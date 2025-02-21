@@ -1,6 +1,9 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: DataPulse
 Version: 1.0.0
 Summary: Outils d'analyse de données
 Author: GANDJI Sovègnon Armand
 Author-email: gerardarm@gmail.com
+Dynamic: author
+Dynamic: author-email
+Dynamic: summary

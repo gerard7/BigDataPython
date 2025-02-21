@@ -182,9 +182,9 @@ print('Plus fréquent = ',freq.most_common(2))
 # Avec k : most_common(k)
 
 # ChainMap : Alternative à la fusion (avant python 3.9)
-# Dasn chainMap, c'est la PRIORITÉ qui importe ici. Ce n'est pas un update ordinaire.
+# Dans chainMap, c'est la PRIORITÉ qui importe ici. Ce n'est pas un update ordinaire.
 # le premier dictionnaire est prioritaire sur le 2ème. (C'est à dire que les valeurs
-# du 1er dictionnaire sont prioritaires sur le 2ème
+# du 1er dictionnaire sont prioritaires sur le 2ème )
 
 # Situation précises : avec des priorités entre plusieurs dictionnaires , éviter les coûts en mémoire
 

@@ -1,6 +1,6 @@
 import csv
 import json
-from DataPulse.DataPulse.logging_config import logger
+from DataPulse.logging_config import logger
 from pathlib import Path
 
 def detect_file_type_path(filepath):
@@ -21,6 +21,7 @@ def detect_file_type_path(filepath):
         return file_types.get(extension, None)
     except Exception as e :
         logger.error(f"Erreur lors de la detection du fichier {filepath} : {e}")
+
 def load_text_file(filepath):
     """
     Lit un fichier texte ligne par ligne en utilisant un générateur
@@ -33,6 +34,7 @@ def load_text_file(filepath):
                 yield line.strip()
     except Exception as e :
         logger.error(f"Erreur de lecture TXT {filepath}: {e}")
+
 def load_csv_file(filepath, delimiter=","):
     """
     Lit un fichier csv et retourne un générateur de lignes
@@ -71,7 +73,7 @@ def load_file(filepath):
         "txt":load_text_file,
     }
     if file_type:
-        return loaders.get(file_type)(filepath)
+        return loaders.get(file_type)(filepath) # C'est un générateur.
     else:
         return None
 

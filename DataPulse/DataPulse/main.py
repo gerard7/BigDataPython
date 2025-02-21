@@ -1,5 +1,5 @@
 import argparse
-from BigDataPython.code_python.DataPulse.DataPulse.commands import load_subcommands
+from DataPulse.commands import load_subcommands
 
 
 def main():
@@ -41,4 +41,8 @@ if __name__== "__main__":
 
 # Après : l'installation de l'exécutable
 #DataPulse preview --file /data/clients.csv
+
+
+# Appel 
+# DataPulse filter --file data/clients.csv --keyword clara --output resultats.txt
 

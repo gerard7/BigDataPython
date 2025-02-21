@@ -1,8 +1,8 @@
-from DataPulse.DataPulse.processing.utils import detect_and_load_file
-from DataPulse.DataPulse.processing.utils import display_data
-from DataPulse.DataPulse.processing.utils import filter_data
-from DataPulse.DataPulse.processing.utils import save_output
-from DataPulse.DataPulse.logging_config import logger
+from DataPulse.processing.utils import detect_and_load_file
+from DataPulse.processing.utils import display_data
+from DataPulse.processing.utils import filter_data
+from DataPulse.processing.utils import save_output
+from DataPulse.logging_config import logger
 
 
 def filter_data_command(args):
