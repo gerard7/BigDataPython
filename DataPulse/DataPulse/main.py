@@ -24,12 +24,18 @@ if __name__== "__main__":
 # Générer le fichier requirements.txt : pip freeze > requirements.txt
 
 # Installation avec requirements.txt : pip install requirements.txt
+# ----------------------------------------------------------------------------
+#   python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv
 
-#  python -m DataPulse.DataPulse.main 10 preview --file DataPulse/data/clients.csv 10 --verbose
+#   python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv --verbose
 
-#  python -m DataPulse.DataPulse.main filter --file DataPulse/data/clients.csv --keyword Michel
+#   python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv --verbose --read 2
 
-# python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv --read 5
+#   python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv --read 5
+
+#   python -m DataPulse.DataPulse.main filter --file DataPulse/data/clients.csv --keyword Michel
+
+
 
 # Git : First commit/
 # After modification : Push : 

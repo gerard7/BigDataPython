@@ -420,3 +420,35 @@
 2025-02-20 15:37:03,565 - INFO  - 97 lignes trouvées après filtrage - utils.py  - 74 Lignes dans le fichier  - DataPulse
 2025-02-20 15:37:08,733 - INFO  - Le type de fichier détecté est : CSV - utils.py  - 48 Lignes dans le fichier  - DataPulse
 2025-02-20 15:37:08,742 - INFO  - 97 lignes trouvées après filtrage - utils.py  - 74 Lignes dans le fichier  - DataPulse
+2025-02-20 23:31:31,057 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:31:31,065 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:20,059 - DEBUG - Mode verbose activé - utils.py - 17 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:20,059 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:20,065 - DEBUG - Temps de chargement: 0.005 sec - utils.py - 58 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:20,065 - DEBUG - Nombres de lignes chargées: 1000 - utils.py - 59 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:20,065 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:30,123 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:30,129 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:37,381 - DEBUG - Mode verbose activé - utils.py - 17 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:37,382 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:37,387 - DEBUG - Temps de chargement: 0.005 sec - utils.py - 58 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:37,387 - DEBUG - Nombres de lignes chargées: 1000 - utils.py - 59 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:32:37,387 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:33:36,256 - DEBUG - Mode verbose activé - utils.py - 17 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:33:36,256 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:33:36,262 - DEBUG - Temps de chargement: 0.005 sec - utils.py - 58 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:33:36,262 - DEBUG - Nombres de lignes chargées: 1000 - utils.py - 59 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:33:36,262 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:34:35,917 - DEBUG - Mode verbose activé - utils.py - 17 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:34:35,918 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:34:35,924 - DEBUG - Temps de chargement: 0.006 sec - utils.py - 58 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:34:35,925 - DEBUG - Nombres de lignes chargées: 1000 - utils.py - 59 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:34:35,925 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:34:47,207 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:34:47,212 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:35:06,719 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:35:06,729 - INFO - 97 lignes trouvées après filtrage - utils.py - 84 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:35:06,729 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:35:27,478 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:35:27,487 - INFO - 85 lignes trouvées après filtrage - utils.py - 84 Lignes dans le Fichier : - DataPulse
+2025-02-20 23:35:27,488 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse

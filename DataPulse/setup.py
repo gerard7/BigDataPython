@@ -28,4 +28,5 @@ setup(
 )
 # Il faut créer un lien symbolique entre le projet(code source) et l'installation python
 # pip install -e . (avec ça , on va tester le package localement d'abord)
-# Faire cette syntaxe dans le répertoire Parent du projet. Ici DataPulse (le premier)
+# Faire cette syntaxe dans le répertoire où se trouve le setup.py . du projet. Ici DataPulse (le premier)
+# Puis, lancez :

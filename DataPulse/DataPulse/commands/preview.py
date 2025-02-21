@@ -1,7 +1,8 @@
 from DataPulse.DataPulse.processing.utils import validate_file
 from DataPulse.DataPulse.processing.utils import detect_and_load_file
 from DataPulse.DataPulse.processing.utils import display_data
-from DataPulse.DataPulse.logging_config import logger
+from DataPulse.DataPulse.processing import file_loaders
+from  DataPulse.DataPulse import logging_config
 import os
 
 
@@ -27,7 +28,7 @@ def preview_file(args):
         display_data(data, args.read)
 
     except (FileNotFoundError, PermissionError, ValueError, RuntimeError) as e:
-        logger.error(f"Erreur dans preview_file: {e}")
+        logging_config.logger.error(f"Erreur dans preview_file: {e}")
         print(f"Erreur: {e}")
 
 def register_subcommand(subparsers):

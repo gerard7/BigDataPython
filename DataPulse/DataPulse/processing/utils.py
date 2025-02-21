@@ -3,7 +3,7 @@ import os.path
 import time
 from DataPulse.DataPulse.logging_config import logger
 import sys
-from DataPulse.DataPulse.logging_config import file_loaders
+from DataPulse.DataPulse.processing import file_loaders
 
 def setup_logging(verbose):
     """
@@ -45,14 +45,14 @@ def detect_and_load_file(file_path, verbose):
     """
     setup_logging(verbose)
 
-    file_type = file_loader.detect_file_type_path(file_path)
+    file_type = file_loaders.detect_file_type_path(file_path)
     logger.info(f"Type detecté : {file_type.upper() if file_type else 'Inconnu'} ")
 
     if not file_type:
         raise ValueError(f"Le type fichier de {file_path} est inconnu")
 
     start_time = time.time()
-    data = list(file_loader.load_file(file_path))
+    data = list(file_loaders.load_file(file_path))
     elapsed_time = time.time() - start_time
 
     logger.debug(f"Temps de chargement: {elapsed_time:.3f} sec")
