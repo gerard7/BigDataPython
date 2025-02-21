@@ -1,5 +1,5 @@
 import argparse
-from DataPulse.DataPulse.commands import load_subcommands
+from BigDataPython.code_python.DataPulse.DataPulse.commands import load_subcommands
 
 
 def main():
@@ -36,8 +36,9 @@ if __name__== "__main__":
 #   python -m DataPulse.DataPulse.main filter --file DataPulse/data/clients.csv --keyword Michel
 
 
-
 # Git : First commit/
 # After modification : Push : 
 
+# Après : l'installation de l'exécutable
+#DataPulse preview --file /data/clients.csv
 
