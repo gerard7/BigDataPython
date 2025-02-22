@@ -1,9 +1,9 @@
 import logging
 import os.path
 import time
-from DataPulse.DataPulse.logging_config import logger
+from DataPulse.logging_config import logger
 import sys
-from DataPulse.DataPulse.processing import file_loaders
+from DataPulse.processing import file_loaders
 
 def setup_logging(verbose):
     """

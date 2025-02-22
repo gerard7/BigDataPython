@@ -1,10 +1,9 @@
-from DataPulse.DataPulse.processing.utils import validate_file
-from DataPulse.DataPulse.processing.utils import detect_and_load_file
-from DataPulse.DataPulse.processing.utils import display_data
-from DataPulse.DataPulse.processing import file_loaders
-from  DataPulse.DataPulse import logging_config
+from DataPulse.processing.utils import validate_file
+from DataPulse.processing.utils import detect_and_load_file
+from DataPulse.processing.utils import display_data
+from DataPulse.processing import file_loaders
+from DataPulse import logging_config
 import os
-
 
 def preview_file(args):
     """

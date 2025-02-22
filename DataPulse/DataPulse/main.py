@@ -1,7 +1,6 @@
 import argparse
 from DataPulse.commands import load_subcommands
 
-
 def main():
     parser = argparse.ArgumentParser(description="DataPulse avec les sous commandes")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -18,6 +17,7 @@ def main():
     else:
         parser.print_help()
 
+
 if __name__== "__main__":
     main()
 
@@ -25,15 +25,16 @@ if __name__== "__main__":
 
 # Installation avec requirements.txt : pip install requirements.txt
 # ----------------------------------------------------------------------------
-#   python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv
+# Se mettre dans : ...../cours_Greta_python/code_python/DataPulse
+#   python -m DataPulse.DataPulse.main preview --file data/clients.csv
 
-#   python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv --verbose
+#   python -m DataPulse.main preview --file data/clients.csv --verbose
 
-#   python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv --verbose --read 2
+#   python -m DataPulse.main preview --file data/clients.csv --verbose --read 2
 
-#   python -m DataPulse.DataPulse.main preview --file DataPulse/data/clients.csv --read 5
+#   python -m DataPulse.main preview --file data/clients.csv --read 5
 
-#   python -m DataPulse.DataPulse.main filter --file DataPulse/data/clients.csv --keyword Michel
+#   python -m DataPulse.main filter --file data/clients.csv --keyword Michel
 
 
 # Git : First commit/

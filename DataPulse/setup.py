@@ -29,4 +29,5 @@ setup(
 # Il faut créer un lien symbolique entre le projet(code source) et l'installation python
 # pip install -e . (avec ça , on va tester le package localement d'abord)
 # Faire cette syntaxe dans le répertoire où se trouve le setup.py . du projet. Ici DataPulse (le premier)
+# ou pip install --use-pep517 -e .   A cause de la noubvelle version de pip
 # Puis, lancez :
