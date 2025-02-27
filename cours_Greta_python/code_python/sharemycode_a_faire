@@ -1,0 +1,38 @@
+# Source du travail à faire : https://sharemycode.fr/r20
+
+======================================21 Fev 25===================================================
+Dans le cadre de la gestion d’un serveur web, il est crucial d’analyser les fichiers de logs pour comprendre le trafic, détecter d’éventuelles anomalies et optimiser la performance du serveur.
+
+Un fichier de logs serveur contient des informations sur chaque requête HTTP envoyée au serveur, telles que :
+
+L’adresse IP du client qui a fait la requête.
+Le code de réponse HTTP (200, 404, 500, etc.).
+L’heure de la requête.
+L’URL demandée, le navigateur utilisé, etc.
+
+Exemple de ligne :
+192.168.1.10 - - [12/Feb/2024:14:05:23 +0000] "GET /index.html HTTP/1.1" 200 512
+
+Vous allez coder une fonction analyze_server_logs(log_path, top_ips=5) qui prend en
+ entrée un fichier de logs et retourne les statistiques suivantes :
+
+Le nombre total de requêtes enregistrées dans les logs.
+La distribution des codes HTTP (exemple : combien de 200, 404, 500, etc.).
+Les top_ips les plus actives (les adresses IP qui ont fait le plus de requêtes).
+Les pics de trafic par heure (combien de requêtes sont envoyées à chaque heure de la journée).
+
+Consignes
+Lire le fichier ligne par ligne en streaming (évitez de charger tout le fichier en mémoire).
+Extraire les informations suivantes avec des expressions régulières (re) :
+Le code HTTP (\b(\d{3})\b)
+L'adresse IP (\b(?:\d{1,3}\.){3}\d{1,3}\b)
+L’heure de la requête (\b(\d{2}):\d{2}:\d{2}\b)
+Utiliser Counter de collections pour compter les occurrences des codes HTTP, des adresses IP et du trafic par heure.
+Retourner un dictionnaire structuré contenant les statistiques.
+
+
+Retour :
+{'total_requests': 10000,
+'http_code_distribution': {'192': 10000},
+'most_active_ips': {'192.168.1.239': 57, '192.168.1.3': 56, '192.168.1.126': 55, '192.168.1.71': 54, '192.168.1.61': 54},
+'traffic_by_hour': {'02': 410, '14': 424, '08': 407, '04': 454, '15': 414, '13': 389, '22': 429, '07': 383, '17': 376, '11': 420, '06': 407, '16': 425, '12': 441, '10': 433, '21': 393, '05': 422, '03': 431, '01': 437, '00': 424, '23': 394, '19': 397, '09': 444, '18': 441, '20': 405}}

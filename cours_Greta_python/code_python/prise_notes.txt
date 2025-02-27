@@ -1,0 +1,492 @@
+x sensé" représente 1,2,3,4,5
+squared_dict ={x : x**2 for x in range(1,6)}
+
+# Fusion de dictionnaires à partir de python 3.9
+new_dict = my_dict | {'country': 'France'}
+print(new_dict)
+
+# ------- Dictionnaire imbriqués -------
+user ={
+'name :'Sam',
+'age':20,
+'adresse':{'city':'Paris', 'zipcode':75001}
+
+}
+
+# ----- Filter des données avec dictionnaires ------
+
+students = ('Dan':85,'Armand':92,'Jarfar':78,'Lucas':90}
+
+# Trier par ordre croissant 
+sorted_students =sorted(students.items(),key=lambda item:item[1])
+
+
+#  Autre exemples : Filter
+
+filtered_students =dict(filter(lambda item:item[1]>90,students.items()))
+print('Filtered students =',filtered_students)
+# On peut faire autrement : Ecriture plus, pythonique
+filtered_students ={k: v for k,v in students.items() if v >90}
+
+print('Filtered students =',filtered_students)
+
+# ------- Les modules : defaultdict, counter, ordereddict, chainmap ------
+
+# Le defaultdict 
+# c'est une version améliorée des dictionnaires standards
+# Les valeurs par defaut lorsqu'une clef inexistante est accédée
+my_dict={}
+# Si on écrit my_dict['key'], cela génère une erreur : keyError
+# Pour éviter des erreurs, on va aller dans collections
+from collections import defaultdict
+
+my_dict = defaultdict(int) # C'est la valeur par défaut lorsqu'une clef inexistante est accédée. Ici 
+# La valeur par défaut est un entier : 0
+
+# Pour lui imposer une valeur par défaut , on écrit:
+my_dict=defaultdict(lambda: 'Valeur inconnue')
+
+
+# Si on veut 100 comme valeur par défaut,on écrit :
+
+my_dict=defaultdict(lambda: 100)
+
+my_dict=defaultdict(lambda: {'note':0})
+
+ # si je fais my_dict['key']+=1 il ne dira rien
+ 
+ # Le counter
+ # Utilité : Obtenir les éléments les plus fréquents (mots_common)
+ # Fusionner ou soustraire des comptages
+ # Gérer automatiquement des valeurs ,négatives 
+ # Les occurrences 
+ # Optimiser , rapide pour les opérations avancées : counter est codé en C
+ # dans l'interpreteur python. Pourquoi c'est mieux ? Vitesse, Optimisation,Mémoire...)
+ 
+ # Sans counter
+ 
+ date =['a','b','a','c']
+ count = {}
+ for item in data:
+	count[item] = count.get(item,0) + 1
+	
+# Avec count
+
+from collections import Counter à partir de Python 3.1
+
+count = Counter(data) # Data peut être une liste, tuple, chaine, dictionnaire
+print(count)
+
+text = "abracadabra"
+freq = Counter(text)
+print('frequence =',freq)
+
+print('Plus fréquent = ',freq.most_common(2))
+
+# Counter fonctionne en O(n) dans la plupart des cas 
+
+# most_common permet de récupérer le top dans le nombre de répétition (O(n log k)) 
+# Avec k : most_common(k)
+
+# ChainMap : Alternative à la fusion (avant python 3.9)
+# Situation précises : avec des priorités entre plusieurs dictionnaires , éviter les coûts en mémoire
+
+ # OrderedDict : dictionnaire ordonné . C'est une garantie sur l'ordre d'insertion
+ # Les clefs sont toujours maintenues dans l'ordre dans lequel elles ont été ajoutées
+ # Fonctionnalité implementée en python 3.7
+ 
+ # Méthodes spécifiques pour manipuler les clefs en fonction de leur ordre.
+ 
+ # Par exemple : move_to_end(key,last=True/False) : elle déplace la clef soit au débit soit à la fin 
+ 
+ # popitem(last=True)
+from collections import OrderedDict
+
+#TD
+
+d = {1: {"title": "Learn Python Programming", "tags": ["python", "programming", "tutorial"]},2: {"title": "Advanced Data Science", "tags": ["data", "science", "machine learning"]},3: {"title": "Introduction to Django", "tags": ["django", "python", "web"]}}
+
+# pratique 2:
+def find_firt(f_list):
+prend un e liste et returne un tuple
+
+# Résultat
+
+print(find_first([1,2,'Fizz",4,5,"Fizz",7",8","Fizz",10,11,"Fizz",13,14,"Fizz",16,17,"Fizz",19,20]))
+
+#Devra afficher (3,Fizz)
+print(find_first([1,2,3,4,5,6,7,8,9,10,11,12,"Buzz",14,15,16,17,18,19,20]))
+
+
+filtered_database =[]
+    filtered_database.append({k2:v2 for k2,v2 in database.items() if mot_clef.lower() in str(v2.values()).lower()})
+    return filtered_database
+
+# Un ensemble (set) est une collection non ordonnée sans doublon d'informations 
+# Création d'un ensemble
+my_set ={1,2,3,4,5}
+another_set ={4,5,6,7}
+
+# Intérêt des ensembles :
+# Gestion efficace des valeurs uniques
+
+# Operation mathématiques rapides (intersection,union,difference..)
+
+# Optimisation des recherches (in est O(1) en moyenne pour les ensembles et dictionnaires, contre O(n) pour les listes )
+
+# Application : Data science et lorsqu'on souhaite optimiser
+
+# Ajout et suppression d'éléments
+my_set.add(18)
+print('my_set =',my_set)
+
+my_set.discard(3) # va supprimer 3 de l'ensemble
+print('my_set =',my_set)
+
+
+# Opération d'ensemble
+print('Union entre my_set et another_set =',my_set | another_set)
+
+print('Intersection entre my_set et another_set',my_set & another_set)
+print('Difference entre my_set et another_set',my_set - another_set)
+
+# Ne conserve pas l'ordre des éléments
+# Ne permet pas d'accéder aux éléments via index
+# Ne permet pas d'ajouter un élément à une position précise
+
+# Vérification d'inclusion
+
+subset ={4,5}
+
+# On veut savoir si subset est un sous ensemble de my_set ou another_set
+
+print('subset est-il un sous ensemble de onother_set ?',subset.issubset(another_set))
+print('another_set est-il un SUR ensemble de subset ?',another_set.issuperset(subset))
+
+
+# Ensembles immuables : frozenset : Ce sont des ensembles gelés. On ne peut pas les modifier.
+
+# Création : 
+immuable_set =frozenset([1,2,3,4])
+print('frozenset , immuable_set=',immuable_set)
+immuable_set.add(5) # génère une erreur
+
+# Compréhension d'ensemble
+
+squared_set ={x**2 for x in my_set}
+print('le carré = ',squared_set)
+
+# Vérifier la présence d'un élément dans un ensemble. ( in ultra rapide : O(1)
+if 
+4 in my_set:
+	print('ok')
+	
+# Eliminer les doublons rapidement
+numbers =[1,2,3,2,4,4,5]
+unique_numbers =set(numbers)
+print('Unique valeurs = ',unique_numbers)
+
+
+# CONCLUSION mémoire :
+# Tuple : meilleure optimisation mémoire
+# Liste : assez compact.... plus que les Tuple
+# Ensemble: plus lourd car, utilisation d'une table de hachage
+# Dictionnaire : le plus coûteux . Car, stockage des clef, valeur,table de hachage
+
+# Conclusion Vitesse :
+# Tuple O(n) pour les recherches
+# Liste : O(n)
+# Ensemble : O(1)
+# Dictionnaire : ( O(1) mais lourd )
+=================================================================================
+# Sérialisation et désérialisation
+
+# Sérialisation = C'est convertir un objet python en un format de stockage ou transmissible
+# Par exemple : JSON, xml, fichier, binaire ( via pickle) 
+
+# Désérialisation = Reconvertir ces données en un objet python utilisable
+
+# Commençons par JSON
+
+import json
+
+# dict vers json : sérialisation
+my_dict={'name':'Sam', 'city':'Paris','age':18}
+json_data = json.dumps(my_dict)
+print('Valeur Json de my_dict =',my_dict)
+# json vers dict : désérialisation
+restored_data = json.loads(json_data)
+print('Valeur désérialisée de json_data =',restored_data)
+
+json_str='''{'name':'Sam', 'city':'Paris','age':18}'''
+# !!! Attention : loads (avec s) c'est pour une chaine Json
+# load est utilisé pour json dans un fichier
+
+# -----------------Manipulation fichier basique ----------------
+# with open() permet d'ouvrir un fichier et de s'assurer qu'il est bien fermé après utilisation
+# Sans with open , il  faut manuellement fermer le fichier avec file.close()
+
+# Exemple Ecrire dans un fichier:
+with open('mon_fichier.txt','w',encoding="utf-8") as f:
+	f.write("Bonjour GRETA 91 \n")
+	f.write("Découvrons le with open()")
+	json.dump(data,f) #sérialisation du fichier
+	
+# Ouverture de fichier
+
+with open('mon_fichier.txt','r') as file:
+	contenu=file.read()
+	print(contenu)
+	
+	
+try:
+ with open('monfichier.txt','r') as file:
+ 	contenu =file.read()
+ 	# Quand on souhaite lire du JSON, on fait:
+ 	# json.load(file) # Cette ligne permet de lire un fichier json dans une variable pour l'exploiter
+ 	print(contenu)
+except FileNotFoundError:
+	print("0Erreur : Le fichiers n'existe pas! ")
+except Exception as e:
+	print(" Une erreur s'est produite {e}")
+	
+	
+	
+==================================
+from collections import defaultdict
+def generate_datastructure(dic):
+	if isinstance(dic.keys,int):
+		obj = defaultdict(val,"Anonumous")
+	
+	return obj
+	
+	
+ # C'est un module Python qui fournit des outils puissants pour manipuler des itérateurs
+ # de manière efficace.
+ # Concrètement,il permet de générer des combinaisons, des permutations, création de cycle
+ # de grouper des données et d'autres opérations sur des séquences de données.
+ # Intérêt : Optimisation de la mémoire et des performances sur la gestion de grandes données.
+ 
+ # Itérateur, c'est quoi ? 
+ # C'est un objet qui permet de parcourir une séquence d'éléments UN PAR UN ( sans stockage en mémoire)
+ # Une liste contient tous les éléments en mémoire ( [1,2,3,4])
+ # Un itérateurs génère les éléments au fur et à mesure. Ce qui économise de la mémoire
+ 
+ # Comment fonctionne un itérateur ?
+ # iter(objt): objet --> itérateur
+ # next(itérateur): renvoie l'élément suivant
+ 
+ # Contexte - IDEAL SI :
+ # on ne veut pas charger toutes les données en mémoire
+ # On traite des fichiers volumineux ( BDD, Data science,IA...)
+ 
+ # Contexte - A ÉVITER SI
+ # On doit revenir en arrière ou accéder directement aux éléments précis
+ # On a peu de données et qu'une liste est plus simple et courte
+ 
+ import itertools
+ numbers = iter([1,2,3,4])
+ print("itérateur numbers est :",numbers)
+ # next permet de renvoyer l'élément
+ print("next(numbers)=",next(numbers))
+ # Pour accéder au suivant :
+ print("next(numbers)=",next(numbers))
+ 
+ # ACCEDER AUX VALEURS SANS NEXT 
+ for num in numberes: # python utilise next en interne
+ 	print(num)
+ 	
+# 1. itertools.count() : générer des ID uniques
+# .count(start,step)
+id_generator = itertools.count(10001,1) # génère un générateur à partir de 10001 inclus
+print("Le générateur =",id_generator)
+
+ids = [next(id_generator) for _ in range(5)] # Envie de récupérer uniquement les 5 premières valeurs
+print('Les 5 premiers éléments =',ids)
+
+
+# création d'un générateur qui commence à 1001 et qui augmente de 1 à chaque appel de next
+
+# 2.  itertools.cycle() : Alternance entre plusieurs tâches
+# .cycle fait quoi ? Ele permet de créer un itérateur qui boucle indéfiniment sur les éléments de l'itérable
+
+# Permet d'alterner entre plusieurs valeurs de manière circulaire
+tasks = itertools.cycle(["analyse","Développement","Test"]]
+
+tasks = [next(tasks) for _ in range(5)]
+print("Ordre des tâches=",tasks)
+
+
+# 3. intertools.repeat() : Générer des valeurs par défaut
+# Exemple
+default_values = itertools.repeat("N/A",4)
+print("retour de default_values=", default_values)
+
+# 4. itertools.permutations() :# Générer toutes les façons d'organiser une équipe
+team = ["Paly","Luca","Arnaud","Assade"]
+arrangement = itertools.permutations(team,r:2) # on prend toutes les permutations de 2 personnes à partir de team
+# avec r = la longueur prise parmi les éléments iterable
+
+
+# 5. itertools.product() : Planification des horaires
+# Exemple
+jours =["lundi","Mardi"]
+horaires = ["Matin,"Aprem"] # Génère toutes les combinaisons possible entre deux listes
+
+planning =list(itertools.product(jours, horaires))
+
+# 6. itertools.groupby() : Regrouper des achats par catégories
+
+# La fonction peermet de regrouper des éléments consécutifs dans un itérable en fonction d'une clé commune
+
+achats=[("Fruit","Pomme")("Fruit" ,"Banane"),("Légume","carotte"),("Fruit","Orange")]
+
+achats.sort()
+
+# Groupby fonctionne si les éléments à grouper sont consécutifs
+
+grouped = {key:list(group) for key,group in intertools.groupby(achats,lambda x:x[0])}
+# Regroupement des éléments en fonction de la premiere valeur du tuple
+
+# 7. itertools.islice() : Extraire une partie d'un journal de logs
+logs = range(100,120)
+print(logs) # Crée un itérable contenant les nombre de 100 à 119
+extracted_logs = list(itertools.islice(logs,2,8,2))
+# Parametre de isslice
+
+# 2-> début de l'extraction (index 2 dans logs)
+# 8-> fin de l'extraction (index 8 non inclus)
+# 2-> Le Pas: (on prend 1 élément sur 2)
+
+
+# 8. itertools.chain : Fusionner plusieurs listes
+clients_online = ["Alice","Sam"]
+clients_offline = ["Heer","Paly"]
+# réunir les deux listes
+all_clients  =list(itertools.chain(clients_online,clients_offline))
+# itertools.chain, crée un itérateur unique qui parcourt les éléments des listes dans
+# l'ordre list()-> itérateur eu une seule fusionnée
+print("Résultat de chain =",all_clients)
+
+# Avantages:
+# Fonctionne avec n'importe quel itérable (= liste, tuples,générateurs)
+# Ne crée pas une nouvelle liste immédiatement (gain de mémoire)
+# Peut fusionner plusieurs sources de données sans duplication.
+
+# 9. itertools.tee : Dupliquer un itérable pour analyser.
+# Cela permer de dupliquer un itérable en plusieurs flux indépedants
+# Parcourir les copies séparément sans modifier l'original
+data = iter(range(5))
+data_copy1,data_copy2 = itertools.tee(data,n=2) # Création de 2 itérateurs indépendants
+print("Flux original :",data_copy1)
+print("Copie indépendante :",data_copy2)
+
+# Si vitre itérateur est très long, mieux vaut le transformer en list
+# ou utiliser un générateur sur mesure pour éviter les problèmes
+# de mémoire. Car , chaque valeur consommées (= utilisé par exemple avec next)
+# sera stockées par tee.
+
+
+# Axe d'amélioration : combinaison , combinaison remplacement 
+
+======================================= 
+import itertools
+def to_iterator(malitse):
+ return iter(maliste)
+ 
+ =====================
+ # 5
+ crée une focntion qui génère les carré des nombres de 0 à n-1
+ def square_number(n,use_generator=True):
+ # Une liste (mode use_generator = False)
+ #Affiche la mémoire utilisée pour chaque version
+ 
+ square_number(10**6,use_generator=True) # Faible mémoire
+ square_number(10**6,use_generator=False) # Faible élevée
+ 
+ #6
+ Ecrire une  fonction pair_combination(iterable)
+ 
+ qui génère toutes les paires uniques (combinaisons de 2 élémenrts d'un itérable en utilisant itertools.comninations()
+ 
+ exeemple
+ result list(pair_combinations([1,2,3,4]))
+ print(result) [
+ 
+ 
+ # 7
+ 
+ {key: [name for name,_ in group] for key,group in intertools.broupby(scores,key=lambda x:x[1])}
+ 
+ 
+ ========================10 Fev 2025 ===========================
+ 
+ 
+  ========================17 Fev 2025 ===========================
+ 
+
+# Organisation type : command/add.py
+
+# Validation avancée des entrées 
+# Par défaut, argparse ne valide que les types de bases (int, float,str...)
+# On pourra ajouter une validation avancée : C'est à dire une validation personnalisée via une fonction
+# Pourquoi c'est utile ? Pour les restrictions métiers sur les entrées , fiabilité des scripts CLIoui
+
+
+def valid_percentage(value):
+val = float(value)
+if not 0<= val <=100:
+raise argparse.ArgumentTypeError(f"Le % doit être entre 0 et 100")
+ return val
+
+def validation_example
+parser = argparse.ArgumentParser(description="Validation personnalisée")
+parser.add_argument(name_or_flags:"--discount",type=valid_percentage,help="Pourcentage")
+args = parser.parse_args()
+print(f"Réduction appliqué :{args.discount}")
+
+===========================================================
+
+# Notion de set_defaults()
+def say_hello(args):
+print("Bonjour")
+
+
+def say_goodbye(args):
+print("Bye !")
+
+
+parser = argparse.ArgumentParser(description="Exemple set defaults")
+subparsers = parser.add_subparsers(dest="command", required=True)
+
+# command "hello"
+parser_hello = subparsers.add_parser("hello",help="Affiche Bonjour")
+parser_hello.set_default(func=says_hello)
+parser_goobye = subparsers.add_parser("goodbye",help="Affiche GoodBye")
+parser_goodbye.set_defaults(func=say_goodbye)
+args = parser.parse_args()
+args.func(args)
+
+
+# Pour tester : parser_set_default() # python module_argparse.py hello
+
+
+
+=====================================================
+
+df = pd.DataFrame({'A': [1, 1, 2, 2],'B': [1, 2, 3, 4],'C': np.random.randn(4)})
+
+[{'id': 1003, 'nom': 'Paul Durant', 'email': 'paul.durant@email.com'} 535.83]
+===========================================================================================
+
+arr=np.array([[10, 20, 30],[40, 50, 60],[70, 80, 90]])
+
+
+
+
+
+
+
+
+
+

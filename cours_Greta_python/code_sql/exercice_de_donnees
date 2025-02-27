@@ -1,0 +1,166 @@
+Exercice 1:
+Agence de location de biens immobilier :
+Identifier les ensembles de données à utiliser dans l'application:
+----
+- le prix de la location de chaque bien immobilier
+-localisation des biens à louer
+-la grandeur de chaque bien : nombre de pièces , comment se positionne la cuisine
+-par rapport au salon.  Est-ce qu'il y a un garage ? 
+-Précisez le niveau de l'étage.
+-Précisez s'il y a un garage ou pas.
+-Précisez la proximité du bien immobilier par rapport à la gare.
+-Demander l'identité du locataire
+-Demander son lieu actuel de travail
+-Demander son numéro de tél et/ou son adresse mail. 
+
+
+
+Exercice 2:
+
+Agende de location de voiture :
+
+------
+- le tarif de chaque véhicule
+-Type de véhicule: automatique ou manuel
+-Nombre de véhicule total et restant
+-Marque du véhicule
+-Modèle, année, kilométrage, couleur 
+-lieux des locations
+-identité de la personne qui emprunte le bien
+-dépot de cheque caution
+-vérification de l'intégrité  du véhicule  ainsi que l'effectivité du volume
+du carburant supérieur ou égal à celui au départ.
+-Le jour ert l'heure de la location
+-Le jour et l'heure du dépot du véhicule
+-Noter la différence de kilométrage
+- Video surveillance à l'entrée de l'agence.
+
+
+
+Exercice 3:
+Voyagiste propose des voyages internationnaux à ses clients.
+----
+- les tarifs de chaque destination
+- Les destinations
+- Les places totales et les places restantes
+- Les dates prévisionnelles et heures de voyages au départ
+- Les date prévisionnelles et heure à destination
+-Identité des voyageurs
+- Nombre de bagages admis et le supplément à payer
+
+
+
+Exercice Association Annajah
+FICHE ADHERENT
+
+Numéro : 125 : entier
+Nom: Ahmed : chaine de caracteres d'une longeur max fixée
+Prenom : Karim : chaine de caracteres d'une longeur max fixée
+Adresse : Rue El Kindy : Chaine de caracteres d'une longeur max fixée
+Code postal: 62000 : entier ( avec peut-etre des contraintes exigées aud départ)
+Ville : Nador : chaine de caracteres d'une longeur max fixée
+Téléphone : 05-36-99-99-99 : Serie de chiffres
+E-mail : k.ahmed@gmail.com : chaine de caracteres ( avec peut-etre une contrainte sur la présence necessaire des caracteres : @ . 
+Date d"adhésion : 20/08/2012 : format Date
+----------
+
+
+Correction :
+
+
+Dictionnaire des Données:
+------------------------
+
+
+Nom de la Données  ----- Format ---longueur ----type ---Regle de calcul --- Regle de gestion --- Document
+
+Number	numerique	3	E-lementaire  C (resulte d'un calcul) 		fiche d'adhérent
+
+========================================================================================================
+Nom			alphabétique	15	X( élementaire)				Fiche d'adhérent
+							
+========================================================================================================
+Prenom			alphabetique	15	X				Fiche d'adhérent
+========================================================================================================
+Adresse			alphabetique		X				
+========================================================================================================
+Code postal		alphanumérique	10	X				FA (fiche adhérent )
+========================================================================================================
+E-mail			alphanumerique	15	X				FA
+========================================================================================================
+
+Modèle Conceptuel de Donnees (MCD)
+
+- Entité
+- Propriété
+- Relation
+		
+		
+		
+CREATE USER 'armand'@'localhost' IDENTIFIED BY 'varmSo7G_';
+
+Donner les droits à armand.
+Pour accorder à l’utilisateur récemment créé tous les privilèges pour la base de données, exécutez la commande suivante :
+
+GRANT ALL PRIVILEGES ON * . * TO 'armand'@'localhost';
+
+
+Je trouve qu'il y a un Impact réel positif sur la pratique et la consommation des produits
+issus de l'agriculture Biologique et équitable
+
+Phrase accroche CV
+Professionnel, dynamique et empathique, doté d'excellentes compétences interpersonnelles et d'une 
+forte capacité d'daptation . Passionné par le travail en équipe et la résolution de prblèmes, je
+favorise la collaboration et la communication efficace pour atteindre les objectifs communs.
+
+
+CV relationnel:
+
+GANDJI Armand
+Adresse
+Tel
+
+Voici mon profil:
+
+=======
+SOFT SKILLS
+Développeur Web
+[Entreprise ] [Date de dé] [Date de fin]
+- Développement et maintenance de sites et applications web en utilisant des technologies modernes.
+- Collaboration avec les designers et chefs de projet pour garantir une ergonomie et une 
+accessibilité optimales.
+- Participation à des revues de code et mise en place des bonnes pratiques de développement.
+
+- Intégration d'API et gestion des bases de données pour assurer une bonne interopérabilité.
+
+----------------
+
+
+
+
+
+
+Communication et collaboration : Travail en équipe agile, écoute active et échanges constructifs
+Résolution de problèmes : Capacité à identifier et corriger rapidement les bugs et à optimiser le code. 
+
+
+
+https://emploi.developpez.com/
+
+////////////////////////
+https://www.free-work.com/
+
+
+trouver le salaire median pour un analyse cybersécurité
+
+ trouver le salaire pour < 1 an en cloud azure :
+ 
+ trouver le salaire d'un Devops en kubernetes > 7 ans
+ 
+ 
+ ======================================
+ 42 ans pour les hommes et 31 pour les femmes
+ qui traversent les choses difficiles dans sa vie
+ 
+ un lieu avec le numéro 9, faut pas prendre
+ 

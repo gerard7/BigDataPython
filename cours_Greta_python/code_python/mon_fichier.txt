@@ -1,0 +1,4 @@
+Bonjour GRETA 91 
+Découvrons le with open()
+Blablabla
+{"name": "Sam", "city": "Paris", "age": 18}

@@ -1,0 +1,201 @@
+2025-02-12 14:16:42,138 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 15 DataPulse
+2025-02-12 14:17:02,854 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 9 DataPulse
+2025-02-12 14:17:02,855 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 11 DataPulse
+2025-02-12 14:28:16,201 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 9 DataPulse
+2025-02-12 14:28:16,203 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 11 DataPulse
+2025-02-12 14:28:31,731 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 9 DataPulse
+2025-02-12 14:28:31,732 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 11 DataPulse
+2025-02-12 14:29:06,168 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 9 DataPulse
+2025-02-12 14:29:06,168 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 11 DataPulse
+2025-02-12 14:30:20,340 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 9 DataPulse
+2025-02-12 14:30:20,341 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 11 DataPulse
+2025-02-12 14:30:31,288 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 9 DataPulse
+2025-02-12 14:30:31,289 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 11 DataPulse
+2025-02-12 14:35:03,712 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 9 - DataPulse
+2025-02-12 14:35:03,713 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 11 - DataPulse
+2025-02-12 14:36:25,463 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 9 - DataPulse
+2025-02-12 14:36:25,464 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 11 - DataPulse
+2025-02-12 14:38:14,633 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:38:14,635 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:40:20,731 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:40:20,732 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:42:58,365 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:42:58,366 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:43:16,499 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:43:16,499 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:43:37,062 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:43:37,063 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:44:02,997 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:44:02,998 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:44:26,447 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:44:26,447 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:44:45,405 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:44:45,406 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:45:14,234 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:45:14,235 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:45:53,097 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:45:53,098 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:47:11,832 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:47:11,833 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:47:59,265 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:47:59,265 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:48:07,462 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:48:07,462 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:49:21,775 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:49:21,776 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:50:54,450 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:50:54,451 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:52:14,608 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:52:14,608 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:52:56,814 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:52:56,815 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:53:22,534 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:53:22,534 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:53:51,841 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:53:51,841 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 14:55:24,939 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 14:55:24,941 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:01:44,127 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:01:44,128 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:02:05,652 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:02:05,653 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:02:23,014 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:02:23,014 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:09:03,629 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:09:03,630 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:10:53,247 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:10:53,249 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:11:04,425 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:11:04,425 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:11:39,379 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:11:39,380 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:19:44,523 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:19:44,524 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:22:52,588 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:22:52,590 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:23:26,144 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:23:26,145 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:23:49,342 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:23:49,343 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:24:05,056 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:24:05,057 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:25:26,252 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:25:26,253 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:26:33,457 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:26:33,460 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:27:46,686 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:27:46,687 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:32:58,184 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:32:58,185 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:33:03,999 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:33:03,999 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:39:17,028 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:39:17,030 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:41:09,449 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:41:09,451 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:41:42,747 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:41:42,748 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:42:37,921 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:42:37,922 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:42:50,020 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:42:50,021 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:43:56,827 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:43:56,830 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:44:13,500 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:44:13,502 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:44:57,967 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:44:57,970 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:45:09,590 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:45:09,591 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:45:47,829 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:45:47,831 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:46:10,626 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:46:10,626 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:46:19,941 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:46:19,941 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:46:42,785 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:46:42,785 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:47:16,259 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:47:16,259 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:47:39,732 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:47:39,733 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:47:55,251 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:47:55,251 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:49:48,476 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:49:48,477 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:50:03,030 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:50:03,031 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:50:58,082 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:50:58,082 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:51:16,353 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:51:16,355 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:51:33,291 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:51:33,292 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:51:39,302 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:51:39,303 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:51:50,138 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:51:50,139 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:56:42,605 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:56:42,606 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:56:55,642 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:56:55,643 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:58:00,303 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:58:00,304 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:58:15,951 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:58:15,952 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:59:16,433 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:59:16,435 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 15:59:55,906 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 15:59:55,909 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:00:21,926 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:00:21,927 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:02:24,552 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:02:24,552 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:02:59,701 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:02:59,703 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:04:43,256 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:04:43,257 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:05:05,757 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:05:05,758 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:11:54,144 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:11:54,146 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:12:03,077 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:12:03,077 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:12:48,575 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:12:48,575 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:13:50,909 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:13:50,910 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:15:37,358 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:15:37,361 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:15:45,115 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:15:45,115 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-12 16:18:03,395 - ERROR  - Ceci est une erreur suite à l'ajout entre éléments incompatibles - file_loader.py  - 11 - DataPulse
+2025-02-12 16:18:03,398 - CRITICAL  - Une erreur Critique !!! - file_loader.py  - 13 - DataPulse
+2025-02-13 11:16:52,260 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 198 - DataPulse
+2025-02-13 11:17:17,756 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 199 - DataPulse
+2025-02-13 11:17:43,920 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 200 - DataPulse
+2025-02-13 11:18:13,163 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 200 - DataPulse
+2025-02-13 11:23:26,637 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 201 - DataPulse
+2025-02-13 11:24:09,118 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 201 - DataPulse
+2025-02-13 11:24:55,343 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 202 - DataPulse
+2025-02-13 11:24:58,616 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 202 - DataPulse
+2025-02-13 11:25:29,421 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 202 - DataPulse
+2025-02-13 11:25:53,972 - ERROR  - Une erreur sévère s'est produite - file_loader.py  - 202 - DataPulse
+2025-02-20 11:41:05,230 - ERROR  - Le fichier data/clients.csv n'existe pas. - utils.py  - 17 - DataPulse
+2025-02-20 11:41:05,233 - ERROR  - Erreur dans le Module preview_file :Le fichier data/clients.csv n'existe pas  - preview.py  - 24 - DataPulse
+2025-02-21 12:25:37,042 - ERROR - Le fichier fourni /home/ratel/BigDataPython/cours_Greta_python/code_python/DataPulse/server_logs.txt ne peut être traité à cause de l'erreur : [Errno 2] No such file or directory: '/home/ratel/BigDataPython/cours_Greta_python/code_python/DataPulse/server_logs.txt' - data_summary.py - 65 Lignes dans le Fichier : - DataPulse
+2025-02-21 12:25:42,815 - ERROR - Le fichier fourni /home/ratel/BigDataPython/cours_Greta_python/code_python/DataPulse/server_logs.txt ne peut être traité à cause de l'erreur : [Errno 2] No such file or directory: '/home/ratel/BigDataPython/cours_Greta_python/code_python/DataPulse/server_logs.txt' - data_summary.py - 65 Lignes dans le Fichier : - DataPulse
+2025-02-21 12:26:29,156 - ERROR - Le fichier fourni /home/ratel/BigDataPython/cours_Greta_python/code_python/DataPulse/server_logs.txt ne peut être traité à cause de l'erreur : [Errno 2] No such file or directory: '/home/ratel/BigDataPython/cours_Greta_python/code_python/DataPulse/server_logs.txt' - data_summary.py - 65 Lignes dans le Fichier : - DataPulse
+2025-02-22 20:19:35,713 - ERROR - Le fichier DataPulse/data/clients.csv n'existe pas - utils.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-22 20:19:35,716 - ERROR - Erreur dans preview_file: Le fichier DataPulse/data/clients.csv n'existe pas - preview.py - 31 Lignes dans le Fichier : - DataPulse
+2025-02-22 20:21:00,342 - ERROR - Le fichier DataPulse/data/clients.csv n'existe pas - utils.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-22 20:21:00,344 - ERROR - Erreur dans preview_file: Le fichier DataPulse/data/clients.csv n'existe pas - preview.py - 31 Lignes dans le Fichier : - DataPulse
+2025-02-22 20:28:45,004 - ERROR - Le fichier DataPulse/data/clients.csv n'existe pas - utils.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-22 20:28:45,006 - ERROR - Erreur dans preview_file: Le fichier DataPulse/data/clients.csv n'existe pas - preview.py - 31 Lignes dans le Fichier : - DataPulse
+2025-02-22 20:33:53,111 - ERROR - Le fichier /data/clients.csv n'existe pas - utils.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-22 20:33:53,113 - ERROR - Erreur dans preview_file: Le fichier /data/clients.csv n'existe pas - preview.py - 31 Lignes dans le Fichier : - DataPulse
+2025-02-22 21:57:56,018 - ERROR - Le fichier data/clients.csv n'existe pas - utils.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-22 21:57:56,019 - ERROR - Erreur dans preview_file: Le fichier data/clients.csv n'existe pas - preview.py - 30 Lignes dans le Fichier : - DataPulse
+2025-02-22 21:58:12,633 - ERROR - Le fichier data/clients.csv n'existe pas - utils.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-22 21:58:12,633 - ERROR - Erreur dans preview_file: Le fichier data/clients.csv n'existe pas - preview.py - 30 Lignes dans le Fichier : - DataPulse
+2025-02-24 20:45:29,102 - ERROR - Erreur lecture fichier json /home/ratel/BigDataPython/cours_Greta_python/code_python/DataPulse/data/transactions.json; Extra data: line 12 column 6 (char 319) - file_loaders.py - 65 Lignes dans le Fichier : - DataPulse
