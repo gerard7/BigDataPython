@@ -9,9 +9,8 @@
 
 import re
 from collections import  Counter
-from DataPulse.logging_config import logger
-from DataPulse.processing.file_loaders import load_file
-
+from cours_Greta_python.code_python.DataPulse.DataPulse.logging_config import logger
+from cours_Greta_python.code_python.DataPulse.DataPulse.processing.file_loaders import load_file
 
 def analyze_server_logs(log_path, top_ips=5):
     """

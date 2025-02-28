@@ -4,7 +4,6 @@ import time
 from DataPulse.logging_config import logger
 import sys
 from DataPulse.processing import file_loaders
-
 def setup_logging(verbose):
     """
     Execution des logs en DEBUG

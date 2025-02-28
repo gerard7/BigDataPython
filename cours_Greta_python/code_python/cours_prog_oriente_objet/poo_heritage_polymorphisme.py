@@ -9,7 +9,7 @@ class Utilisateur:
     def __init__(self, nom, email, mot_de_passe):
         """
         Initialise un utilisateur avec un nom, mail, mdp
-        Certains attributs sont protégés pour éviter un acces direct
+        Certains attributs sont protégés pour éviter un accès direct
         """
         # Public : accessible librement
         self.nom = nom
@@ -116,12 +116,12 @@ class GestionAcces:
     """
     def verifier_acces(self, niveau_requis):
         """
-        Verifie si l'utilisateur a le bon niveau d'acces
+        Vérifie si l'utilisateur a le bon niveau d'acces
         """
         if hasattr(self, "niveau_acces") and self.niveau_acces >= niveau_requis:
-            print(f" {self.nom} a acces au niveau {niveau_requis}")
+            print(f" {self.nom} a accès au niveau {niveau_requis}")
         else:
-            print(f"{self.nom} n'a pas le niveau dacces requis {niveau_requis}")
+            print(f"{self.nom} n'a pas le niveau d'accès requis {niveau_requis}")
 
     @staticmethod
     def afficher_droits_utilisateur(obj):

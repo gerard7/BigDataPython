@@ -588,3 +588,51 @@
 2025-02-22 22:02:42,737 - DEBUG - Nombres de lignes chargées: 1000 - utils.py - 59 Lignes dans le Fichier : - DataPulse
 2025-02-22 22:02:42,737 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
 2025-02-24 20:45:29,102 - ERROR - Erreur lecture fichier json /home/ratel/BigDataPython/cours_Greta_python/code_python/DataPulse/data/transactions.json; Extra data: line 12 column 6 (char 319) - file_loaders.py - 65 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:29:34,779 - ERROR - Le fichier /data/clients.csv n'existe pas - utils.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:29:34,782 - ERROR - Erreur dans preview_file: Le fichier /data/clients.csv n'existe pas - preview.py - 30 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:32:38,541 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:32:38,810 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:32:45,606 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:32:45,876 - INFO - Apercu des données - utils.py - 95 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:33:01,266 - INFO - Type detecté : CSV  - utils.py - 49 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:33:01,729 - INFO - 5033 lignes trouvées après filtrage - utils.py - 84 Lignes dans le Fichier : - DataPulse
+2025-02-27 21:33:01,783 - INFO - 💾 Résultats enregistrés dans 'resultats.txt'. - utils.py - 115 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:35:28,735 - ERROR - Le fichier /data/clients.csv n'existe pas - utils.py - 27 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:35:28,737 - ERROR - Erreur dans preview_file: Le fichier /data/clients.csv n'existe pas - preview.py - 30 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:35:34,925 - INFO - Type detecté : CSV  - utils.py - 48 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:35:35,202 - INFO - Apercu des données - utils.py - 94 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:40:31,486 - ERROR - Le fichier data/clients.csv n'existe pas - utils.py - 27 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:40:31,489 - ERROR - Erreur dans preview_file: Le fichier data/clients.csv n'existe pas - preview.py - 30 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:40:45,633 - INFO - Type detecté : CSV  - utils.py - 48 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:40:45,933 - INFO - Apercu des données - utils.py - 94 Lignes dans le Fichier : - DataPulse
+2025-02-27 23:47:24,487 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-27 23:47:51,297 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-27 23:49:17,820 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-27 23:50:34,868 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-27 23:53:46,114 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-27 23:58:01,419 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-27 23:59:04,605 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-27 23:59:34,380 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-27 23:59:35,223 - ERROR - Erreur dans analyse: object of type 'NoneType' has no len() - analyse.py - 30 Lignes dans le Fichier : - DataPulse
+2025-02-28 00:00:17,087 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 00:00:17,949 - ERROR -  Erreur lors de l'enregistrement des résultats : 'NoneType' object is not iterable - utils.py - 116 Lignes dans le Fichier : - DataPulse
+2025-02-28 00:02:19,944 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 00:02:20,844 - ERROR -  Erreur lors de l'enregistrement des résultats : 'NoneType' object is not iterable - utils.py - 116 Lignes dans le Fichier : - DataPulse
+2025-02-28 00:02:20,845 - ERROR - Erreur dans analyse: 'NoneType' object is not iterable - analyse.py - 26 Lignes dans le Fichier : - DataPulse
+2025-02-28 00:02:20,845 - ERROR - Erreur dans analyse: object of type 'NoneType' has no len() - analyse.py - 33 Lignes dans le Fichier : - DataPulse
+2025-02-28 08:24:52,649 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 08:25:17,855 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 08:25:18,664 - ERROR -  Erreur lors de l'enregistrement des résultats : 'NoneType' object is not iterable - utils.py - 116 Lignes dans le Fichier : - DataPulse
+2025-02-28 08:25:18,665 - ERROR - Erreur dans analyse: 'NoneType' object is not iterable - analyse.py - 29 Lignes dans le Fichier : - DataPulse
+2025-02-28 08:25:18,665 - ERROR - Erreur dans analyse: object of type 'NoneType' has no len() - analyse.py - 36 Lignes dans le Fichier : - DataPulse
+2025-02-28 08:25:51,262 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 08:25:52,058 - ERROR -  Erreur lors de l'enregistrement des résultats : 'NoneType' object is not iterable - utils.py - 116 Lignes dans le Fichier : - DataPulse
+2025-02-28 08:25:52,058 - ERROR - Erreur dans analyse: 'NoneType' object is not iterable - analyse.py - 29 Lignes dans le Fichier : - DataPulse
+2025-02-28 08:26:10,189 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 08:26:49,811 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 08:26:50,608 - ERROR - Erreur dans analyse: 'NoneType' object is not iterable - analyse.py - 29 Lignes dans le Fichier : - DataPulse
+2025-02-28 08:27:20,145 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 08:27:20,982 - ERROR - Erreur dans analyse: 'NoneType' object is not iterable - analyse.py - 29 Lignes dans le Fichier : - DataPulse
+2025-02-28 09:22:53,261 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 09:22:54,417 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  'NoneType' object is not iterable - analyse.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-28 10:03:36,469 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
