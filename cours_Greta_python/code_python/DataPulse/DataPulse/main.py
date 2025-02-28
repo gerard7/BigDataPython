@@ -44,7 +44,7 @@ if __name__== "__main__":
 
 # Après : l'installation de l'exécutable
 # DataPulse preview --file data/clients.csv
-# DataPulse analyse --file data/clients.csv --chunk 500 -- verbose --output resultats.txt
+# DataPulse analyse --file data/clients.csv --chunk 500 --verbose --output resultats.txt
 
  # git commit -am "Création d'un package setup ainsi que de plusieurs modifications"
  # Dans le répertoire BigDataPython

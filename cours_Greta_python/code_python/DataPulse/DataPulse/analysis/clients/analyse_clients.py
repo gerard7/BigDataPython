@@ -76,8 +76,8 @@ def analyse_cli(filepath,chunk_size):
     dico_global["inactive_clients_count"] = count_inactif
     dico_global["oldest_inactive_dates"] = Counter(oldest_date).most_common()
     dico_global["top_clients"]= nom_prenom_total_montant
-    print("dico_global",dico_global)
-
+    # print("dico_global",dico_global)
+    return dico_global
 
 
 

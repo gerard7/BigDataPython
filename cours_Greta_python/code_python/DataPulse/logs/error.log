@@ -218,3 +218,7 @@
 2025-02-28 08:26:50,608 - ERROR - Erreur dans analyse: 'NoneType' object is not iterable - analyse.py - 29 Lignes dans le Fichier : - DataPulse
 2025-02-28 08:27:20,982 - ERROR - Erreur dans analyse: 'NoneType' object is not iterable - analyse.py - 29 Lignes dans le Fichier : - DataPulse
 2025-02-28 09:22:54,417 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  'NoneType' object is not iterable - analyse.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-28 21:26:20,792 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  can only concatenate str (not "int") to str - analyse.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-28 21:26:53,592 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  can only concatenate str (not "int") to str - analyse.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-28 21:27:12,744 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  unsupported operand type(s) for +: 'int' and 'str' - analyse.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-28 21:28:02,392 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  unsupported operand type(s) for +: 'int' and 'str' - analyse.py - 29 Lignes dans le Fichier : - DataPulse

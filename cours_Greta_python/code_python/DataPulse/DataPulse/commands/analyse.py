@@ -20,12 +20,12 @@ def analyse_data_command(args):
             try:
                 # save_output(resultat, args.output)
                 with open(args.output, "w") as file:
-                    for value in resultat:
-                        file.write(value+"\n")
-                print(f"💾 Résultats enregistrés dans {args.output}")
+                    for clef,value in resultat.items():
+                        file.write(str(clef)+":"+str(value)+"\n")
+                print(f"💾 Résultats enregistrés dans le fichier : {args.output}")
                 return
             except TypeError as e:
-                logger.error(f"Erreur dans analyse: En écrivant dans le fichier -  {e}")
+                logger.error(f"Erreur dans analyse: En écrivant dans le fichier : {args.output}-  {e}")
 
         # # Afficher les résultats
         # try:

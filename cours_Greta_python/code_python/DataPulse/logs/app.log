@@ -636,3 +636,19 @@
 2025-02-28 09:22:53,261 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
 2025-02-28 09:22:54,417 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  'NoneType' object is not iterable - analyse.py - 28 Lignes dans le Fichier : - DataPulse
 2025-02-28 10:03:36,469 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:23:38,267 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:24:21,256 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:24:50,579 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:26:19,987 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:26:20,792 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  can only concatenate str (not "int") to str - analyse.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-28 21:26:52,786 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:26:53,592 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  can only concatenate str (not "int") to str - analyse.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-28 21:27:11,950 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:27:12,744 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  unsupported operand type(s) for +: 'int' and 'str' - analyse.py - 28 Lignes dans le Fichier : - DataPulse
+2025-02-28 21:28:01,600 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:28:02,392 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  unsupported operand type(s) for +: 'int' and 'str' - analyse.py - 29 Lignes dans le Fichier : - DataPulse
+2025-02-28 21:30:06,800 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:30:52,926 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:31:52,244 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:32:54,195 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
+2025-02-28 21:34:57,468 - INFO - NumExpr defaulting to 4 threads. - utils.py - 161 Lignes dans le Fichier : - numexpr.utils
