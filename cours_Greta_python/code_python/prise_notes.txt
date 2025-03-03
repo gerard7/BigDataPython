@@ -481,6 +481,16 @@ df = pd.DataFrame({'A': [1, 1, 2, 2],'B': [1, 2, 3, 4],'C': np.random.randn(4)})
 
 arr=np.array([[10, 20, 30],[40, 50, 60],[70, 80, 90]])
 
+ftp://rapace:7Gsovarm@gerard-gandji.hd.free.fr
+
+ftp.microsoft.com
+
+English International School
+IFU : 3200800136115
+Tél : (00229) 21301274
+Adresse :08 BP 0430 Haie-Vive
+Cotonou - BÉNIN
+
 
 
 

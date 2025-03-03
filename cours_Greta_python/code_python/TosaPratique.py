@@ -563,16 +563,70 @@ print("//////////////////////////////////////////////")
 # assert launcher (max, 1,2,3)==3
 # assert launcher(int,"100",base=2)==4
 
-import numpy as np
-def graphe_matrix_to_list(m):
-    res=[[]]
-    for i in range(len(m)):
-        for j in range(len(m)):
-            if m[i,j]==True:
-                res.insert(i,[1])
-            else:pass
-    return res
+# import numpy as np
+# def graphe_matrix_to_list(m):
+#     res=[[]]
+#     for i in range(len(m)):
+#         for j in range(len(m)):
+#             if m[i,j]==True:
+#                 res.insert(i,[1])
+#             else:pass
+#     return res
+#
+# m1= np.array([[False,True],[False,False]]) # Doit retourner  [[1],[]]
+# m2 = np.array([[False,True,False],[True,False,True],[False,True,False]])
+# print("Adjacent Matrice =",graphe_matrix_to_list(m1))
 
-m1= np.array([[False,True],[False,False]]) # Doit retourner  [[1],[]]
-m2 = np.array([[False,True,False],[True,False,True],[False,True,False]])
-print("Adjacent Matrice =",graphe_matrix_to_list(m1))
+
+
+# EXERCICE TOSA PRATIQUE - OBJET
+#
+# Créer une classe abstraite Vehicule avec une méthode abstraite decrire().
+# Créer ensuite deux sous-classes Voiture et Moto, chacune implémente decrire() différemment.
+#
+#
+# La classe Vehicule est abstraite (ABC).
+# Voiture et Moto héritent de Vehicule.
+# decrire() doit renvoyer une description du véhicule.
+#
+#
+#
+# Sortie attendue :
+# Je suis une voiture.
+# Je suis une moto.
+
+from abc import ABC
+from abc import abstractmethod
+
+class Vehicule(ABC):
+    """
+    Classe véhicule qui est une classe abstraite . Donc qui hérite de ABC
+    """
+    @abstractmethod
+    def decrire(self):
+        return " Je suis un Véhicule"
+
+
+
+class Voiture(Vehicule):
+    def __init__(self):
+        pass
+
+    def decrire(self):
+        return "Je suis une Voiture"
+
+
+
+class Moto(Vehicule):
+    def __int__(self):
+        pass
+
+    def decrire(self):
+        return "Je suis une Moto"
+
+
+ma_voiture = Voiture()
+ma_moto = Moto()
+
+print(ma_voiture.decrire())
+print(ma_moto.decrire())
