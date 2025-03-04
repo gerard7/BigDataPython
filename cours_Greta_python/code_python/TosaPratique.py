@@ -435,6 +435,7 @@
 # 		if i[1]==1:
 # 			return i[0]
 # from TDListes import nombres
+from linecache import cache
 
 # # Test
 # print(first_non_repeating_char("aabccdeff"))  # 'b'
@@ -598,35 +599,78 @@ print("//////////////////////////////////////////////")
 from abc import ABC
 from abc import abstractmethod
 
-class Vehicule(ABC):
-    """
-    Classe véhicule qui est une classe abstraite . Donc qui hérite de ABC
-    """
-    @abstractmethod
-    def decrire(self):
-        return " Je suis un Véhicule"
+# class Vehicule(ABC):
+#     """
+#     Classe véhicule qui est une classe abstraite . Donc qui hérite de ABC
+#     """
+#     @abstractmethod
+#     def decrire(self):
+#         return " Je suis un Véhicule"
+#
+#
+#
+# class Voiture(Vehicule):
+#     def __init__(self):
+#         pass
+#
+#     def decrire(self):
+#         return "Je suis une Voiture"
+#
+#
+#
+# class Moto(Vehicule):
+#     def __int__(self):
+#         pass
+#
+#     def decrire(self):
+#         return "Je suis une Moto"
+#
+#
+# ma_voiture = Voiture()
+# ma_moto = Moto()
+#
+# print(ma_voiture.decrire())
+# print(ma_moto.decrire())
 
 
 
-class Voiture(Vehicule):
-    def __init__(self):
-        pass
+print("***************** 4 Mars *****************")
+"""
+EXERCICE TOSA 6min
 
-    def decrire(self):
-        return "Je suis une Voiture"
+Créer une classe Memorizer qui :
+
+Stocke les résultats des appels précédents dans un dictionnaire (cache).
+Compte le nombre total d’appels (appel_count).
+Implémente __call__(n) pour calculer n * 2, sauf si le résultat est déjà en cache.
+Tester avec plusieurs appels et afficher le cache et le nombre d’appels.
 
 
+# ----- TESTS ----- : 
+memo = Memorizer()
+print(memo(5))  #  Calculé : 5 → 10
+print(memo(3))  #  Calculé : 3 → 6
+print(memo(5))  #  Récupéré depuis le cache : 5 → 10
 
-class Moto(Vehicule):
+print(f" Nombre d'appels réels : {memo.appel_count}")  #  2 (seuls 5 et 3 ont été calculés)
+
+
+"""
+
+class Memorizer:
     def __int__(self):
-        pass
+        self.cache = {}
+        self.count = 0
 
-    def decrire(self):
-        return "Je suis une Moto"
+    def __call__(self,n):
+        # self.count+=1
+        print(f"Count = {self.count}")
+        # if n in self.cache.keys():
+        #     print("Je ne calcule rien. Je retourne seulement")
+        #     return self.cache[n]
+        # else:
+        #    self.cache[n] = n*2
+        #    return self.cache[n]
 
-
-ma_voiture = Voiture()
-ma_moto = Moto()
-
-print(ma_voiture.decrire())
-print(ma_moto.decrire())
+memo =Memorizer()
+print(memo(5))
