@@ -657,20 +657,152 @@ print(f" Nombre d'appels réels : {memo.appel_count}")  #  2 (seuls 5 et 3 ont �
 
 """
 
-class Memorizer:
-    def __int__(self):
-        self.cache = {}
-        self.count = 0
+# class Memorizer:
+#     def __int__(self):
+#         self.cache = {}
+#         self.count = 0
+#
+#     def __call__(self,n):
+#         # self.count+=1
+#         print(f"Count = {self.count}")
+#         # if n in self.cache.keys():
+#         #     print("Je ne calcule rien. Je retourne seulement")
+#         #     return self.cache[n]
+#         # else:
+#         #    self.cache[n] = n*2
+#         #    return self.cache[n]
+#
+# memo =Memorizer()
+# print(memo(5))
 
-    def __call__(self,n):
-        # self.count+=1
-        print(f"Count = {self.count}")
-        # if n in self.cache.keys():
-        #     print("Je ne calcule rien. Je retourne seulement")
-        #     return self.cache[n]
-        # else:
-        #    self.cache[n] = n*2
-        #    return self.cache[n]
+print("************************* 6 MARS : 5 Exercices ********************")
 
-memo =Memorizer()
-print(memo(5))
+print("---------- Exerciuce 1 -------------")
+# ---- Exercice
+# TOSA
+# ---- Exercice TOSA 1 ---- :
+# Complétez la classe suivante pour que l’affichage print(dog)
+# retourne "Chien de race Labrador".
+# class Dog:
+#     def __init__(self, breed):
+#         self.breed = breed
+#
+#     def __str__(self):
+#         return f"Chien de race : {self.breed}"
+#
+
+
+# dog = Dog("Labrador")
+# print(dog)  # Doit afficher : Chien de race Labrador
+
+print("///// Exo 2 /////")
+
+
+# ---- Exercice TOSA 2 ---- :
+# Complétez la classe BankAccount pour permettre l’addition de deux comptes
+# bancaires en surchargeant l’opérateur +.L’addition de deux comptes doit
+# retourner un nouveau compte avec la somme des soldes des deux comptes.
+# class BankAccount:
+#     def __init__(self, owner, balance):
+#         self.owner = owner
+#         self.balance = balance
+#
+#     # Complétez ici
+#
+# acc1 = BankAccount("Sam", 1000)
+# acc2 = BankAccount("Nad", 1500)
+#
+# acc3 = acc1 + acc2  # Devrait créer un nouveau compte avec balance 2500
+# print(acc3.owner)  # Doit afficher : "Sam & Nad"
+# print(acc3.balance)  # Doit afficher : 2500
+
+# class BankAccount:
+#     def __init__(self, owner, balance):
+#         self.owner = owner
+#         self.balance = balance
+#
+#     def __add__(self,obj):
+#         commun_nom = self.owner + " & " + obj.owner
+#         commune_somme = self.balance + obj.balance
+#         return BankAccount(commun_nom,commune_somme)
+#
+#
+# acc1 = BankAccount("Sam", 1000)
+# acc2 = BankAccount("Nad", 1500)
+
+
+# acc3 = acc1 + acc2  # Devrait créer un nouveau compte avec balance 2500
+# # print(acc3.owner)  # Doit afficher : "Sam & Nad"
+# # print(acc3.balance)  # Doit afficher : 2500
+
+print("--------- Exercice 3---------")
+# A REVOIR
+"""
+def __call__(cls, *args, **kwargs):
+        # Vérifier si l'instance existe déjà
+        if cls not in cls._instances:
+            # Si l'instance n'existe pas, créer une nouvelle instance
+            instance = super().__call__(*args, **kwargs)
+            # Enregistrer cette instance
+            cls._instances[cls] = instance
+        # Retourner l'instance existante
+        return cls._instances[cls]
+"""
+
+# ---- Exercice TOSA 3 ----:
+# Complétez la classe Singleton pour qu'elle respecte le design pattern Singleton
+#
+# class Singleton(type):
+#    _instances = {}
+#
+#    def __call__(cls, *args, **kwargs):
+#         # Si l'instance n'existe pas encore, on la crée
+#         if cls not in cls._instances:
+#             cls._instances[cls] = super().__call__(*args, **kwargs)
+#         # On retourne toujours la même instance
+#         return cls._instances[cls]
+# # #
+# s1 = Singleton()
+# s2 = Singleton()
+#
+# print(s1 is s2)  # Doit afficher True
+
+print("********* Exo 4 *******************")
+
+# ---- EXERCICE TOSA 4 ---- :
+# Complétez la classe Point pour qu’elle soit immutable
+#
+# from dataclasses import dataclass
+#
+# @dataclass(frozen=True)
+# class Point:
+#     x:int
+#     y:int
+#
+# p = Point(x=1, y=2)
+# # p.x = 10  # Doit lever une erreur à cause de frozen=True
+
+
+print("////// Exo 5//////")
+
+# ---- EXERCICE TOSA 5 ----:
+# Complétez la classe pour que isinstance(obj, A)
+# retourne True uniquement si obj a l’attribut special_attr
+#
+# class Meta(type):
+#     # Lorsqu'on fait isinstance , c'est __instancecheck__  qui est appelé
+#     def __instancecheck__(cls, instance):
+#         if hasattr(instance,"special_attr"):
+#             return True
+#         else:
+#             return False
+#
+# class A(metaclass=Meta):
+#     pass
+#
+# class B:
+#     special_attr = True
+#
+# b = B()
+# print(isinstance(b, A))  # Doit afficher True
+#

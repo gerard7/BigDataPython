@@ -485,11 +485,10 @@ ftp://rapace:7Gsovarm@gerard-gandji.hd.free.fr
 
 ftp.microsoft.com
 
-English International School
-IFU : 3200800136115
-Tél : (00229) 21301274
-Adresse :08 BP 0430 Haie-Vive
-Cotonou - BÉNIN
+
+
+from cours_Greta_python.code_python.DataPulse.DataPulse.logging_config import logger
+
 
 
 

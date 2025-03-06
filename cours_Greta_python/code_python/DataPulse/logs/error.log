@@ -222,3 +222,10 @@
 2025-02-28 21:26:53,592 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  can only concatenate str (not "int") to str - analyse.py - 28 Lignes dans le Fichier : - DataPulse
 2025-02-28 21:27:12,744 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  unsupported operand type(s) for +: 'int' and 'str' - analyse.py - 28 Lignes dans le Fichier : - DataPulse
 2025-02-28 21:28:02,392 - ERROR - Erreur dans analyse: En écrivant dans le fichier -  unsupported operand type(s) for +: 'int' and 'str' - analyse.py - 29 Lignes dans le Fichier : - DataPulse
+2025-03-06 15:26:59,834 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : Could not interpret value `Mois` for `hue`. Value is a string, but `data` was not passed. - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
+2025-03-06 15:29:56,213 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : Could not interpret value `Mois` for `hue`. Value is a string, but `data` was not passed. - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
+2025-03-06 15:30:24,877 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : Could not interpret value `Mois` for `hue`. Value is a string, but `data` was not passed. - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
+2025-03-06 15:33:50,739 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : 'coolwarn' is not a valid palette name - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
+2025-03-06 15:33:51,002 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : 'coolwarn' is not a valid palette name - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
+2025-03-06 15:36:07,134 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : 'coolwarn' is not a valid palette name - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
+2025-03-06 15:36:07,343 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : 'coolwarn' is not a valid palette name - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
