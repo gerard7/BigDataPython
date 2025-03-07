@@ -1,4 +1,54 @@
-Bonjour GRETA 91 
-Découvrons le with open()
-Blablabla
-{"name": "Sam", "city": "Paris", "age": 18}
+version: '3'
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: nextcloud_db
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --log-bin=ROW
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: nextcloudpassword
+
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud_app
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    volumes:
+      - nextcloud_data:/var/www/html
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: nextcloudpassword
+
+volumes:
+  db_data:
+  nextcloud_data:
+  
+  =======================
+  Si vous utilisez un disque dur ou SSD externe, montez-le et mappez-le dans docker-compose.yml :
+
+volumes:
+  - /mnt/nextcloud:/var/www/html/data
+
+
+===============================
+
+Optimiser avec Redis (Cache)
+
+Ajoutez ce service dans docker-compose.yml :
+
+  redis:
+    image: redis:alpine
+    container_name: nextcloud_redis
+    restart: unless-stopped
+
+
+================================
