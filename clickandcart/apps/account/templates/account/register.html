@@ -1,0 +1,42 @@
+<!-- -->
+{% extends "base.html" %}
+
+{% block title%} - Inscription {% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Inscription</h2>
+    <form method="POST">
+        {% csrf_token %}  <!-- pour éviter les attaques -->
+        <!-- {{ form.as_p }} --> <!-- c'est pour afficher le formulaire sous forme de paragraphe -->
+        <div class="mb-3">
+            {{ form.firstname.label_tag}}
+            {{ form.firstname }}
+            {{ form.firstame.errors }}  <!-- Si cette définition est ici, en cas d'erreur, les erreurs s'afficheront en dessous . Si cette ligne était définie au dessus, cela s'afficherait au dessus -->
+        </div>
+         <div class="mb-3">
+            {{ form.lastname.label_tag}}
+            {{ form.lastname }}
+            {{ form.lastname.errors }}  <!-- Si cette définition est ici, en cas d'erreur, les erreurs s'afficheront en dessous . Si cette ligne était définie au dessus, cela s'afficherait au dessus -->
+        </div>
+        <div class="mb-3">
+            {{ form.email.label_tag}}
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+        <div class="mb-3">
+            {{ form.password.label_tag}}
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+        <div class="mb-3">
+            {{ form.confirme_password.label_tag}}
+            {{ form.confirme_password }}
+            {{ form.confirme_password.errors }}
+        </div>
+        <button  type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+</div>
+{% endblock %}
