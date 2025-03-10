@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os.path
 from pathlib import Path
 
+from django.conf.global_settings import STATICFILES_DIRS
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -55,7 +57,7 @@ ROOT_URLCONF = "clickandcart.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR,"templates")], # C'est ici qu'on ajoute de nouveau dossiers qu'on voudrait que Django aille chercher: ici templates
+        "DIRS": [os.path.join(BASE_DIR,"templates"),], # C'est ici qu'on ajoute de nouveau dossiers qu'on voudrait que Django aille chercher: ici templates
         "APP_DIRS": True, # C'est cette ligne qui lui permet d'aller chercher les dossiers templates dans chaque app pour les vues HTML
         "OPTIONS": {
             "context_processors": [
@@ -117,6 +119,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+# Dossier global pour fichiers static
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR,"static")
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
