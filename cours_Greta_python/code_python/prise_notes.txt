@@ -489,8 +489,29 @@ ftp.microsoft.com
 
 from cours_Greta_python.code_python.DataPulse.DataPulse.logging_config import logger
 
+sudo chown -R www-data:www-data nextcloud/
+
+sudo chmod -R 770 /volume1/doker/nextcloud/
+
+=====================
+J'ai installé nextcloud dans /media/nexcloud
+
+a son installation, il a cré le dossier config dans /media/nextcloud .
+Et jsutement dans ce dossier , on en a d'autres : config/www/nextcloud 
+et tous les éléments importants de l'application se trouvent dans ce dernier nextcloud.
+Du coup, j'ai créé un lien vers /var/www/html: 
+sudo ln -s /media/nextcloud/config/www/nextcloud/ /var/www/html/
+
+Ainsi, c'est comme si le bon répertoire nextcloud se trouvait dans /var/www/html. 
+Je pourrais accéder au site via : https://gerard-gandji.hd.free.fr/nextcloud
 
 
+Donner les droits au répertoire config : 
+sudo chown -R www-data:www-data /media/nextcloud/config  et sudo chown -R www-data:www-data /media/mariadb
+sudo chmod -R 770 /media/nextcloud/config et sudo chmod -R 770 /media/nextcloud/mariadb
+
+!!! Tant que l'installation n'est pas encore complète, c'est que des problèmes de droits ne sont pas encore résolus.
+Chercher les sous-dossiers de config...etc pour leur appliquer : sudo chown -R www-data:www-data et  sudo chmod -R 770
 
 
 

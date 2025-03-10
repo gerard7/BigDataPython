@@ -229,3 +229,13 @@
 2025-03-06 15:33:51,002 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : 'coolwarn' is not a valid palette name - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
 2025-03-06 15:36:07,134 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : 'coolwarn' is not a valid palette name - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
 2025-03-06 15:36:07,343 - ERROR - Erreur lors de la création du graphique 'CLients inactifs' : 'coolwarn' is not a valid palette name - client_visualizer.py - 81 Lignes dans le Fichier : - DataPulse
+2025-03-07 15:00:04,291 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 59 Lignes dans le Fichier : - DataPulse
+2025-03-07 15:24:10,644 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 59 Lignes dans le Fichier : - DataPulse
+2025-03-07 15:27:17,576 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 59 Lignes dans le Fichier : - DataPulse
+2025-03-07 15:36:29,648 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-07 15:39:03,513 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-07 15:52:37,603 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-07 15:53:16,509 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-07 20:10:47,242 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-07 20:12:47,227 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-07 20:19:36,320 - ERROR - Erreur lors de la création du Visualizer :'dict' object is not callable - streamlit_app.py - 63 Lignes dans le Fichier : - DataPulse
