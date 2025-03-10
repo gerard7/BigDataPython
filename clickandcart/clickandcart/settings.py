@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -55,8 +55,8 @@ ROOT_URLCONF = "clickandcart.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
-        "APP_DIRS": True, # C'est cette ligne qui lui permet d'aller chercher les dossiers templates dans chaque app pour les vue HTML
+        "DIRS": [os.path.join(BASE_DIR,"templates")], # C'est ici qu'on ajoute de nouveau dossiers qu'on voudrait que Django aille chercher: ici templates
+        "APP_DIRS": True, # C'est cette ligne qui lui permet d'aller chercher les dossiers templates dans chaque app pour les vues HTML
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
