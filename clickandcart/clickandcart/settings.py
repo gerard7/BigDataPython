@@ -141,6 +141,6 @@ INTERNAL_IPS =[
 
 ]
 
-# AUTH_USER_MODEL = "account.Client" # On indique à Django d'utilisder un modèle personnalisé qui est CLient se trouvant dans le module account
+AUTH_USER_MODEL = "account.Client" # On indique à Django d'utilisder un modèle personnalisé qui est CLient se trouvant dans le module account
 # Il n'est pas nécessaire de préciszer le chemin du model. Car , par défaut, Django cherchera le model dans models
 

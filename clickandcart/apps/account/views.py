@@ -7,8 +7,10 @@ from django.contrib import messages
 
 # Create your views here.
 def register(request):
+    print("***** Passage ici")
     form = RegisterForm(request.POST or None)  # veut dire, soit on crée un formulaire, ou on le crée s'il n'existe pas
     if form.is_valid():
+        print("------------ Passage ici")
         try:
             Client.objects.create_user(
                 email=form.cleaned_data["email"],
