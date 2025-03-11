@@ -6,7 +6,7 @@ class ClientManager(BaseUserManager): # Django a besoin de Manager pour communiq
     # BaseUserManager pour gérer les mots de pass
     def create_user(self,email, firstname, lastname, password):
         email =self.normalize_email(email) # l'utilisation de self, fait référence à la classe Parente
-        user = self.model(email=email,fistname=firstname,lastname=lastname) # va créer plutard une table , un objet user
+        user = self.model(email=email,firstname=firstname,lastname=lastname) # va créer plutard une table , un objet user
         user.set_password(password) # C'est pour hasher le password et l'attribuer au user
         user.save(using=self._db)
         return user # Retourne l'instance du user qui vient d'être créé
