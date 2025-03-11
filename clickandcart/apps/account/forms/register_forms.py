@@ -9,12 +9,12 @@ from apps.account.validators import validate_mail
 class RegisterForm(forms.Form):
     firstname = forms.CharField(
         max_length=50,
-        label="Prenom",
+        label="Prénom :",
         validators=[validate_alpha],
         required=True,
         widget=forms.TextInput(
             attrs={
-                "placeholder":"Prenom",
+                "placeholder":"Prénom",
                 "class":"form-control", # C'est pour utiliser les formulaires de Boostrap
                  }
         )
@@ -23,12 +23,12 @@ class RegisterForm(forms.Form):
 
     lastname = forms.CharField(
         max_length=50,
-        label ="NOM",
+        label ="NOM :",
         validators=[validate_alpha],
         required=True,
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Prenom",
+                "placeholder": "NOM",
                 "class": "form-control",  # C'est pour utiliser les formulaires de Boostrap
             }
         )
@@ -54,7 +54,7 @@ class RegisterForm(forms.Form):
         validators=[validate_password_strength],
         widget=forms.PasswordInput(
             attrs={
-                "placeholder": "Mot de passe",
+                "placeholder": "Mot de passe ( > 8 caractères + carac spéciaux): Ex: aerAhftp&#_",
                 "class": "form-control"
             }
 
@@ -73,3 +73,13 @@ class RegisterForm(forms.Form):
 
         )
     )
+
+    def clean(self): # C'est une méthode que Django connait pour vérifier que password=confirme_password
+        # Elle est automatiquement appelé lorsqu'on fait : form.is_value() dans views.py
+        cleaned_data = super().clean()
+        password_ = cleaned_data.get("password")
+        confirme_passwword_ = cleaned_data.get("confirme_password")
+        if (password_ and confirme_passwword_) and (password_!=confirme_passwword_):
+            self.add_error("confirme_password","Les mots de passe ne correspondent pas ")
+            # Lever une erreur ciblée en précisant la clé d'un champ!
+        return cleaned_data

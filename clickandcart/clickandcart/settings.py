@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os.path
 from pathlib import Path
 
-from django.conf.global_settings import STATICFILES_DIRS
+from django.conf.global_settings import STATICFILES_DIRS, AUTH_USER_MODEL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,3 +136,7 @@ INTERNAL_IPS =[
     '127.0.0.1'
 
 ]
+
+# AUTH_USER_MODEL = "account.Client" # On indique à Django d'utilisder un modèle personnalisé qui est CLient se trouvant dans le module account
+# Il n'est pas nécessaire de préciszer le chemin du model. Car , par défaut, Django cherchera le model dans models
+

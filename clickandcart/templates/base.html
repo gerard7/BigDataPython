@@ -204,6 +204,15 @@
 </nav>
 
 <main>
+  <div class="container">
+    {% if messages  %}
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}  <!-- {{ permet d'afficher le contenu de la variable : message -->
+          </div>
+      {% endfor %}
+    {% endif %}
+  </div>
   {% block content %}
   {% endblock %}
 </main>

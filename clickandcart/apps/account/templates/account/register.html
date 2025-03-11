@@ -14,7 +14,7 @@
         <div class="mb-3">
             {{ form.firstname.label_tag}}
             {{ form.firstname }}
-            {{ form.firstame.errors }}  <!-- Si cette définition est ici, en cas d'erreur, les erreurs s'afficheront en dessous . Si cette ligne était définie au dessus, cela s'afficherait au dessus -->
+            {{ form.firstname.errors }}  <!-- Si cette définition est ici, en cas d'erreur, les erreurs s'afficheront en dessous . Si cette ligne était définie au dessus, cela s'afficherait au dessus -->
         </div>
          <div class="mb-3">
             {{ form.lastname.label_tag}}
@@ -37,6 +37,11 @@
             {{ form.confirme_password.errors }}
         </div>
         <button  type="submit" class="btn btn-primary">S'inscrire</button>
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
     </form>
 </div>
 {% endblock %}
