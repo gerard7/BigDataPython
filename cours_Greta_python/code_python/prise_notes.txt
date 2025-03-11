@@ -491,7 +491,12 @@ from cours_Greta_python.code_python.DataPulse.DataPulse.logging_config import lo
 
 sudo chown -R www-data:www-data nextcloud/
 
-sudo chmod -R 770 /volume1/doker/nextcloud/
+sudo chmod -R 775 /volume1/doker/nextcloud/
+
+ET
+sudo chown -R www-data:www-data /var/www
+
+sudo chmod -R 775 /var/www
 
 =====================
 J'ai installé nextcloud dans /media/nexcloud
@@ -512,6 +517,15 @@ sudo chmod -R 770 /media/nextcloud/config et sudo chmod -R 770 /media/nextcloud/
 
 !!! Tant que l'installation n'est pas encore complète, c'est que des problèmes de droits ne sont pas encore résolus.
 Chercher les sous-dossiers de config...etc pour leur appliquer : sudo chown -R www-data:www-data et  sudo chmod -R 770
+
+Reste des modifications du fichier : /etc/fstab:
+mettre : dmask=002,fmask=002 pour donner les droits d'écriture
+==================================================
+
+pip install django-debug-toolbar
+
+ django-admin startapp nom_app : pour créer une nouvelle application dans apps: Attention: le faire dans le chemin...apps
+=====================================
 
 
 
