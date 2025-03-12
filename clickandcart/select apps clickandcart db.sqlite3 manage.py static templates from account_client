@@ -1,0 +1,11 @@
+ id |                                         password                                         | last_login | is_superuser |  firstname  |  lastname   |        email        | is_active | is_staff 
+----+------------------------------------------------------------------------------------------+------------+--------------+-------------+-------------+---------------------+-----------+----------
+  1 | pbkdf2_sha256$870000$ws4nA1uPmWuQh40bOLlExz$j7AOcAcICI1S2cL05HhLm3eNu9DX4ncRw785Yf9R57w= |            | f            | Sovègnon    | GANDJI      | armand@armand.com   | t         | f
+  7 | pbkdf2_sha256$870000$zKzhuJQoE0LwbA2UTYnM2U$7iTzHB+SbNHwaQiRme225LpMGbwX8tAZpNM9icgeoAc= |            | f            | Sovègnon    | GANDJI      | toaoe@ieixi.com     | t         | f
+  8 | pbkdf2_sha256$870000$T1OPCfEoxGGVBPKFiRegTP$L976RNK3nCtZ5sFJgbzTBo5hGkK1NnEGOn68yD++xuU= |            | f            | Sovègnon    | GANDJI      | zefez@eefef.com     | t         | f
+  9 | pbkdf2_sha256$870000$NvzwwSno7hBmGoy4EIZ50j$Mpn41qP1MDYcaMXsQQjM6bOREUqPrhr5M7oE5XIGMUI= |            | f            | Sovègnon    | GANDJI      | xxxdeed@ceerfr.fr   | t         | f
+ 11 | pbkdf2_sha256$870000$VNPoFVkyEKuibH7Esjcut3$6gvowFb1w1KoXzti6ncqDEwCztZ1htiklPXQcDRKwjg= |            | f            | Claude      | JENESAISPAS | grfsge@ehee.com     | t         | f
+ 12 | pbkdf2_sha256$870000$5TTTB9Uel3PVcrtkH57ZUC$7+uGkAoYM4/D85gDpstQoIANHDdfTxHRaNQjqzSqbco= |            | f            | ClaudeAutre | JESAIS      | grfsge@eheezjre.com | t         | f
+ 13 | pbkdf2_sha256$870000$Y2FnyFPo9LXdPL21Tkxg5Q$EjJ/A3OF+9WjCVtpheOLTCL4qhFAcFyZTvLYBo3Owe0= |            | f            | Claude      | PAUL        | toto@toto.com       | t         | f
+(7 rows)
+

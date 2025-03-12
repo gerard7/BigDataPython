@@ -1,0 +1,15 @@
+                       List of relations
+ Schema |              Name               | Type  |    Owner    
+--------+---------------------------------+-------+-------------
+ public | account_client                  | table | django_user
+ public | account_client_groups           | table | django_user
+ public | account_client_user_permissions | table | django_user
+ public | auth_group                      | table | django_user
+ public | auth_group_permissions          | table | django_user
+ public | auth_permission                 | table | django_user
+ public | django_admin_log                | table | django_user
+ public | django_content_type             | table | django_user
+ public | django_migrations               | table | django_user
+ public | django_session                  | table | django_user
+(10 rows)
+
