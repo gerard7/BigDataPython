@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os.path
 from pathlib import Path
 
-from django.conf.global_settings import STATICFILES_DIRS, AUTH_USER_MODEL
+from django.contrib.messages import constants as messages # On va redéfinir le DEBUG, ERROR,...
+
+from django.conf.global_settings import STATICFILES_DIRS
+from django.conf.global_settings import INTERNAL_IPS
+from django.conf.global_settings import AUTH_USER_MODEL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
     "apps.home",
     "debug_toolbar",
     "apps.account",
+    "apps.product",
 ]
 
 MIDDLEWARE = [
@@ -141,6 +146,24 @@ INTERNAL_IPS =[
 
 ]
 
-AUTH_USER_MODEL = "account.Client" # On indique à Django d'utilisder un modèle personnalisé qui est CLient se trouvant dans le module account
-# Il n'est pas nécessaire de préciszer le chemin du model. Car , par défaut, Django cherchera le model dans models
+AUTH_USER_MODEL = "account.client" # On indique à Django d'utiliser un modèle personnalisé qui est CLient se trouvant dans le module account
+# Il n'est pas nécessaire de préciser le chemin du model. Car , par défaut, Django cherchera le model dans models
 
+#  Pour personnaliser les messages qui apparaissent sur la page en fonction des erreurs qui viennent de django.
+# La bonne méthode est de le faire dans le setting
+MESSAGE_TAGS = {
+    messages.DEBUG:"secondary",
+    messages.INFO:"info",
+    messages.SUCCESS:"success",
+    messages.WARNING:"warning",
+    messages.ERROR:"danger"
+}
+
+# Redirection après une connexion réussie
+LOGIN_REDIRECT_URL ="home"
+
+# Redirection après une déconnexion.
+LOGOUT_REDIRECT_URL ="login"
+
+# URL pour la page de connexion
+LOGIN_URL ="login"

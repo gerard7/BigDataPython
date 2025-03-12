@@ -15,7 +15,7 @@ class ClientManager(BaseUserManager): # Django a besoin de Manager pour communiq
         user = self.create_user(email, firstname, lastname, password)
         user.is_staff = True
         user.is_superuser = True
-        user.save(usign=self._db)
+        user.save(using=self._db)
         return user
 
 class Client(AbstractBaseUser,PermissionsMixin):
