@@ -1,0 +1,2355 @@
+Serveur FTP : pureftpd
+création du groupe : sudo groupadd ftpgroup
+
+(supprimer un groupe : groupdel NomGroupe)
+
+Installation Raspberry Pi 3 : sudo dd bs=4M if=2016-09-23-raspbian-jessie-lite.img of=/dev/sdf
+
+Pour une premiere installation, le login est :pi
+password : raspberry
+
+Pour lancer la premiere interface de configuration: sudo raspi-config
+
+Pour créer un nouvel utilisateur : sudo adduser armand	. Une demande de mot de passe permet de définir un mot de passe pour cet utilisateur.
+
+Pour définir cet utilisateur comme superUser : taper : 	sudo visudo
+
+Puis (pour l'exemple de l'utilisateur : armand) écrire : armand ALL=(ALL:ALL) ALL
+
+Pour changer le mot de passe par defaut ou non de pi, sur un terminal, taper : sudo raspi-config
+
+Lieu De Stockage = /home/gerard/Applications/stockageDataFTP   
+
+création de l'utilisateur : faucon : sudo useradd -g ftpgroup -d /dev/null -s /usr/sbin/nologin faucon
+
+Client passe = !=rePtil__:
+
+Fichier de config :  /etc/pure-ftpd/conf/   (https://doc.ubuntu-fr.org/pure-ftp)
+
+Création Utilisateur virtuel: faucon
+
+------- ce 30 Decembre 2024 : ------
+
+Trois utilisateurs crés :
+- faucon (!=rePtil__) : qui accède au répertoire ordinaire dont le contenu est susceptible d'être modifié.
+
+sudo pure-pw useradd faucon -u ftpuser -g ftpgroup -d /media/diskWesternDigital/ftpDataOnDiskWesternDigital/
+
+ - rapace (__=+@maths)  qui accède au répertoire de données Mathématiques : 
+ 
+ sudo pure-pw useradd rapace -u ftpuser -g ftpgroup -d /media/diskWesternDigital/Alain-SagemCom_Avril_2016
+
+- aigle ( 7Gsovarm) qui accède au répertoire des vidéos des caméras de Dopé Kopé : 
+
+sudo pure-pw useradd aigle -u ftpuser -g ftpgroup -d /media/diskIomega/videosCamera/
+
+
+
+ftp://aigle:7Gsovarm:@82.65.214.195
+
+
+
+Supprimer un lien symbolique : rm -i $le_nom_du_lien
+
+INTALLATION SERVEUR : FTP CE 1 JANVIER 2025
+Le serveur retenu pour ftp est : pure-ftp . En raison de la définition
+de l'espace de données lors de la définition de l'utilisateur :
+sudo pure-pw useradd nom_utilisateur -u ftpuser -g ftpgroup -d /home/www/nom_utilisateur
+
+Les répertoires et les auteurs :
+
+faucon : /media/diskWesternDigital/ftpDataOnDiskWesternDigital
+
+rapace : /media/diskWesternDigital/Alain-SagemCom_Avril_2016
+
+aigle (video caméra) : /media/diskIomega/videosCamera/
+
+
+GUIDE D'INSTALLATION COMPLETE DU SERVEUR FTP :
+
+- sudo apt-get install pure-ftpd pure-ftpd-common
+
+Suite à cette commande, le serveur FTP sera lancé automatiquement. L'ensemble des fichiers de configuration de
+ Pure-ftpd se trouve dans le répertoire suivant: /etc/pure-ftpd/
+
+Il faut ensuite créer l'utilisateur/groupe système avec lequel le serveur FTP sera lancé:
+( Les utilisateurs virtuels seront mappés à l'UID de ftpuser et au GID de ftpgroup. )
+
+- sudo groupadd ftpgroup
+
+- sudo useradd -g ftpgroup -d /dev/null -s /etc ftpuser
+
+Configuration de Pure-ftpd
+De base, Pure-ftpd base son authentification sur le PAM système puis sur un fichier de donnée interne. 
+Personnellement et pour des raisons de sécurité, je préfère désactiver l'authentification par PAM. 
+Pour cela il faut éditer le fichier conf/PAMAuthentication et remplacer la ligne yes par no:
+
+
+- # sudo nano /etc/pure-ftpd/conf/PAMAuthentication
+
+no
+
+# sudo nano /etc/pure-ftpd/conf/DontResolve
+
+yes
+
+
+Pour finir, il faut créer un lien symbolique pour activer l’authentification des utilisateurs virtuels :
+
+# cd /etc/pure-ftpd/auth/
+
+# sudo ln -s ../conf/PureDB 50puredb
+
+
+Création d'un utilisateur FTP
+Par exemple si vous voulez créer l'utilisateur ftp nicolargo dont le 
+répertoire sera /home/ftp/nicolargo, il faut saisir les commandes suivantes:
+
+
+- sudo mkdir /home/ftp/nicolargo
+
+- sudo chown -R ftpuser:ftpgroup /home/ftp/nicolargo
+
+- sudo pure-pw useradd nicolargo -u ftpuser -g ftpgroup -d /home/ftp/nicolargo
+
+Ces commandes vont avoir comme buts de créer un répertoire local puis de renseigner le 
+fichier de configuration de Pure-ftp: /etc/pure-ftpd/pureftpd.passwd:
+
+- sudo cat /etc/pure-ftpd/pureftpd.passwd
+
+
+Enfin il faut transofrmer ce fichier dans un format sécurisé et lisible par le serveur FTP (/etc/pure-ftpd/pureftpd.pdb):
+
+
+sudo pure-pw mkdb
+
+
+On relance alors le serveur pour que la configuration soit prse en compte:
+
+sudo /etc/init.d/pure-ftpd restart
+
+
+Quelques commandes utiles...
+Voici quelques commandes utiles à l'administration de votre serveur FTP.
+
+Pour configurer le message affiché lors de la connexion des utilisateurs, il faut commencer par editer un fichier texte contenant le message:
+
+
+# sudo nano /etc/motd.pure-ftpd
+
+Bienvenue sur mon beau serveur FTP !
+
+Puis ajouter le chemin de ce fichier dans le fichier /etc/pure-ftpd/conf/FortunesFile:
+
+
+# sudo nano /etc/pure-ftpd/conf/FortunesFile
+
+/etc/motd.pure-ftpd
+
+Pour connaitre la liste des utilisateurs ayant un compte FTP:
+
+sudo pure-pw list
+
+
+Pour changer le mot de passe d'un utilisateur:
+
+sudo pure-pw passwd $Utilisateur
+
+Pour supprimer le compte d'un utilisateur:
+
+sudo pure-pw userdel $Utilisateur
+
+-------- AJOUT D'UN NOUVEL UTILISATEUR AVEC SON REPERTOIRE :
+
+*********
+
+sudo chown -R ftpuser:ftpgroup /media/diskWesternDigitalMyBook/Alain-SagemCom_Avril_2016
+
+sudo pure-pw useradd rapace -u ftpuser -g ftpgroup -d /media/diskWesternDigitalMyBook/Alain-SagemCom_Avril_2016
+
+sudo pure-pw mkdb
+
+sudo /etc/init.d/pure-ftpd restart
+
+*********
+
+sudo chown -R ftpuser:ftpgroup /media/diskIomegaCrocodile/videosCamera/
+sudo pure-pw useradd aigle -u ftpuser -g ftpgroup -d /media/diskIomegaCrocodile/videosCamera/
+sudo pure-pw mkdb
+sudo /etc/init.d/pure-ftpd restart
+
+*********
+
+CREONS UN UTILISATEUR SPECIAL QUI POURRA ENVOYER LES VIDEOS DE CAMERAS SUR LE SERVEUR FTP:
+
+C'est le seul utilisateur qui aura le droit de uploader des data
+sur le serveur . Cela permettra aux cameras d'envoyer des vidéos
+dans le répertoire : /media/diskIomega/videosCamera/
+
+
+pour cela :
+
+------ AJOUT D'UN UTILISATEUR SPECIAL POUR L'UPLOAD ------
+
+Cet utilisateur pourra écrire des fichiers dans le dossier /media/diskIomegaCrocodile/videosCamera/ du serveur FTP . 
+
+Nom : epervier
+
+sudo pure-pw useradd epervier -u ftpuser -g ftpgroup -d /media/diskIomegaCrocodile/videosCamera/ -m
+
+sudo pure-pw mkdb
+
+sudo ln -s /etc/pure-ftpd/conf/PureDB /etc/pure-ftpd/auth/60puredb
+
+sudo service pure-ftpd restart
+
+
+================
+
+Pour connaitre la liste des utilisateurs ayant un compte FTP: sudo pure-pw list
+
+Démarrer le serveur : /etc/init.d/pure-ftpd start
+Arreter le serveur : /etc/init.d/pure-ftpd stop
+restart : /etc/init.d/pure-ftpd restart   
+Reload : /etc/init.d/pure-ftpd force-reload
+
+desinstaller pure ftpd : sudo apt-get --purge remove pure-ftpd
+
+Pour créer un utilisateur : sudo pure-pw useradd nicolargo -u ftpuser -g ftpgroup -d /home/ftp/nicolargo
+
+Pour changer le mot de passe d'un utilisateur: sudo pure-pw passwd nicolargo
+
+Pour supprimer le compte d'un utilisateur: sudo pure-pw userdel nicolargo
+
+Lister les utilisateurs connectés : sudo pure-ftpwho
+
+Lister les utilisateurs virtuels :sudo pure-pw list
+
+STATUT du serveur : sudo /etc/init.d/pure-ftpd status
+
+Vérification du statut d'un utilisateur : pure-pw show $Utilisateur
+
+ftp avec user , mot de passe et port :
+ftp://user:password:@host:Port
+
+ftp://faucon:!=rePtil__:@82.65.214.195
+
+ftp://rapace:__=+@maths:@82.65.214.195
+
+ftp://gerard-gandji.hd.free.fr
+
+
+
+
+
+
+========================================================
+
+Format disque : http://qdosmsq.dunbar-it.co.uk/blog/2013/06/noobs-for-raspberry-pi/
+
+
+========================================================
+
+
+3 cbm clim, sall de bain, toil ind,garag pou 1 voiture, il peut louer,20000/jr , ou 15000/jr (puisque c'est moi) , compteur a carte, tv, frigo,cuisinière, plat, calavi zopa calme,
+
+==========================
+
+openssl req -config intermediate/openssl.cnf \
+      -key intermediate/private/www.owncloud.key.pem \
+      -new -sha256 -out intermediate/csr/www.owncloud.csr.pem
+
+
+openssl req -config intermediate/openssl.cnf \
+      -key intermediate/private/www.owncloud.key.pem \
+      -new -sha256 -out intermediate/csr/www.owncloud.csr.pem
+======================================
+
+
+
+Collabora en ligne : Le certificat SSL n'est pas installé. Merci de demander à votre administrateur d'ajouter ca-chain.cert.pem dans ca-bundle.crt, par exemple "cat /etc/loolwsd/ca-chain.cert.pem >> <server-installation>/resources/config/ca-bundle.crt". Le message d'erreur exact est : cURL error 60: SSL certificate problem: self signed certificate
+======================================
+
+crlDistributionPoints = URI:https://88.174.188.32/owncloud/intermediate.crl.pem
+
+======================================
+
+Installation de certificat SSL : https://technique.arscenic.org/lamp-linux-apache-mysql-php/apache-le-serveur-http/modules-complementaires/article/installer-et-configurer-le-module-ssl-pour-apache2
+
+
+sudo /usr/sbin/make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/apache2/ssl/apache.pem
+
+Votre certificat se trouve donc à l’emplacement /etc/apache2/ssl/apache.pem.
+
+
+Dans un premier temps il est nécessaire que le serveur apache écoute sur le port 443. Pour cela il suffit d’éditer le ficher /etc/apache2/ports.conf et vérifier que la ligne Listen 443 y soit présente.
+
+La meilleur manière de l’intégrer est de l’écrire de la sorte :
+
+    <IfModule mod_ssl.c>
+        Listen 443
+    </IfModule>
+======================================
+Installation SSL:
+
+1: Créer le certificat : ca-chain.cert.pem
+
+2: Copier le certificat : ca-chain.cert.pem dans /var/www/owncloud/ressources/config/ca-bundle.crt  par :
+
+cat /etc/LIEUX CREATION DU CERTIFICAT/ca-chain.cert.pem >> /var/www/owncloud/resources/config/ca-bundle.crt
+
+
+Activer le certificat dans la config par:
+
+sudo vi  /etc/apache2/sites-enabled/default-ssl.conf
+
+
+ Redemarrer le serveur : 
+
+sudo /etc/init.d/apache2 restart
+
+======================================
+
+
+Compression lz
+
+sudo apt-get install lunzip lzip
+
+Decompresser avec :tar xf fichier.tar.lz
+
+décompresser tar.bz2 : tar xfvj fichier.tar.bz2
+
+Compresser en zip : zip nom_de_larchive.zip fichier1 fichier2
+
+Pour compresser un répertoire  : zip -r nom_de_larchive.zip dossier
+
+décompresser .zip : unzip nom_de_larchive.zip -d dossier
+
+Compresser en tar.gz  : tar -czvf nom-de-l-archive.tar.gz nom-de-l-archive
+
+décompresser .tar.gz : tar -xzvf archive.tar.gz
+
+Compresser en .rar : rar a votre_archive.rar [liste des fichiers]
+
+
+Décompresser .rar : unrar x votre_archive.rar
+
+Compresser avec bzip2 :
+
+tar -cjvf archive.tar.bz2 ~/Documents/
+
+Même si la compression avec gzip est la solution plus utilisée pour créer des archives compressées, tar prend également en charge la compression avec xz et bzip2.
+
+Pour rappel, xz utilise l’algorithme de compression LZMA2 et bzip2 utilise l’algorithme du même nom. Globalement, xz est le plus performant et permet d’obtenir un meilleur taux de compression que gzip et bzip2.
+
+    Pour compresser avec xz : remplacez l’option -z (pour gzip) par -J pour xz. Cela créera un fichier d’archive au format .tar.xz.
+    Pour compresser avec bzip2 : remplacer l’option -z (pour gzip) par -j pour bzip2. Cela créera un fichier d’archive au format .tar.bz2.
+
+
+Pour Extraire bz2 :  Pour conserver l’archive originale, ajoutez l’ -koption suivante:
+
+bzip2 -dk filename.bz2
+
+
+======================================
+
+DEMARCHES POUR UTILISER LE HTTPS :
+
+Suivre ce site : https://www.it-connect.fr/securiser-owncloud-par-httpsssl/
+Sauf que le code suivant est à copier dans la suite de : /etc/apache2/sites-available/000-default.conf
+
+NameVirtualHost *:443
+# Hôte virtuel qui écoute sur le port HTTPS 443
+<VirtualHost *:443>
+DocumentRoot /var/www/
+# Activation du mode SSL
+SSLEngine On
+SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
+# On indique ou est le certificat
+SSLCertificateFile /etc/ssl/certs/owncloud.crt
+SSLCertificateKeyFile /etc/ssl/private/owncloud.key
+</VirtualHost>
+
+
+LE RESTE DES EXPLICATIONS SUR LE SITE :  https://www.it-connect.fr/securiser-owncloud-par-httpsssl/ EST CORRECTE.
+======================================
+Au cas, où Onlyoffice n'est plus accessible,
+aller dans config.php et mettre ceci :
+
+'onlyoffice' =>
+array (
+'verify_peer_off' => TRUE,
+)
+
+=======================================
+Architecture du Orangepi : Welcome to Ubuntu 16.04.1 LTS (GNU/Linux 3.10.102+ aarch64)
+
+Flasher la carte SD: on peut aisément convertir le fichier .iso en ficher .img : mv fichier.iso fichier.img
+Après,faire : 
+
+sudo dd if=rapace_convert.img of=/dev/sdf status=progress conv=noerror,sync
+
+sudo dd if=Raspi_15-Avril_2019_DocDockerCompose-Apache_DBaseMySQL_Owncloud10-1-0_RedisFtpTousDisques-sdf.img of=/dev/sdf status=progress conv=noerror,sync
+
+
+sudo dd if=OrangePi_WinPlus_Ubuntu16.04_Server_v0_3.img of=/dev/sdf status=progress conv=noerror,sync
+
+
+Première connexion : root / orangepi
+
+1) sudo fdisk -l 
+
+2) sudo fdisk /dev/sdf (en fonction de l'identité du disque)
+
+: d pour delete
+: n pour new partition  (je prends une partition primaire de taille = 10240 (2048 x 5)
+
+: t pour définir le type de partition
+
+: w pour écrire
+
+sudo mkfs.vfat /dev/sdf1 pour finir avec le processus de formatage
+
+>> A la fin, sur l'écran de la TV, configurer le clavier par :
+	dpkg-reconfigure keyboard-configuration
+
+>> Faire une mise à jour : sudo apt-get upgrade
+
+>> sudo apt-get install openssh-server
+
+Après, configurer ssh (voir fichier dans le téléphone) , Enfin, changer le port de connexion : 230
+
+
+MODIFIER LE PORT DE SSH :
+
+> sudo nano /etc/ssh/sshd_config
+
+> sudo /etc/init.d/ssh restart
+
+Installation de MySQL server:
+Après flash, et apt-get update, voire : apt-get upgrade, il faut tout de suite faire :
+
+sudo apt install mysql-server-5.7
+
+
+Nouvel Utilisateur:
+> exit
+> logout
+>usermod -l $User
+> passwd $User
+Enfin, on modifie /etc/passwd pour modifier le chemin de /home de $User
+
+> sudo nano /etc/passwd
+Ajouter :
+
+$User::1000:100::/home/$User:/bin/bash
+
+=======================================
+NOUVEAU FORMATAGE CE 7 Septembre 2018
+
+Avec le répertoire : opi-win-a64-firmware dans Telechargement:
+
+: Avec sudo fdisk -l (on peut avoir l'identifiant exact de la carte SD ) Ici c'est : /dev/sdf actuellement.
+
+> Formater la carte avec :  sudo ./format_sd.sh /dev/sdf
+
+> Flasher la carte avec  : sudo ./flash_sd.sh /dev/sdf
+
+> Utilisation :  user: ubuntu    pass: ubuntu
+
+> Premiere Utilisation :
+
+sudo apt-get update
+
+sudo apt-get dist-upgrade
+
+sync
+
+Modifier les fichers : /etc/hostname et /etc/hosts
+pour changer le nom de l'ordinateur
+=======================================
+CELUI-CI FONCTIONNE
+
+> Aller dans le repertoire : opi-win-a64-firmware pour formater la carte avec : sudo ./format_sd.sh /dev/sdf
+En suite :
+
+> sudo dd if=Armbian_5.59_Orangepiwin_Ubuntu_xenial_default_3.10.107.img of=/dev/sdh status=progress conv=noerror,sync
+
+ 
+
+Première connexion : root pass= 1234
+
+Pour les autres configurations , faire : sudo armbian-config
+
+
+add user as root :
+
+
+=======================================
+TEST 
+
+
+
+sudo dd if=Raspbian_server_For_win_A64_V0_1.img of=/dev/sdf status=progress conv=noerror,sync
+
+=======================================
+
+Rapace : 36:c9:e3:f1:b8:05  
+
+192.168.0.38
+
+Configuration du clavier :
+
+dpkg-reconfigure keyboard-configuration
+
+Après : sudo apt-get upgrade et sudo apt-get update
+
+Il faut aussi configurer la langue locale : sudo dpkg-reconfigure locales
+
+Mettre "LANG=fr_FR.UTF-8" dans /etc/environment
+
+Installation de Docker sur Raspberry : https://devdojo.com/bobbyiliev/how-to-install-docker-and-docker-compose-on-raspberry-pi
+
+Installation de Redis sur Raspberry : https://habilisbest.com/install-redis-on-your-raspberrypi
+
+En cas de problème avec docker : faire 
+sudo service docker stop
+sudo service docker start
+
+Si cela ne fonctionne toujours pas, faire:
+
+export DOCKER_HOST="127.0.0.1"
+
+(Ne pas oublier de chercher ou se trouve l'exécutable de docker-compose)
+
+Ici , il se trouve : /home/armand/.local/bin/
+
+
+Conversion de vdi en img :
+
+vboxmanage clonehd Fichier.vdi Fichier_convert.img --format RAW
+
+
+Créer un virtualenv avec une version spécifique de python :
+
+mkvirtualenv onlyOfficeEnv --python=/usr/bin/python2.7
+=======================================
+Machines sauvegardées: 
+root : orangepi
+armand: 7Gs...1
+sauvegardée sous : machineBaseOrangepi
+
+sudo dd if=/dev/sdf | gzip -9 > ./OrangepiMySqlVirtEnvGMP.img.gz
+
+Machine Base + Mysql server + GMP + VirtualEnv + Docker enregistrée sous : OrangepiMySqlVirtEnvGMP
+
+
+sudo dd if=/dev/sdf | gzip -9 > ./OrangepiMySqlVirtEnvGMP.img.gz
+
+
+sudo dd if=/dev/sdf | gzip -9 > ./disqueRaspberyPi16Sept2018.img.gz
+
+Split :
+
+Split in multiple file. Exemple:
+
+split --bytes=1400M OrangepiMySqlVirtEnvGMP.img.gz partialOrangepiMySqlVirtEnvGMP
+
+Et pour la reconstitution : cat partialOrangepiMySqlVirtEnvGMP* > OrangepiMySqlVirtEnvGMP.img.gz
+
+
+
+Flasher : 
+
+sudo dd if=OrangepiMySqlVirtEnvGMP.img of=/dev/sdg status=progress conv=noerror,sync
+
+
+sudo dd if=machineBaseMySqlVirtEnvGMPDockerOrangepi.img of=/dev/sdf status=progress conv=noerror,sync
+=======================================
+
+split --bytes=1400M disqueRaspberyPi16Sept2018.img.gz partialdisqueRaspberyPi16Sept2018.img.gz
+
+
+
+=======================================
+J'ai installé qemu : (voir iic : https://fosspost.org/tutorials/use-qemu-test-operating-systems-distributions )
+
+sudo apt install qemu qemu-kvm libvirt-bin
+
+Création image : Caractéristique en vue d'utiliser OnlyOffice dont les caractéristiques sont les suivantes :
+
+
+
+    Processeur
+    dual-core avec fréquence d'horloge de 2 GHz ou plus
+    RAM : 2 GB or more
+    HDD : at least 40 GB of free space
+    Additional Requirements at least 2 GB of swap
+    OS : amd64 distributive Linux avec la version du noyau 3.10 ou ultérieure
+    Exigences supplémentaires
+        Docker: version 1.10 ou ultérieure
+
+
+D'où :
+
+qemu-img create -f qcow2 onlyOfficeUbuntu.img 45G
+
+
+qemu-system-x86_64 -m 2500 -boot d -enable-kvm -smp 4 -net nic -net user -hda onlyOfficeUbuntu.img -cdrom ../ubuntu-16.04.4-server-amd64.iso
+
+Si cette syntaxe échoue à cause de -enable-kvm, taper dans un terminal :-enable-kvm
+Voir la ligne : Virtualization type:  si elle est à : full, plus besoin d'activer : -enable-kvm
+La virtuamisation est déjà à son max.
+C'est le cas sur : rapace (OnlyOffice)
+
+D'où :
+
+qemu-system-x86_64 -m 2500 -boot d -smp 4 -net nic -net user -hda onlyOfficeUbuntu.img -cdrom ../ubuntu-16.04.4-server-amd64.iso
+
+
+Installation sur RaspEbrry pi :
+qemu-system-x86_64 -boot d -smp 4 -net nic -net user -hda onlyOfficeUbuntu.img -cdrom ubuntu-16.04.4-server-amd64.iso
+=======================================
+
+sudo dd if=ubuntu-16.04.4-server-amd64.iso of=/dev/sdh status=progress conv=noerror,sync
+
+sudo dd if=ubuntu-16.04.4-server-amd64.img of=/dev/sdh status=progress conv=noerror,sync
+=======================================
+Pour compresser : tar -zcvf archive-name.tar.gz directory-name
+ et pour décompresser : tar -zxvf prog-1-jan-2005.tar.gz
+
+
+=======================================
+sudo dd if=OrangePi_WinPlus_Ubuntu16.04_Server_v0_3.img of=/dev/sdf status=progress conv=noerror,sync
+
+=======================================
+connexion externe :
+
+Entrée interne : ssh -X -p 7274 armand@192.168.0.12   : ratel 
+
+       Externe   ssh -X -p 5074 armand@82.235.119.234 : ratel
+
+- (Externe)  ssh -X -p 7472 armand@82.235.119.234  : rapaceServeurOnlyOffice : 7G..1!  (192.168.0.30) (interne port : 229)
+
+- (Externe)  ssh -X -p 7450 gandji@82.235.119.234 : serverReference  : 7G..1_!_ (192.168.0.29)  (interne port : 229)
+
+- (Externe)  ssh -X -p 7274 gerard@82.234.119.234 : ahoemepatgg : 7G!!!7G..__== (port interne : 229) 
+=======================================
+
+sudo dd if=Raspbian_server_For_win_A64_V0_1.img of=/dev/sdf status=progress conv=noerror,sync
+
+=======================================
+Redirection automatique en https:
+
+dans le fichier .htaccess qui se trouve dans /var/www/owncloud:
+
+Ecrite dans : .htaccess :
+
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ http://82.235.119.234/owncloud/$1 [R,L]
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+=======================================
+Apache service :
+
+sudo /etc/init.d/apache2 stop/start/restart
+=======================================
+Voir les process qui utilisent les ports :
+
+netstat -paunt  ou netstat -nlp
+
+-a : Tous les ports
+-t : Tous les ports TCP
+-u : Tous les ports UDP
+-l : Tous les ports en écoute
+-n : Affiche directement les IP. Pas de résolution de nom.
+-p : Affiche le nom du programme et le PID associé.
+=======================================
+Voir le process qui utilise un port précis :
+
+ps -eaf | grep 1380
+=======================================
+503 Service Unavailable : Solution lorsqu'on se connecte 
+au serveur OnlyOffice et qu'on a cela comme reponse :
+
+- Dans le fichier : docker-compose.yml : 
+1: Replace all `image: onlyoffice/documentserver:latest` to `image: onlyoffice/documentserver:5.1.4.22` to simulate upgrade
+2: `docker-compose up -d`
+ go to `localhost` and check that everything fine
+
+=======================================
+
+Lancer Redis server via Docker :
+
+docker run --name redis -d -p 127.0.0.1:6379:6379 --restart unless-stopped arm32v7/redis --appendonly yes --maxmemory 512mb --tcp-backlog 128
+
+=======================================
+Solution Docker pour Owncloud
+https://owncloud.org/download/
+=======================================
+
+
+
+===================================================
+Votre redirection DNS (gerard-gandji.hd.free.fr vers 82.235.119.234) a bien été enregistrée.
+Le rafraichissement de celui-ci se fera sous quelques heures.
+===================================================
+sudo service sphinxsearch /start/status
+
+sudo /usr/bin/searchd --config /etc/sphinxsearch/sphinx.conf
+
+===================================================
+Lancement redis par Docker: (port redis par défaut :  6379 )
+
+sudo docker run --name redis -d -p 127.0.0.1:6380:6380 --restart unless-stopped arm32v7/redis --appendonly yes --maxmemory 512mb --tcp-backlog 128
+
+docker rm  $NumContainer
+===================================================
+Docker CollaboraCode sur le serveur : CollaboraCodeServer
+docker run -t -d -p 127.0.0.1:9980:9980 -e "domain=gerard-gandji.hd.free.fr" -e "username=admin" -e "password=S3cRetGG" --restart always collabora/code
+
+Name of container : flamboyant_dubinsky
+===================================================
+
+
+docker cp loolwsd.xml flamboyant_dubinsky:/etc/loolwsd/loolwsd.xml
+
+
+docker logs flamboyant_dubinsky
+
+
+
+https://gerard-gandji.hd.free.fr:9081/hosting/discovery
+
+===================================================
+https sur raspberri pi : https://www.avoiderrors.com/enable-ssl-raspberry-pi-owncloud/
+
+
+Mise à jours de owncloud : https://doc.owncloud.com/server/administration_manual/maintenance/manual_upgrade.html
+
+
+- Si l'erreur suivante apparaît  sur l'interface de Owncloud:
+ Nous recommandons d'activer la tâche planifiée système qui, comme toute autre tâche planifiée, a des implications possibles sur les performances et la fiabilité
+
+Solution : Aller en bas de la page de l'interface et cocher "cron" au lieu de "Ajax"
+
+- Si dans l’interface administrateur un bandeau avec le message suivant apparaît:
+
+L’en-tête HTTP « Strict-Transport-Security »  n’est pas configurée à « 15552000 » secondes. Pour renforcer la sécurité nous recommandons d’activer HSTS comme décrit dans notre Guide pour le renforcement et la sécurité.
+
+Rendez-vous dans : sudo nano /etc/apache2/sites-available/default-ssl.conf
+
+Ceci peut être accompli en définissant les paramètres suivants dans la configuration de l’hôte virtuel d’Apache contenant l”entrée <VirtualHost *:443>
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains"
+</IfModule>
+
+
+- Parametre LDAP : http://wiki.dane.ac-versailles.fr/index.php?title=Installer_un_serveur_owncloud_8_avec_l%27annuaire_du_se3
+
+===================================================
+Sauvegarde
+
+sudo dd if=/dev/sdf | gzip -9 > ./Raspi_04-Mars_2019_DocDockerCompose-Apache_DBaseMySQL_Owncloud10-1-0_RedisFtpTousDisques-sdf.img.gz
+
+Restauration :
+
+sudo dd if=Raspi_04-Mars_2019_DocDockerCompose-Apache_DBaseMySQL_Owncloud10-1-0_RedisFtpTousDisques-sdf.img of=/dev/sdf status=progress conv=noerror,sync
+===================================================
+sudo docker run -t -d -p 127.0.0.1:9990:9990 -e "domain=gerard-gandji.hd.free.fr" -e "username=admin" -e "password=S3cRet" --restart always collabora/code
+
+docker cp amazing_leakey:/etc/loolwsd.xml loolwsd.xml
+
+docker cp amazing_leakey:/etc/loolwsd.xml /etc/loolwsd.xml
+
+docker cp /etc/loolwsd.xml amazing_leakey:/etc/loolwsd.xml
+
+
+
+A voir  : https://mondedie.fr/d/10423-tuto-installer-collabora-online-avec-nextcloud-nginx-et-docker
+
+
+
+'preview_libreoffice_path' => '/usr/bin'
+
+
+
+sudo docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=true" collabora/code
+
+sudo docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=yes" collabora/code
+
+3d35df6f5f087017cea4e59d081e345848454eaa0a97c17b8495fccc6f2ca846
+
+
+==================================================
+Erreur actuelle :
+Error when trying to connect (Error occurred in the document service: Error while downloading the document file to be converted.)
+
+Solution :
+Cela est dû au manque de confiance entre les deux ordinateurs: celui qui exécute Owncloud et celui qui exécute Document Server :
+On peut désactiver la vérification du certificat de sécurité entre les deux ordinateurs : 
+Il suffit de changer la valeur du paramètre : "rejectUnauthorized" qui est à true et le mettre à false.
+
+Ce paramètre se trouve sur le serveur hébergeant  :DocumentServer :  /etc/onlyoffice/documentserver/default.json
+Après cela, il faut redémarrer le serveur : DocumentServer et Owncloud. Puis c'est bon ! 
+
+
+L'erreur au dessus provient aussi parfois, de ce que le serveur Ngninx sur Document Server est paramétré en sorte que
+toute connexion en provenance d'ailleurs et à destination de Document Server soit rejeté. 
+Pour cela, ouvrir : sudo nano /etc/nginx/includes/onlyoffice-documentserver-docservice.conf
+et faites les modifications pour avoir ceci :
+
+location /info {
+  # allow 127.0.0.1;
+  # deny all;
+  proxy_pass http://docservice;
+  allow all;
+}
+
+
+et 
+
+location / {
+  proxy_pass http://docservice;
+  allow all;
+}
+
+
+Savegardez et relancer le server : sudo /etc/init.d/nginx restart
+
+
+
+
+survenu lors de l'intégration de Document Server dans Community server, faire de même que sur Document Server.
+Ouvrir le fichier de paramètre de nginx et autoriser la connexion venant de partout.
+
+
+
+
+
+
+
+Pour l'erreur : Error when trying to connect (Bad Request or timeout error)
+
+Aller dans le fichier config de owncloud et mettez ceci  à la fin :
+
+'onlyoffice' =>
+  array (
+    'verify_peer_off' => true,
+  )
+
+=============================================
+https://www.collaboraoffice.com/code/
+
+=============================================
+Docker commande : https://docs.docker.com/engine/reference/commandline/container_run/
+
+
+docker run -t -d -p 127.0.0.1:9980:9980 -e "domain=http://gerard-gandji.hd.free.fr" -e "username=admin" -e "password=S3cRet" --restart always collabora/code -e "server_name=http://gerard-gandji.hd.free.fr" 
+
+
+You can access the admin console at https://<CODE-domain>/loleaflet/dist/admin/admin.html
+
+
+/etc/loolwsd/loolwsd.xml configuration file in the Docker image 
+
+After starting the container, you can copy the configuration file out of the container, edit it, and copy it back to the container. The container will notice that the configuration file has changed, and the service will be restarted (don’t forget the --restart always option when you start the container with docker run).
+
+( https://www.collaboraoffice.com/code/docker/) 
+
+1. Find out the name or hash of your container:
+
+$ docker ps
+
+
+The output would be something like this:
+
+CONTAINER ID  IMAGE           COMMAND                  CREATED         STATUS        PORTS                      NAMES
+a4633c28c690  collabora/code  "/bin/sh -c 'bash ..."   5 seconds ago   Up 4 seconds  127.0.0.1:9980->9980/tcp   romantic_meninsky
+
+
+2. Copy out the config file:
+
+$ docker cp romantic_meninsky:/etc/loolwsd/loolwsd.xml loolwsd.xml
+
+
+3. Edit the config file with your favourite editor, then save and copy it back to the container:
+
+$ docker cp loolwsd.xml romantic_meninsky:/etc/loolwsd/loolwsd.xml
+
+Wait a few seconds for the the automatic restart.
+============================================
+
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:348: starting container process caused "process_linux.go:297: copying bootstrap data to pipe caused \"write init-p: broken pipe\"": unknown
+
+Solution :
+
+- sudo apt-get remove --purge docker*
+
+
+- rm -rf /etc/docker
+- rm /etc/systemd/system/docker.service.d
+- rm /etc/init/d/docker
+
+Installer la bonne version de docker :
+
+apt install -y docker-ce=18.06.1~ce~3-0~ubuntu jq
+============================================
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:348: starting container process caused "exec: \"-e\": executable file not found in $PATH": unknown.
+
+
+
+
+
+sudo docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=true" --restart always collabora/code
+c77a666f385ac3c5da3a6e061f3a7ef34a6b2fbe26558876358c84c062440e4d
+
+
+sudo docker ps
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                    NAMES
+c77a666f385a        collabora/code      "/bin/sh -c 'bash st…"   About a minute ago   Up About a minute   0.0.0.0:9980->9980/tcp   dreamy_goldstine
+
+
+
+
+sudo docker cp naughty_williams:/etc/loolwsd/loolwsd.xml loolwsd.xml
+
+Après modification faire :
+
+sudo docker cp loolwsd.xml naughty_williams:/etc/loolwsd/loolwsd.xml
+
+Voir les certificats :/etc/loolwsd/cert.pem
+============================================
+
+docker run -t -d -p 192.168.0.29:9980:9980 -e 'domain=gerard-gandji.hd.free.fr' --restart always --cap-add MKNOD collabora/code
+
+sudo nano /etc/apache2/sites-available/default-ssl.conf
+
+les certificats se trouvent : /etc/apache2/ssl/owncloud.crt  et /etc/apache2/ssl/owncloud.key sur Ratel
+
+
+============================================
+
+version :9.6.5.771
+
+
+
+
+File editing start
+
+Voir ici : https://dev.onlyoffice.org/viewtopic.php?f=23&t=11252
+
+
+
+integration document server in community server , Api url : service is not defined
+
+
+
+
+openssl req -x509 -out onlyoffice.crt -keyout onlyoffice.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+==========================================================
+  
+  <add key="files.docservice.url.converter" value="https://gerard-gandji.hd.free.fr:9091/ConvertService.ashx" />
+  <add key="files.docservice.url.api" value="https://gerard-gandji.hd.free.fr:9091/web-apps/apps/api/documents/api.js" />
+  <add key="files.docservice.url.apinew" value="https://gerard-gandji.hd.free.fr:9091/web-apps/apps/api/documents/api.js" />
+  <add key="files.docservice.url.preloader" value="https://gerard-gandji.hd.free.fr:9091/web-apps/apps/api/documents/cache-scripts.html" />
+  <add key="files.docservice.url.storage" value="https://gerard-gandji.hd.free.fr:9091/FileUploader.ashx" />
+  <add key="files.docservice.url.portal" value="https://gerard-gandji.hd.free.fr:7474" />
+  <add key="files.docservice.url.command" value="https://gerard-gandji.hd.free.fr:9091/coauthoring/CommandService.ashx" />
+
+
+ <add key="files.docservice.url.public" value="https://gerard-gandji.hd.free.fr:9091/" />
+ <add key="files.docservice.url.internal" value="https://gerard-gandji.hd.free.fr:9091/" />
+ <add key="files.docservice.url.portal" value="http://192.168.0.45" />
+
+
+
+
+===========================================================
+'onlyoffice' =>
+  array (
+    'verify_peer_off' => true,
+  ),
+
+===========================================================
+
+Video installation Document server et Community Server : https://helpcenter.onlyoffice.com/fr/video/install-community-ubuntu.aspx
+
+Parametrage poir ssl de DocumentServer et Community Server:
+
+version Community Server : 9.6.5.771
+
+version Document Server : 4.1
+
+Pour Document Server : sudo nano /etc/onlyoffice/documentserver/nginx/onlyoffice-documentserver.conf
+
+lieu ssl certificat pour Document Server : /root/.mkcert/ ou bien /etc/nginx/ssl_certificats/
+ et pour dhparam : /etc/ssl/certs/
+
+
+Pour Community Server : sudo nano /etc/nginx/sites-available/onlyoffice
+
+
+lieu ssl certificat pour communityserver : /home/armand/.mkcert/
+Voir ici : https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
+
+cd /etc/ssl/certs
+openssl dhparam -out dhparam.pem 4096
+
+
+https://lehollandaisvolant.net/?d=2019/01/07/22/57/47-localhost-et-https
+
+https://github.com/FiloSottile/mkcert/releases
+
+Dans community Server, aller ici pour changer les adresses : sudo nano /var/www/onlyoffice/WebStudio/web.appsettings.config
+
+Après modification il faut relancer le serveur : sudo service monoserve restart
+
+(voir ici :https://helpcenter.onlyoffice.com/server/linux/document/connect-document-server.aspx)
+===========================================================
+Docker pour Collabora :
+sudo docker run -t -d -p 127.0.0.1:9980:9980 -e 'domain=localhost' -e "password=7Gsovarm1!" --restart always --cap-add MKNOD collabora/code
+
+sudo docker container prune : pour supprimer tous les container
+
+se connecter à un container : 
+sudo docker exec -it ID_Container bash
+
+docker run -t -d -p 127.0.0.1:9980:9980 --name office -e "extra_params=--o:ssl.enable=false" --restart always --cap-add MKNOD collabora/code
+
+Page Admin : http://192.168.0.38:9980/loleaflet/dist/admin/admin.html
+login = admin, passe := (voir fichier docker-compose.yml)
+
+===========================================================
+
+
+=====================================================
+ca fonctionne bien :
+
+sudo docker pull collabora/code   puis :
+
+
+docker run -t -d -p 9980:9980 -e "username=admin" -e "password=7Gsovarm1" -e "extra_params=--o:ssl.enable=true" collabora/code
+
+=====================================================
+
+Please ask your administrator to add ca-chain.cert.pem to the ca-bundle.crt, for example "cat /etc/loolwsd/ca-chain.cert.pem >> /resources/config/ca-bundle.crt" . The exact error message was: cURL error 60: SSL certificate problem: self signed certificate
+
+
+cat /home/armand/.mkcert/localhost.pem | docker exec -i "$(ucr get appcenter/apps/owncloud/container)" bash -c 'cat >> /var/www/owncloud/resources/config/ca-bundle.crt'
+
+=====================================================
+sudo dd if=UCS-Installation-amd64.iso of=/dev/sdf status=progress conv=noerror,sync
+
+
+=====================================================
+
+Données importantes pour sauvegarde Raspberry Pi :
+
+<?php
+$CONFIG = array (
+  'instanceid' => 'ocwuem1jb9gb',
+  'passwordsalt' => 'Hz23fMBco+tPohD5A9+z5Ip5v2MJ5Z',
+  'secret' => 'uB9E+4mz/fSdh+oGsBWiRY5jqEVQIBZiHZGiTKjkIi4+pqa1',
+  'trusted_domains' => 
+  array (
+    0 => '82.235.119.234',
+    1 => '192.168.0.12',
+    2 => 'gerard-gandji.hd.free.fr',
+    3 => 'gerard-gandji.freeboxos.fr',
+  ),
+  'datadirectory' => '/media/diskWesternDigital/cloudData/owncloud/data/',
+  'overwrite.cli.url' => 'https://82.235.119.234/owncloud','https://gerard-gandji.freeboxos.fr/owncloud',
+  'dbtype' => 'mysql',
+  'version' => '10.1.0.1',
+  'dbname' => 'owncloud',
+  'dbhost' => 'localhost',
+  'dbtableprefix' => 'oc_',
+  'dbuser' => 'gandjicloud',
+  'dbpassword' => '7Gsovarm1_',
+  'logtimezone' => 'UTC',
+  'installed' => true,
+  'mail_smtpmode' => 'smtp',
+  'mail_smtpsecure' => 'ssl',
+  'mail_from_address' => 'gerardarm',
+  'mail_domain' => 'gmail.com',
+  'mail_smtpauthtype' => 'LOGIN',
+  'mail_smtpauth' => 1,
+  'mail_smtphost' => 'smtp.gmail.com',
+  'mail_smtpport' => '465',
+  'mail_smtpname' => 'gerardarm',
+  'mail_smtppassword' => '7G_!7Gsovarm1',
+  'memcache.local' => '\\OC\\Memcache\\Redis',
+  'redis' => 
+  array (
+    'host' => 'localhost',
+    'port' => 6379,
+  ),
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'maintenance' => false,
+  'logtimezone' => 'UTC',
+  'installed' => true,
+  'mail_smtpmode' => 'smtp',
+  'mail_smtpsecure' => 'ssl',
+  'mail_from_address' => 'gerardarm',
+  'mail_domain' => 'gmail.com',
+  'mail_smtpauthtype' => 'LOGIN',
+  'mail_smtpauth' => 1,
+  'mail_smtphost' => 'smtp.gmail.com',
+  'mail_smtpport' => '465',
+  'mail_smtpname' => 'gerardarm',
+  'mail_smtppassword' => '7G_!7Gsovarm1',
+  'memcache.local' => '\\OC\\Memcache\\Redis',
+  'redis' => 
+  array (
+    'host' => 'localhost',
+    'port' => 6379,
+  ),
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'maintenance' => false,
+  'loglevel' => 2,
+  'theme' => '',
+  'ldapIgnoreNamingRules' => false,
+  'onlyoffice' => array (
+    'verify_peer_off' => true,
+   ),
+
+);
+
+
+
+
+=====================================================
+Document server : Le fichier à modifier
+pour la configuration de ssl (https) est ici :
+
+
+sudo nano /etc/nginx/conf.d/onlyoffice-documentserver.conf
+
+
+Fichier en cours de modification :
+sudo nano /etc/nginx/sites-available/onlyoffice-documentserver
+
+=====================================================
+
+
+
+=====================================================
+gpg --keyserver pgpkeys.mit.edu --recv-key 010908312D230C5F gpg -a --export 010908312D230C5F | sudo apt-key add -
+=====================================================
+Install Mono on ubuntu 14.04 :
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+
+
+echo "deb https://download.mono-project.com/repo/ubuntu wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+
+
+echo "deb http://archive.ubuntu.com/ubuntu precise main universe multiverse" | sudo tee -a /etc/apt/sources.list
+
+
+
+=====================================================
+
+sudo dd if=/dev/sdf | gzip -9 > ./Raspi_15-Avril_2019_DocDockerCompose-Apache_DBaseMySQL_Owncloud10-1-0_RedisFtpTousDisques-sdf.img.gz
+
+=====================================================
+sauvegarde:
+sudo dd if=/dev/sdf | gzip -9 > ./orangepi_Docker_22Avril2019.img
+
+
+Restauration:
+
+sudo ddrescue -D --force Raspbian_server_For_win_A64_V0_1.img /dev/sdf
+
+
+
+====================================================
+Fixer adresse MAC:  https://blog.sleeplessbeastie.eu/2013/01/11/how-to-change-the-mac-address-of-an-ethernet-interface/
+
+Aller ici : /etc/network/interfaces  pour modifier
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# Network interfaces
+allow-hotplug eth0
+iface eth0 inet dhcp
+  hwaddress ether 08:00:00:00:00:01 ($ValeurAdresseMAC XX:XX:XX:XX:XX:XX )
+
+allow-hotplug eth1
+iface eth1 inet dhcp
+
+
+====================================================
+set user and with grant privilege 
+
+https://www.liquidweb.com/kb/how-to-add-a-user-and-grant-root-privileges-on-ubuntu-14-04/
+remove user with home directory : sudo deluser -remove-home pi
+passwd user
+====================================================
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# Network interfaces
+allow-hotplug eth0
+iface eth0 inet dhcp
+  hwaddress ether 32:1a:a8:b1:21:ae 
+
+allow-hotplug eth1
+iface eth1 inet dhcp
+=======================================
+dpkg-reconfigure tzdata : pour configurer l'heure UTC
+=======================================
+mkvirtualenv avec un python spécifique :
+
+mkvirtualenv --python=/usr/bin/python3.4 projetWebDjango (port : 7080 )
+python manage.py runserver 0:7080
+
+
+
+virtualenwrapper.sh se trouve dans : faire : whereis virtualenvwrapper.sh  (/usr/share/virtualenvwrapper) 
+
+export WORKON_HOME=~/.virenv
+mkdir -p $WORKON_HOME
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
+sudo passwd postgres : pour changer le mot de passe de postgres
+
+http://www.i18nguy.com/unicode/language-identifiers.html
+
+pip install Django==2.0
+
+pip install psycopg2
+
+postgreSQL installé sur anaconda:
+7G..1_!_
+psql
+
+sudo -u postgres psql
+create database anaconda;
+
+
+
+voir : https://opensource.com/article/17/10/set-postgres-database-your-raspberry-pi
+
+https://chartio.com/resources/tutorials/how-to-list-databases-and-tables-in-postgresql-using-psql/
+=======================================
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'anaconda',
+        'USER': 'armand',
+        'PASSWORD': '7Gsovarm1_!_',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
+=======================================
+impossibilité de joindre un pc par ssh après
+toutes les bonnes installations.
+ faire sur les deux pc : sudo ufw reset
+
+
+=======================================
+Suppression diverses impossibles sur PC:
+Aller dans /etc/fstab et modifier ro (Read Only) en rw (Read Write)
+Puis faire : sudo fsck -n -f
+Enfin : Redémarrez
+=======================================
+/etc/hosts
+
+127.0.0.1       anaconda
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+
+192.168.0.29    serverReference
+192.168.0.47    ahoemepatgg
+192.168.0.21    lynx
+192.168.0.32    rapace
+192.168.0.12    ratel
+192.168.0.13    documentServer
+192.168.0.33    communityServer
+
+/etc/network/interfaces 
+
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# Network interfaces
+allow-hotplug eth0
+iface eth0 inet dhcp
+  hwaddress ether 32:af:51:bf:1c:4a
+
+allow-hotplug eth1
+iface eth1 inet dhcp
+
+======================================
+/usr/bin/python3.5
+
+mkvirtualenv --python=/usr/bin/python3.5 py35django22
+======================================
+Document server : https://gerard-gandji.hd.free.fr:9091/welcome/
+
+Community server : http://gerard-gandji.hd.free.fr:7473/auth.aspx  (plutôt sur Chrome)
+======================================
+Pour utiliser SCP et SSH sans avoir à taper de mot de passe, il suffit
+de copier la cléf publique de la machine : cliente :id_rsa.pub  vers le réperoire $HOME/.ssh de la machine distante via ssh-copy-id : 
+
+SERVEUR LOACL :
+
+ssh-keygen -t rsa
+
+(mettre le passephrase)
+
+cp id_rsa.pub authorized_keys
+
+ssh-agent bash
+
+ssh-add id_rsa
+
+(mettre le passephrase)
+
+COPIER LA CLEF PUBLIQUE id_rsa.pub du serveur local vers le serveur distant
+
+scp -P $PORT ~/.ssh/id_rsa.pub login@serveur:~/  
+
+SUR LE SERVEUR DISTANT : 
+cat id_rsa.pub >>~/.ssh/authorized_keys
+chmod 700 ~/.ssh/authorized_keys
+======================================
+specifier le port pour turbogears : dans : development.ini
+
+ensuite, lancer : gearbox serve --reload
+
+======================================
+Vous vous consacrez au développement de votre société, et vous réfléchissez en
+parallele à diversifier votre activité toujours dans le domaine du Bio. Vous
+vous renseignez sur l'Apiculture. Point CPF, vous allez activer votre Compte.
+WWW.défi-metiers.fr vous allez contacter le centre de formation : Eplefpa - C
+FPPA Bougainville.
+=====================================
+Pour une configurer le VPN sur le raspberry
+https://www.youtube.com/watch?v=zsN47t2r_WU
+
+
+=====================================
+
+Pour les problèmes de limite de mémoire 
+survenus dans le setting de la page principale, voici la solution:
+Faire :
+
+cd  /etc/php/8.0/fpm/
+sudo nano php.ini
+
+chercher : memory_limit et modifier sa valeur à 512M
+puis taper dans /etc/php/8.0/fpm/ : 
+sudo service php8.0-fpm restart
+
+
+=====================================
+
+None of the things above helped me so here is my solution:
+
+go into the file /var/www/nextcloud/updater/index.php and comment the lines:
+
+    if($stepState === 'start') {
+            die(
+            sprintf(
+                    'Step %s is currently in process. Please reload this page later.',
+                    $stepNumber
+                    )
+            );
+    }
+with “//” at the beginning out.
+
+Reload your Update-Page - done!
+
+=====================================
+Mise à jour directement sur le server :
+
+
+sudo -u www-data php /var/www/nextcloud/updater/updater.phar
+=====================================
+
+Génération de mot de passe sécurisé :
+
+gpg --gen-random --armor 1 24 | base64
+
+=====================================
+
+Valeur de /var/www/html/nextcloud/config/config.php  ce 11 Déc 2024
+
+/media/diskWesternDigital/cloudData/data_29_04_2021
+/media/diskWesternDigital/cloudData/data_4_Jan_2025
+
+
+<?php
+$CONFIG = array (
+  'instanceid' => 'ocb85omtvdi2',
+  'passwordsalt' => 'HJVjtTcpF1AtyqgERh+URrVEOSRTgI',
+  'secret' => 'UIe0sl5dt/xUZLvaMWDvPhjcexy8N6kDiZUum6S4IqtOZ99X',
+  'trusted_proxies' => 
+  array (
+    0 => '10.0.20.16',
+  ),
+  'forwarded_for_headers' => 
+  array (
+    0 => 'HTTP_X_FORWARDED_FOR',
+  ),
+  'trusted_domains' => 
+  array (
+    0 => 'gerard-gandji.hd.free.fr',
+    1 => '192.168.0.12',
+    2 => '82.65.214.195',
+    3 => '192.168.0.32',
+    4 => '192.168.0.33',
+  ),
+
+  'datadirectory' => '/media/diskWesternDigital/cloudData/data_29_04_2021',
+  'dbtype' => 'mysql',
+  'version' => '21.0.1.1',
+  'overwrite.cli.url' => 'https://gerard-gandji.hd.free.fr/nextcloud',
+  'dbname' => 'nextcloud',
+  'dbhost' => 'localhost',
+  'dbport' => '',
+  'dbtableprefix' => 'oc_',
+  'mysql.utf8mb4' => true,
+  'dbuser' => 'gandjicloud',
+  'dbpassword' => '7Gsovarm1_',
+  'installed' => true,
+  'onlyoffice' => 
+  array (
+    'verify_peer_off' => true,
+  ),
+  'filelocking.enabled' => 'true',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'redis' => 
+  array (
+    'host' => 'localhost',
+    'port' => 6379,
+    'timeout' => 0,
+    'dbindex' => 0,
+  ),
+  'maintenance' => true,
+  'mail_smtpmode' => 'smtp',
+  'mail_smtpsecure' => 'ssl',
+  'mail_sendmailmode' => 'smtp',
+  'mail_from_address' => 'gerardarm',
+  'mail_domain' => 'Gmail.com',
+  'mail_smtpauth' => 1,
+  'mail_smtpauthtype' => 'LOGIN',
+  'mail_smtphost' => 'SMTP.gmail.com',
+  'mail_smtpname' => '',
+  'mail_smtppassword' => '',
+  'theme' => '',
+  'loglevel' => 0,
+  'updater.secret' => '$2y$10$L3sT03ApobVB2FVzidRp1OUfcLJL3HpO5N0sERs/LHqeUfK5T.Rsq',
+);
+
+
+Le repertoire de Nextcloud devra avoir les permissions de :
+0770
+
+
+Le paramètre d’autorisations UNIX est défini sur 0770 par défaut. 
+Ce paramètre par défaut accorde des autorisations de lecture, d’écriture et 
+d’exécution au propriétaire et au groupe, mais aucune autorisation n’est accordée aux autres utilisateurs.
+
+La commande chmod permet de modifier les droits et permissions. On utilise cette 
+dernière en indiquant l'utilisateur (u, g, o ou a), les actions "+, -, =" et le droit 
+concerné "r, w, x". On pourra éventuellement utiliser la notation décimale.
+
+Changer le propriétaire d'un fichier :
+
+chown nouvel_utilisateur unfichier
+Changer le groupe propriétaire d'un fichier :
+
+
+chgrp nouveau_groupe unfichier
+Changer le propriétaire et/ou le groupe propriétaire d'un fichier :
+
+chown nouvel_utilisateur:nouveau_groupe unfichier
+
+
+------
+Changer le propriétaire et/ou le groupe propriétaire d'un dossier et de tous les fichiers/sous-dossiers contenus :
+
+1
+chown -R nouvel_utilisateur:nouveau_groupe undossier
+-R pour la récursivité, en majuscule !
+
+---- Pour mon besoin : chown 0770 -R  /media/diskWesternDigitalMyBook/cloudData/data_29_04_2021
+
+Ne pas oublier le garder : umask de /etc/fstab à : 007
+=====================================
+sudo apt install php8.1-fpm php8.1-gd php8.1-json php8.1-mysql php8.1-curl php8.1-mbstring php8.1-intl php-imagick php8.1-xml php8.1-zip
+
+=====================================
+
+Instruction intallation php8.0:
+
+sudo wget -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+
+sudo apt update
+
+sudo apt install -y php8.0-common php8.0-cli
+
+php -version 
+
+sudo apt install -y php8.0-curl php8.0-gd php8.0-mbstring php8.0-xml pho8.0-zip
+
+php -m 
+
+sudo apt install -y php8.0-mysql
+
+sudo apt install -y libapache2-mod-php8.0
+=====================================
+
+INTALLATION DOCKER :
+
+curl -sSL https://get.docker.com | sh
+
+sudo usermod -aG docker $USER
+
+logout 
+
+sudo reboot
+
+
+--- compose.yaml : https://pimylifeup.com/nextcloud-docker/ ----
+  ou /media/diskWesternDigitalMyBook/cloudData/data_4_Jan_2025
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.6
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=no
+      - MYSQL_PASSWORD=7Gsovarm1_!_
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=gandjicloud
+
+  redis:
+    image: redis:alpine
+    restart: always
+
+  app:
+    image: nextcloud:apache
+    restart: always
+    volumes:
+      - /media/diskWesternDigitalMyBook/cloudData/data_29_04_2021
+      - nextcloud:/var/www/html
+    environment:
+      - VIRTUAL_HOST=ratel
+      - MYSQL_PASSWORD=7Gsovarm1_
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=gandjicloud
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+    depends_on:
+      - db
+      - redis
+    networks:
+      - proxy-tier
+      - default
+
+  cron:
+    image: nextcloud:apache
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html:z
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
+
+  proxy:
+    build: ./proxy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - DEFAULT_HOST=ratel
+    volumes:
+      - certs:/etc/nginx/certs:z,ro
+      - vhost.d:/etc/nginx/vhost.d:z
+      - html:/usr/share/nginx/html:z
+      - /var/run/docker.sock:/tmp/docker.sock:z,ro
+    depends_on:
+      - omgwtfssl
+    networks:
+      - proxy-tier
+
+  omgwtfssl:
+    image: csckcac/omgwtfssl
+    restart: "no"
+    volumes:
+      - certs:/certs
+    environment:
+      - SSL_SUBJECT=ratel.local
+      - CA_SUBJECT=gerardarm@gmail.com
+      - SSL_KEY=/certs/ratel.local.key
+      - SSL_CSR=/certs/ratel.local.csr
+      - SSL_CERT=/certs/ratel.local.crt
+    networks:
+      - proxy-tier
+
+volumes:
+  nextcloud:
+  db:
+  certs:
+  acme:
+  vhost.d:
+  html:
+
+networks:
+  proxy-tier:
+===================N'A PAS FONCTIONNE CHEZ MOI=================
+Lancement  : 
+
+docker compose up -d
+We use the “-d” option to detach Docker from the terminal once it has downloaded and started all containers
+
+
+Etat d'un Docker : docker ps -a
+
+-------------
+docker compose logs -f  
+
+Pour n’afficher que les logs d’un service en particulier :
+
+docker compose logs -f [service_name]  
+-------------
+
+Pour pouvoir démarrer un conteneur, vous devez au préalable avec créer une image à l’aide de la commande docker pull :
+
+docker pull <nom de l'image>
+-------------
+
+docker start [options] id_containeur
+-------------
+Vous pouvez aussi spécifier container.
+Par exemple :
+
+sudo docker container start 1f8594be150e
+
+sudo docker compose down (Stop and remove containers, networks )  
+
+-------------
+Pour arrêter tous les conteneurs en cours d’exécution, entrez ce qui suit :
+
+docker stop $( docker ps –a –q )
+-------------
+
+
+Pour tuer immédiatement un conteneur docker sans attendre la fin de la période de grâce, utilisez l’option kill.
+
+docker kill [option] <id_containeur>
+
+-------------
+
+# As "root"
+$ sudo systemctl stop docker    # arrêter
+$ sudo systemctl start docker   # démarrer
+$ sudo systemctl restart docker # redémarrer
+
+docker rmi $Conteneur  pour supprimer le conteneur
+====================================
+******  Ce 8 Janvier 2025  ******
+
+Installer : lshw : sudo apt-get install lshw
+
+Disque : voir tous les disques et leur capacité :  sudo lshw -class disk
+
+sudo blkid  Pour avoir les UUID
+
+Faire aussi : sudo fdisk -l
+
+[ Etat de /etc/fstab sur raspberry pi ce 08 Janvier 2025  
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigitalMyBook ntfs-3g defaults,auto,gid=1002,umask=000,locale=fr_FR.utf8 0 0
+
+UUID=FE7CCF887CCF3A63 /media/diskIomegaCrocodile ntfs-3g defaults,auto,gid=1002,umask=000,locale=fr_FR.utf8 0 0
+
+UUID=3AD8-6D10 /media/diskScanDiskDataCloud        auto    defaults,umask=000,gid=1002        0       0
+
+]
+
+
+
+L'idée globale dans les droits dans fstab
+est d'autoriser tous les droits d'écriture, de lecture
+et d'exécution sur tous les disques. 
+
+avec un umask à 000, ça veut dire que tout ce qui sera sur la partition 
+aura comme droits rwxrwxrwx (lecture/écriture/exécution pour tout le monde)
+
+Par ailleurs :
+Il faut définir un gid et un uid
+Si on ne précises pas l'uid, les droits sont attribués à root 
+par défaut. Essayons d'ajouter uid=1000. Et gid=1000. 
+ Ce sont les valeurs par défaut du premier utilisateur (toi je suppose) et de son groupe.
+
+
+Ce qui donne ce 11 Janvier 2025 cette forme de fstab:
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigitalMyBook ntfs-3g defaults,auto,uid=1000,gid=1000,umask=000,locale=fr_FR.utf8 0 0
+
+UUID=FE7CCF887CCF3A63 /media/diskIomegaCrocodile ntfs-3g defaults,auto,uid=1000,gid=1000,umask=000,locale=fr_FR.utf8 0 0
+
+UUID=3AD8-6D10 /media/diskScanDiskDataCloud        auto    defaults,umask=000,uid=1000,gid=1000        0       0
+
+
+
+Nous savons que www-data doit pouvoir écrire dans 
+les disques via Nextcloud:
+
+(créer le groupe groupDiskWesDigMyBo)
+- sudo groupadd groupDiskWesDigMyBo 
+(recupérer le gid du groupe)
+- cat /etc/group |grep groupDiskWesDigMyBo  ici c'est 1002
+
+(Ajouter armand et www-data au groupe)
+
+- sudo usermod -a -G groupDiskWesDigMyBo www-data
+
+- sudo usermod -a -G groupDiskWesDigMyBo armand
+
+(obtenir le uid du disque groupDiskWesDigMyBo)
+
+c'est le uid obtenuqu'on va renseigner dans /etc/fstab
+Cela donne finalement :
+
+
+Ce qui donne ce 11 Janvier 2025 cette forme de fstab:
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigitalMyBook ntfs-3g defaults,auto,uid=1002,gid=1000,umask=000,locale=fr_FR.utf8 0 0
+
+UUID=FE7CCF887CCF3A63 /media/diskIomegaCrocodile ntfs-3g defaults,auto,uid=1002,gid=1000,umask=000,locale=fr_FR.utf8 0 0
+
+UUID=3AD8-6D10 /media/diskScanDiskDataCloud auto defaults,umask=000,uid=1002,gid=1000        0       0
+
+
+Nextcloud refuse d'écrire dans le répertoire config :
+
+sudo chown -R www-data:www-data /media/nextcloud/config/www/nextcloud/config  (dans la situation actuelle de docker et où le docker écrit )
+
+sudo chown -R www-data:www-data /app/www/public/config/config.php
+
+====================================
+sudo chmod -R 0770 /var/www/html/nextcloud/
+
+sudo chown -R www-data:www-data /var/www/html/nextcloud/
+
+Donner tous les droits d'écriture sur les disques:
+
+sudo chmod -R u+rwx /media/diskWesternDigitalMyBook/
+
+sudo chmod -R u+rwx /media/diskIomegaCrocodile/
+
+sudo chmod -R u+rwx /media/diskScanDiskDataCloud/
+====================================
+Cette version de compose.yaml a fonctionné :
+Elle est ici :
+
+services:
+  nextcloud-db:
+    image: mariadb:latest
+    container_name: nextcloud-db
+    hostname: nextcloud-db
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./nextcloud-data-db:/var/lib/mysql
+
+  nextcloud-redis:
+    image: redis:latest
+    container_name: nextcloud-redis
+    env_file: .env
+    hostname: nextcloud-redis
+    restart: unless-stopped
+
+  nextcloud-app:
+    image: nextcloud:fpm
+    container_name: nextcloud-app
+    hostname: nextcloud-app
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+    volumes:
+      - ../../../var/www/html/nextcloud/:/var/www/html
+      - ../../diskWesternDigitalMyBook/cloudData/data_4_Jan_2025/:/var/www/html/data
+  nextcloud-web:
+    image: nginx:latest
+    container_name: nextcloud-web
+    hostname: nextcloud-web
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - nextcloud-app
+    volumes:
+      - ../../../var/www/html/nextcloud/:/var/www/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+         - 80:80
+
+  nextcloud-cron:
+    image: nextcloud:fpm
+    container_name: nextcloud-cron
+    hostname: nextcloud-cron
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ../../../var/www/html/nextcloud/:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+
+
+====================================
+NOTE IMPORTANTE.
+les fichiers : compose.yaml, .env et nginx.conf sont tous déposés au meme 
+endroit sur le disque : /media/diskWesternDigitalMyBook/webNexcloud
+
+Le démarrer avec : sudo docker compose up -d
+lieu de definition : https://cloud.theodo.com/blog/nextcloud-docker
+Il faut ensuite créer un fichier .env là où est placé le fichier compose.yaml
+
+Ce 25 Janvier 2025
+******************
+
+J'ai défini le répertoire :  /media/diskWesternDigitalMyBook/cloudData/data_4_Jan_2025
+comme lieu du Data de nextcloud.
+
+J'ai défini le repertoire : /media/diskWesternDigitalMyBook/webNexcloud
+pour les fichiers : nginx.conf , .env et compose.yaml
+
+Sachant que : www-data est propriétaire de /var/www/html 
+ainsi que www-data est propriétaire de /media/diskWesternDigitalMyBook/cloudData/data_4_Jan_2025 défini
+depuis /etc/fstab
+uid=33,gid=33 sont les identifiants de www-data
+[ - ../cloudData/data_4_Jan_2025/:/var/www/html/data ]
+
+//////////////////////////////////////////
+
+proc            /proc           proc    defaults          0       0
+PARTUUID=ff3f1c0a-01  /boot/firmware  vfat    defaults          0       2
+PARTUUID=ff3f1c0a-02  /               ext4    defaults,noatime  0       1
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigitalMyBook ntfs-3g defaults,auto,uid=33,gid=33,umask=0 7 7 0,locale=fr_FR.utf8 0 0
+
+UUID=FE7CCF887CCF3A63 /media/diskIomegaCrocodile ntfs-3g defaults,auto,uid=33,gid=33,umask=0 7 7 0,locale=fr_FR.utf8 0 0
+
+UUID=3AD8-6D10 /media/diskScanDiskDataCloud auto defaults,uid=33,gid=33,umask=0 7 7 0,locale=fr_FR.utf8 0 0
+
+UUID=1000 /media/diskWesternDigitalMyBook/ ntfs-3g defaults,nls=utf8,uid=33,gid=33,umask=0 7 7 0,locale=fr_FR.utf8 0 0
+
+//////////////////////////////////////////
+
+
+Voir les log : docker compose logs -f
+
+sudo docker container ls -a 
+Attention !!! le contenu de .env est:
+
+
+# GENERAL
+
+# The domain from where you'll access Nextcloud (eg. cloud.myself.com)
+MY_DOMAIN=gerard-gandji.hd.free.fr
+# Your timezone
+TZ=Europe/Paris
+
+# NEXTCLOUD-MARIADB
+
+# The database's root user password
+# ! Set a stronger password !
+MYSQL_ROOT_PASSWORD=7Gsovarm1_!_
+# The database's nextcloud user password
+# ! Set a stronger password !
+MYSQL_PASSWORD=7Gsovarm1_
+MYSQL_DATABASE=nextcloud
+MYSQL_USER=gerardgandji
+
+# NEXTCLOUD
+MYSQL_HOST=nextcloud-db
+REDIS_HOST=nextcloud-redis
+
+/////////////////////////////
+
+***** IL Y A AUSSI LA CONFIGURATION nginx.conf à définir :
+le fichier nginx.conf doit rester là où se trouve le fichier compose.yaml
+
+worker_processes auto;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    upstream php-handler {
+        server nextcloud-app:9000;
+    }
+
+    server {
+        listen 80;
+
+        # Add headers to serve security related headers
+        # Before enabling Strict-Transport-Security headers please read into this
+        # topic first.
+        #add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload;" always;
+        #
+        # WARNING: Only add the preload option once you read about
+        # the consequences in https://hstspreload.org/. This option
+        # will add the domain to a hardcoded list that is shipped
+        # in all major browsers and getting removed from this list
+        # could take several months.
+        add_header Referrer-Policy "no-referrer" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header X-Download-Options "noopen" always;
+        add_header X-Frame-Options "SAMEORIGIN" always;
+        add_header X-Permitted-Cross-Domain-Policies "none" always;
+        add_header X-Robots-Tag "none" always;
+        add_header X-XSS-Protection "1; mode=block" always;
+
+        # Remove X-Powered-By, which is an information leak
+        fastcgi_hide_header X-Powered-By;
+
+        # Path to the root of your installation
+        root /var/www/html;
+
+        location = /robots.txt {
+            allow all;
+            log_not_found off;
+            access_log off;
+        }
+
+        # The following 2 rules are only needed for the user_webfinger app.
+        # Uncomment it if you're planning to use this app.
+        #rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+        #rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json last;
+
+        # The following rule is only needed for the Social app.
+        # Uncomment it if you're planning to use this app.
+        #rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+
+        location = /.well-known/carddav {
+            return 301 $scheme://$host:$server_port/remote.php/dav;
+        }
+
+        location = /.well-known/caldav {
+            return 301 $scheme://$host:$server_port/remote.php/dav;
+        }
+
+        # set max upload size
+        client_max_body_size 10G;
+        fastcgi_buffers 64 4K;
+
+        # Enable gzip but do not remove ETag headers
+        gzip on;
+        gzip_vary on;
+        gzip_comp_level 4;
+        gzip_min_length 256;
+        gzip_proxied expired no-cache no-store private no_last_modified no_etag auth;
+        gzip_types application/atom+xml application/javascript application/json application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy;
+
+        # Uncomment if your server is build with the ngx_pagespeed module
+        # This module is currently not supported.
+        #pagespeed off;
+
+        location / {
+            rewrite ^ /index.php;
+        }
+
+        location ~ ^\/(?:build|tests|config|lib|3rdparty|templates|data)\/ {
+            deny all;
+        }
+        location ~ ^\/(?:\.|autotest|occ|issue|indie|db_|console) {
+            deny all;
+        }
+
+        location ~ ^\/(?:index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|oc[ms]-provider\/.+)\.php(?:$|\/) {
+            fastcgi_split_path_info ^(.+?\.php)(\/.*|)$;
+            set $path_info $fastcgi_path_info;
+            try_files $fastcgi_script_name =404;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $path_info;
+            # fastcgi_param HTTPS on;
+
+            # Avoid sending the security headers twice
+            fastcgi_param modHeadersAvailable true;
+
+            # Enable pretty urls
+            fastcgi_param front_controller_active true;
+            fastcgi_pass php-handler;
+            fastcgi_intercept_errors on;
+            fastcgi_request_buffering off;
+        }
+
+        location ~ ^\/(?:updater|oc[ms]-provider)(?:$|\/) {
+            try_files $uri/ =404;
+            index index.php;
+        }
+
+        # Adding the cache control header for js, css and map files
+        # Make sure it is BELOW the PHP block
+        location ~ \.(?:css|js|woff2?|svg|gif|map)$ {
+            try_files $uri /index.php$request_uri;
+            add_header Cache-Control "public, max-age=15778463";
+            # Add headers to serve security related headers (It is intended to
+            # have those duplicated to the ones above)
+            # Before enabling Strict-Transport-Security headers please read into
+            # this topic first.
+            #add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload;" always;
+            #
+            # WARNING: Only add the preload option once you read about
+            # the consequences in https://hstspreload.org/. This option
+            # will add the domain to a hardcoded list that is shipped
+            # in all major browsers and getting removed from this list
+            # could take several months.
+            add_header Referrer-Policy "no-referrer" always;
+            add_header X-Content-Type-Options "nosniff" always;
+            add_header X-Download-Options "noopen" always;
+            add_header X-Frame-Options "SAMEORIGIN" always;
+            add_header X-Permitted-Cross-Domain-Policies "none" always;
+            add_header X-Robots-Tag "none" always;
+            add_header X-XSS-Protection "1; mode=block" always;
+
+            # Optional: Don't log access to assets
+            access_log off;
+        }
+
+        location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap|mp4|webm)$ {
+            try_files $uri /index.php$request_uri;
+            # Optional: Don't log access to other assets
+            access_log off;
+        }
+    }
+}
+
+
+====================================
+uid et gid sont les identifiants de mon utilisateur nextcloud. Tu peux les obtenir en faisant id nextcloud.
+dmask à 007 va donner des répertoires avec les permissions 770.
+fmask à 117 va donner des fichiers avec les permissions 660.
+
+Recherche de solution pour palier aux probleme affiché suivant : Votre répertoire de données est lisible par d'autres personnes., nextcloud docker
+
+      - ./nextcloud-data/:/var/www/html
+      
+a ete remplacé par : ../../../var/www/html/nextcloud/:/var/www/html
+
+
+Autre recommandation d'installation de nextcloud 
+par docker : lien d'installation : https://www.youtube.com/watch?v=RkJuAGCKsUQ
+
+Je définis le lieu : /media/diskWesternDigitalMyBook/webNexcloud
+comme lieu du répertoire nextcloud et ses dépendances :
+
+J'ai créé les répertoires : nextcloud, apps,config, theme à cet endroit :/media/diskWesternDigitalMyBook/webNexcloud 
+
+pour le répertoire des Data de Nextcloud, j'ai gardé :/media/diskWesternDigitalMyBook/cloudData/data_29_04_2021
+
+A la demande html lors de l'installation de nextcloud, j'ai donné le répertoire : /media/diskWesternDigitalMyBook/webNexcloud/nextcloud/data
+comme lieu de data
+
+
+sudo docker run -d -p 80:80 --name nextcloud --restart unless-stopped -v /media/diskWesternDigitalMyBook/webNexcloud/nextcloud:/var/www/html -v /media/diskWesternDigitalMyBook/webNexcloud/apps:/var/www/html/custom_apps -v /media/diskWesternDigitalMyBook/webNexcloud/config:/var/www/html/config -v /media/diskWesternDigitalMyBook/cloudData/sudo docker run -d -p 80:80 --name nextcloud --restart unless-stopped -v /media/diskWesternDigitalMyBook/webNexcloud/nextcloud:/var/www/html -v /media/diskWesternDigitalMyBook/webNexcloud/apps:/var/www/html/custom_apps -v /media/diskWesternDigitalMyBook/webNexcloud/config:/var/www/html/config -v /media/diskWesternDigitalMyBook/cloudData/data_29_04_2021:/var/www/html/data -v /media/diskWesternDigitalMyBook/webNexcloud/theme:/var/www/html/themes nextcloud:/var/www/html/data -v /media/diskWesternDigitalMyBook/webNexcloud/theme:/var/www/html/themes nextcloud
+
+sudo docker container ls -a   Pour voir l'état du Docker
+
+
+Container Nexcloud actuellement cours : 0719d1d2ab5dc834b0e9e12ac5648efdd4e997c9302b6d350f871c9d004529a8
+Identifiant Container : 0719d1d2ab5d
+
+===================================
+Si nextcloud refuse parfois d'écrire dans le répertoire des données , répertoire
+défini par soi-même , faites ceci :
+
+Faites : sudo cat /etc/passwd et chercher si vous avez l’utilisateur www-data.
+
+si oui faites ceci :
+sudo chown -R www-data:www-data /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025
+sudo chmod -R 770 /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025
+
+sudo chmod -R 770 /var/www/html/nextcloud/ 
+sudo chown -R www-data:www-data /var/www/html/nextcloud/ (en tout cas, là où se trouve nextcloud)
+ 
+Cela répond au problème :
+
+/////////////////
+
+Votre répertoire de données est lisible par d'autres personnes.
+
+Veuillez changer les permissions du répertoire en mode 0770 afin
+ que son contenu ne puisse pas être listé par les autres personnes.
+////////////////
+
+Pour arrêter : sudo docker stop 
+Supprimer :    sudo docker rm 
+
+ATTENTION !!! Impossible d'écrire dans le répertoire : message affiché lors de l'installation de nextcloud
+
+If you get the error message 'Your data directory is readable by other users.' Try the following:
+1.) Enter the following command: sudo nano /etc/fstab
+
+2.) Then edit/add the following line: UUID=[YOUR UUID NUMBER] /mnt/orico ntfs defaults,nls=utf8,uid=www-data,gid=www-data,dmask=007,windows_names 0 0
+
+
+UUID=1000 /media/diskWesternDigitalMyBook ntfs-3g defaults,nls=utf8,uid=www-data,gid=www-data,dmask=007,locale=fr_FR.utf8 0 0
+
+
+Valeur de /etc/fstab  : ce 21 Janvier 2025
+
+proc            /proc           proc    defaults          0       0
+PARTUUID=ff3f1c0a-01  /boot/firmware  vfat    defaults          0       2
+PARTUUID=ff3f1c0a-02  /               ext4    defaults,noatime  0       1
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigitalMyBook ntfs-3g defaults,auto,uid=1000,gid=1002,umask=0 0 0,locale=fr_FR.utf8 0 0
+
+UUID=FE7CCF887CCF3A63 /media/diskIomegaCrocodile ntfs-3g defaults,auto,uid=1000,gid=1002,umask=0 0 0,locale=fr_FR.utf8 0 0
+
+UUID=3AD8-6D10 /media/diskScanDiskDataCloud auto defaults,uid=1000,gid=1002,umask=0 0 0,locale=fr_FR.utf8 0 0
+
+UUID=1000 /media/diskWesternDigitalMyBook/ ntfs-3g defaults,nls=utf8,uid=www-data,gid=www-data,dmask=0770,locale=fr_FR.utf8 0 0
+
+==================================== compose.yaml brut : En cours de test ce 16 Fev 2025
+version: "3.8"
+services:
+  nextcloud-db:
+    image: mariadb:latest
+    container_name: nextcloud-db
+    hostname: nextcloud-db
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./nextcloud-data-db:/var/lib/mysql
+
+  nextcloud-redis:
+    image: redis:latest
+    container_name: nextcloud-redis
+    env_file: .env
+    hostname: nextcloud-redis
+    restart: unless-stopped
+
+  nextcloud-app:
+    image: nextcloud:fpm
+    container_name: nextcloud-app
+    hostname: nextcloud-app
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+    volumes:
+      - ./nextcloud-data/:/var/www/html
+      - /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025:/var/www/html/data
+      # Uncomment and specify your data directory (if you have a mounted hard drive)
+      # !! ALWAYS make a backup of your data before such manipulations !!
+      # - /path/to/data/directory:/var/www/html/data
+
+  nextcloud-web:
+    image: nginx:latest
+    container_name: nextcloud-web
+    hostname: nextcloud-web
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - nextcloud-app
+    volumes:
+      - ./nextcloud-data/:/var/www/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 80:80
+
+  nextcloud-cron:
+    image: nextcloud:fpm
+    container_name: nextcloud-cron
+    hostname: nextcloud-cron
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./nextcloud-data/:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+==================================== Compose.yaml modifié :   
+
+
+=========== AUTRE FICHIR DOCKER-COMPOSE.yml
+
+pour éviter le refus d'écriture dans le répertoire : /media/diskWesternDigitalMyBook/cloudData/data_4_Jan_2025
+j'ai gardé le répertoire : data dans /var/www/html/nextcloud et je crée un lien symbolique de 
+data qui pointe sur : /media/diskWesternDigitalMyBook/cloudData/data_4_Jan_2025
+
+[ln -s [target] [link_name]
+Copy
+ln: La commande pour créer des liens.
+–s: Indique à ln de créer un lien symbolique (soft link) plutôt qu’un lien en dur.
+[target]: Le fichier ou le répertoire vers lequel vous souhaitez pointer (la source).
+[link_name]: Le nom que vous souhaitez donner au lien symbolique (la destination). ]
+
+
+cd /var/www/html/nextcloud (voir data en vue qui est dans nextcloud)
+ln -s /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025/data /var/www/html/nextcloud/data
+
+dans : /media/diskWesternDigitalMyBook/cloudData/data_4_Jan_2025, faire : ls -lh pour voir que le répertoire 
+ contient un répertoire data qui pointe sur /var/www/html/nextcloud/data
+
+:::: supprimer le lien symbolique : aller dans /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025/  et taper : rm -i data ou unlink data
+
+Ajoutez : 
+sudo chmod -R 770 /var/www/html/nextcloud/ 
+sudo chown -R www-data:www-data /var/www/html/nextcloud/
+
+=================docker-compose.yml===============
+Créer le fichier docker-compose.yml dans /var/www/html avec le contenu ci-dessous. Ne créer aucun autre dossier à l'intérieur. Puisque le container crée tout.
+
+-----------------
+services:
+  nextcloud:
+    image: linuxserver/nextcloud
+    container_name: nextcloud
+    environment:
+      - PUID=992
+      - PGID=992
+      - TZ=Europe/Paris
+    volumes:
+      - /var/www/html/nextcloud/config:/config
+      - /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025:/data
+    ports:
+      - 443:443
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+  mariadb:
+    image: linuxserver/mariadb
+    container_name: mariadb
+    environment:
+      - PUID=992
+      - PGID=992
+      - MYSQL_ROOT_PASSWORD=7Gsovarm1_!_
+      - TZ=Europe/Paris
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=gerardgandji
+      - MYSQL_PASSWORD=7Gsovarm1_
+    volumes:
+      - /var/www/html/nextcloud/mariadb:/config
+    restart: unless-stopped
+    
+    ======================= sur le site : https://www.forum-nas.fr/threads/tuto-installation-de-nextcloud-en-docker-sur-raspberry-pi.14445/ =======================
+    Répertoire choisi pour les données de Nextcloud: /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025
+    
+    
+    www-data, armand sont des utilisateurs:
+    docker est un group.
+   
+   Actuellement, je suis utilisateur : armand: La commande : sudo usermod -aG docker $USER permet de m'ajouter (option -a ) au groupe docker
+    
+    - ajouter l'utilisateur armand au groupe www-data :
+    sudo adduser armand www-data
+    
+    - Ajout de l'utilisateur www-data au groupe docker :  sudo adduser www-data docker
+    
+    --- A cette étape, le groupe docker contient : armand, www-data
+    Je vais ensite prendre le PUID et PGID de ce groupe, pour les renseigner dans le fichier : docker-compose.yml. Aussi, dans le fichier /etc/fstab
+    les uid et gid seront mis à la valeur du groupe docker.
+    
+    
+    -- cat /etc/group fournit entre autre l'info : docker:x:992:armand,www-data
+    c'est cette valeur 992 qui sera renseigné dans le fichier /etc/fstab
+    
+    sudo chmod -R 0770 /var/www/html/nextcloud/ (là où se trouve le répertoire nextcloud)
+    sudo chown -R www-data:www-data /var/www/html/nextcloud/  (là où se trouve le répertoire nextcloud)
+
+    sudo chmod -R 0770 /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025
+    sudo chown -R www-data:www-data /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025
+    
+    Aller dans le dossier /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025 : et faire : touch -c .ocdata Dès qu'on fait cela, ça passe.
+
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+

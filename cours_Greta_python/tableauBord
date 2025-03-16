@@ -1,0 +1,1724 @@
+Adresse Principale : guy78-7-88-174-188-32.fbx.proxad.net
+=========================================================
+Installation RaspberryPi  
+Telechargements
+[ Pour une nouvelle image compressée : unxz --verbose ubuntu-mate-16.04-desktop-armhf-raspberry-pi.img  ]
+
+http://blog.nicolargo.com/2009/01/un-serveur-ftp-en-5-minutes-chrono.html
+
+Site : http://blog.nicolargo.com/2009/01/un-serveur-ftp-en-5-minutes-chrono.html
+
+sudo ddrescue -D --force 2016-09-23-raspbian-jessie-lite.img /dev/sdf
+
+ftp://faucon:!=rePtil__:@192.168.0.12:29717
+
+ftp://faucon:!=rePtil__:@88.174.188.32:29717
+
+Utilisateur Maths : rapace : __=+@maths
+
+-----
+
+sudo chown -R ftpuser:ftpgroup /media/diskWesternDigital/ftpDataOnDiskWesternDigital
+
+sudo chown -R ftpuser:ftpgroup /media/diskWesternDigital/Alain-SagemCom_Avril_2016
+
+
+(!=rePtil__)
+
+sudo pure-pw useradd rapace -u ftpuser -g ftpgroup -d /media/diskWesternDigital/Alain-SagemCom_Avril_2016
+
+(__=+@maths)
+
+
+ftp://faucon:!=rePtil__:@gerard-gandji.hd.free.fr 
+
+ftp://rapace:__=+@maths:@gerard-gandji.hd.free.fr  (cela fonctionne mieux sur le navigateur : Chrome)
+=============================
+
+Activer les disques montés en USB :Avec les réglages par défaut, le Raspberry Pi 2 limite le courant à 600mA pour l'ensemble des 4 ports USB. La modification logicielle qui est proposée ici va étendre cette limite à 1200mA.
+
+> editer : /boot/config.txt
+
+Rechercher la présence éventuelle de la ligne "max_usb_current=..."
+Ajouter la ligne suivante "max_usb_current=1" ou modifier sa valeur à 1 si elle existe déjà.
+Enregistrer le fichier config.txt
+Redémarrer le Raspberry Pi 2
+
+-------------------------------------------
+Installer : lshw : sudo apt-get install lshw
+
+Disque : voir tous les disques et leur capacité :  sudo lshw -class disk
+
+Faire aussi : sudo fdisk -l
+
+[ Etat de /etc/fstab sur raspberry pi ce 04 Novembre 2024  
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigital ntfs-3g defaults,auto,gid=1002,umask=007,locale=fr_FR.utf8 0 0
+
+UUID=FE7CCF887CCF3A63 /media/diskCrocodile ntfs-3g defaults,auto,gid=1002,umask=000,locale=fr_FR.utf8 0 0
+
+UUID=3AD8-6D10 /media/diskScanDisk        auto    defaults,umask=000,gid=1002        0       0
+
+]
+
+pour monter automatiquement les disques, modifier le fichier : /etc/fstab   : /dev/hdb1 /media/backup auto defaults umask=0 0 0
+
+
+Voir tous les dispositifs connectés à la Freebox : nmap -sP 192.168.0.*
+
+Faire aussi : sudo fdisk -l 
+Tenir compte des résultats sortis pour Monter les disques.
+
+Monter le disque Iomega : sudo mount /dev/sdb1 /home/armand/diskIomega/
+
+Monter le disque WesterneDigital : sudo mount /dev/sda1 /home/armand/diskWesternDigital/
+
+J'ai créé un lien symbolique depuis le répertoire ftpData du diskIomega vers /home/armand/ftpData. (Bien sûr , avant de créer le lien symbolique, le 
+répertoire ftpData n'existe pas dans /home/armand)
+
+Attention : Installer (ntfs-3g) par :  sudo apt-get install ntfs-3g AVANT LA SUITE Mais AVANT, FAIT: sudo apt-get update et sudo apt-get upgrade
+
+sudo ln -s diskIomega/ftpData/ ftpData
+
+sudo mount -t vfat -o uid=1000,gid=1000 /dev/sda1 /media/diskIomega/
+
+sudo mount -t vfat -o uid=1000,gid=1000 /dev/sdc1 /media/diskScanDisk/
+
+sudo mount -t ntfs-3g -o uid=1000,gid=1000 /dev/sdb1 /media/diskWesternDigital/
+
+Dans fstab, j'ajoute :
+
+
+/dev/sda1     /media/diskIomega/   auto defaults umask=0 0 0   <strong>nofail</strong>
+
+
+/dev/sdb1     /media/diskWesternDigital/   auto defaults umask=0 0 0   <strong>nofail</strong>
+
+/dev/sdc1     /media/diskScanDisk/   auto defaults umask=0 0 0   <strong>nofail</strong>
+
+
+
+NB : Noter la règle nofail , qui permet d’éviter que le Pi ne bloque au démarrage si le disque dur n’est pas connecté ou pas prêt. On vérifie que tout va bien avec mount –a . S’il n’y a pas d’erreur, pas de souci.
+
+Enfin, j’ajuste les paramètres de démarrage du Pi pour laisser le temps au disque dur de démarrer et d’être monté. On édite /boot/cmdline.txt  et on ajoute rootdelay=5  à la fin de l’unique ligne qu’il contient :
+
+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait quiet splash
+
+Ce qui donne :
+
+
+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait quiet splash rootdelay=5
+=============================
+
+(paramètres indiqués par le site)
+
+/dev/sda1     /media/diskIomega/   vfat   <strong>nofail</strong>,uid=1000,gid=1000   0       0
+/dev/sdb1     /media/diskWesternDigital/   ntfs   <strong>nofail</strong>,uid=1000,gid=1000   0       0
+/dev/sdc1     /media/diskScanDisk/   vfat   <strong>nofail</strong>,uid=1000,gid=1000   0       0
+
+=============================
+Installation : sudo apt-get install mysql-server
+
+INITIALISATION
+
+ DROP DATABASE owncloud;
+
+DROP USER 'gandjicloud'@'localhost';
+
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+
+CREATE DATABASE IF NOT EXISTS owncloud;
+
+
+
+=============================
+
+sudo ln -s /media/diskWesternDigital/cloudData/data /var/www/owncloud/data
+
+(sudo unlink owncloud pour couper le lien)
+
+Donner les droits www-data à ce data ici /var/www/owncloud/data
+
+sudo chown -R www-data:www-data /var/www/owncloud/data
+
+
+chmod -R 0770 /var/www/owncloud/data  (ancien ! Maintenant , faire plutôt : chmod -R 0770 /var/www/owncloud/)
+chmod -R 0770 /media/diskWesternDigital/cloudData/data
+
+redemarrer Owncloud. C'est à dire Apache : sudo service apache2 restart ou sudo /etc/init.d/apache2 restart
+
+
+ sudo blkid : liste toutes les partitions avec leur type
+  
+cat /etc/group :  pour voir les groupes qui existent
+
+sudo groupadd nomGroupe : pour ajouter un groupe.
+
+sudo groupdel Nom_groupe  : pour détruire un groupe 
+
+
+
+CELUI QUI FONCTIONNE LE MIEUX EST CELUI CI !
+
+/dev/sda1 /media/diskIomega/   auto    defaults,uid=1000,gid=1000        0       0
+
+/dev/sdb1     /media/diskWesternDigital/  auto    defaults,uid=1000,gid=1000        0       0
+
+/dev/sdc1     /media/diskScanDisk/ auto    defaults,uid=1000,gid=1000        0       0
+
+
+/dev/sdb1    /media/diskWesternDigital/cloudData/owncloud  auto    defaults,uid=1003,gid=1003        0       0
+
+=========================================
+
+sudo foremost -t jpeg,avi -i /dev/sda1
+
+find /media/diskWesternDigital/cloudData/owncloud -type f -print0 | xargs -0 chmod 0640
+
+find /media/diskWesternDigital/cloudData/owncloud -type d -print0 | xargs -0 chmod 0750
+
+
+1: sudo chown -R www-data:www-data /var/www/owncloud/
+
+2: sudo chown -R www-data:www-data /media/diskWesternDigital/cloudData/owncloud/apps/
+3: sudo chown -R www-data:www-data /media/diskWesternDigital/cloudData/owncloud/config/
+4: sudo chown -R www-data:www-data /media/diskWesternDigital/cloudData/owncloud/data/
+5: sudo chown -R www-data:www-data /media/diskWesternDigital/cloudData/owncloud/themes/
+
+
+
+
+
+8: sudo chmod 0644 /media/diskWesternDigital/cloudData/owncloud/data/.htaccess
+9: sudo chmod 0644 /media/diskWesternDigital/cloudData/owncloud/.htaccess
+
+
+==========================================
+
+recupération des données supprimées sous linux :
+
+sudo foremost -t avi mpeg -i /dev/sdb1  -o /media/diskIomega/
+==========================================
+INSTALLATION OWNCLOUD :
+
+ On met à jour tous les packets
+
+sudo apt-get update
+
+sudo apt-get upgrade
+
+1.1. On fait la commande : (réglage utilisateur)
+
+sudo usermod -a -G www-data www-data
+
+2. On installe tous les paquets nécessaires à Owncloud
+
+(CONFIGURATION POUR L'UTILISATION DE MYSQL)
+
+sudo apt-get install apache2 php5 php5-gd php5-mysql php5-curl php5-json php5-common php5-intl php-pear php-apc php-xml-parser libapache2-mod-php5 curl libcurl3 libcurl3-dev 
+
+sudo apt-get install mysql-server
+
+3. On ajoute une ligne à la fin du fichier apache2.conf
+
+sudo vi /etc/apache2/apache2.conf
+
+Ajouter la ligne « ServerName owncloud » à la fin du fichier
+
+ServerName owncloud (Attention . Cette syntaxe a fait buguer la suite)
+
+3.1. On modifie le nom de l’host dans le fichier /etc/hosts
+
+sudo vi /etc/hosts
+
+Remplacer raspberrypi (ou le nom donné au Raspberry) par owncloud (rate. Il faut que la dernière ligne ressemble à ça
+
+127.0.1.1                         owncloud
+
+3.2. On modifie une ligne dans un fichier
+
+sudo vi /etc/apache2/sites-enabled/000-default.conf
+
+changer le « AllowOverride None » en « AllowOverride All »
+
+4. On modifie le fichier php.ini (dans  /etc/php5/apache2/php.ini )  de façon à ce que la limite d’upload soit à 2Go au lieu de 2Mo.
+
+Changer ces deux lignes comme ceci :
+
+upload_max_filesize = 5G
+ post_max_size = 5G
+
+Pour trouver facilement ces lignes utiliser la recherche en faisant Ctrl ?upload_max_filesize
+
+5. On supprime l’ancien index.html
+
+sudo rm /var/www/index.html
+
+6. On active la réécriture d’Apache
+
+sudo a2enmod rewrite
+ sudo a2enmod headers
+
+7. On redémarre Apache
+
+sudo /etc/init.d/apache2 restart
+
+Ensuite :
+
+sudo mv owncloud /var/www/
+
+
+sudo chown -R www-data:www-data /var/www/
+
+Regarder ensuite ici : http://shilo-pi.blogspot.fr/2014/08/installer-owncloud-sur-le-raspberry-pi.html
+
+(supprimer un groupe : groupdel NomGroupe)
+
+Ajouter pi et www-data au groupe diskWesternDigital : sudo groupadd diskWesternDigital
+
+
+> sudo usermod -a -G diskWesternDigital pi
+
+> sudo usermod -a -G diskWesternDigital www-data
+
+Prendre l'ID du group diskWesternDigital : cat /etc/group |grep diskWesternDigital
+Ici : diskWesternDigital:x:1003
+
+Obtenir UUID de mon disque: Ici : /media/diskWesternDigital/ : taper : sudo blkid pour lire l'UUID du disque concerné
+
+ici : C6B89CABB89C9B8D
+
+Pour le DiskCrocodile on a : FE7CCF887CCF3A63
+
+Ecrire dans le fichier /etc/fstab/
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigital ntfs-3g defaults,auto,gid=1003,umask=007,locale=fr_FR.utf8 0 0
+
+UUID=FE7CCF887CCF3A63 /media/diskCrocodile ntfs-3g defaults,auto,gid=1005,umask=007,locale=fr_FR.utf8 0 0
+
+Le répertoire des médias pour owncloud sera : /media/diskWesternDigital/cloudData/owncloud/data
+
+(Surtout vérifier que le CHMOD de » data » est bien sur 770 sous peine de message d’erreurs à l’installe de owncloud.) :
+770 pour : 7 pour u(user), 7 pour g(group) et 0 pour o (other)   :  sudo chmod -R 770 /media/diskWesternDigital/cloudData/owncloud/data/
+chmod u+rwx,g+rx-w,o+r-wx fichier3
+
+
+    r (read) = 4
+    w (write) = 2
+    x (execute) = 1
+    - = 0
+
+
+    Pour rwx, on aura : 4+2+1 = 7
+    Pour rw-, on aura : 4+2+0 = 6
+    Pour r--, on aura : 4+0+0 = 4
+
+
+
+
+
+    0 : - - - (aucun droit)
+    1 : - - x (exécution)
+    2 : - w - (écriture)
+    3 : - w x (écriture et exécution)
+    4 : r - - (lecture seule)
+    5 : r - x (lecture et exécution)
+    6 : r w - (lecture et écriture)
+    7 : r w x (lecture, écriture et exécution)
+
+CE QUI DONNE : chmod u+rxw,g+rxw,o-r-x-w /media/diskWesternDigital/cloudData/owncloud/data
+
+-------------------
+
+Démarrer l’installation de Owncloud
+
+Via votre navigateur," IP_du_raspi/owncloud "Dans l'interface vous aurez « répertoire des données » indiquer :
+
+/media/DD500/owncloud/data
+
+pour la base MySQL, indiquer le login et passe mis à son l’installation de SQL
+
+
+nom de la base = owncloud
+
+
+Tous est bon a ce moment là sauf que la limite d'upload est de 2Mo .
+
+C'est que par défaut, l’envoie de fichier dans OwnCloud est limité à 2M.
+
+Au lieux de modifier le fichier php.ini dans apache2 on va modifier le fichier .htacces du dossier owncloud
+-------------------
+ERREUR, en cas d'erreur de REQUEST Serveur not found, 
+ouvrir le fichier : (sudo vi /etc/apache2/sites-available/000-default.conf) et mettre la variable suivante (DocumentRoot /var/www/owncloud) à la valeur : DocumentRoot /var/www
+
+puis redémarrer
+
+=========================================
+sudo apt-get install libreoffice  sur owncloud
+
+==================  Ancien config.php =======================  se trouve dans :/var/www/owncloud/config
+
+
+<?php
+$CONFIG = array (
+  'instanceid' => 'oc8izwwfvxkn',
+  'passwordsalt' => 'pbHXO3mU0hBhsQ/KRTh9gzQssjU1ln',
+  'secret' => 'dmkz2oJcJ72Y7UNypBReOZ1AbhFhiPO0AJSLAQ+IZvLKgnaZ',
+  'trusted_domains' =>
+  array (
+    0 => '192.168.0.12',
+    1 => '88.174.188.32',
+  ),
+  'datadirectory' => '/media/diskWesternDigital/cloudData/owncloud/data',
+  'overwrite.cli.url' => 'http://88.174.188.32/owncloud',
+  'dbtype' => 'mysql',
+  'version' => '9.1.3.1',
+  'dbname' => 'owncloud',
+  'dbhost' => 'localhost',
+  'dbtableprefix' => 'oc_',
+  'dbuser' => 'gandjicloud',
+  'dbpassword' => '7Gsovarm1_',
+  'logtimezone' => 'UTC',
+  'installed' => true,
+  'mail_from_address' => 'gerardarm',
+  'mail_smtpmode' => 'php',
+  'mail_domain' => 'gmail.com',
+  'loglevel' => #0,
+  'defaultapp' => 'files',
+  'knowledgebaseenabled' => true,
+  'enable_avatars' => true,
+  'allow_user_to_change_display_name' => false,
+  'updater.server.url' => 'https://updates.owncloud.com/server/',
+  'has_internet_connection' => true,
+  'appstoreenabled' => true,
+  'appstoreurl' => 'https://api.owncloud.com/v1',
+  'enable_previews' => true,
+  'preview_max_x' => NULL,
+  'preview_max_y' => NULL,
+  'updater.secret' => '$2y$10$FVUo3qHaEODDB/qmFUMTcOnk8xMMX8huNY.UCusjYS4osrDfAjYIa',
+  'maintenance' => false,
+  'memcache.local' => '\OC\Memcache\APCu',
+  'preview_libreoffice_path' => '/usr/bin/libreoffice',
+  'preview_office_cl_parameters' => '--headless --nologo --nofirststartwizard --invisible --norestore --convert-to pdf --outdir ',
+  'apps_paths' => array (
+      0 => array (
+              'path'     => OC::$SERVERROOT.'/apps',
+              'url'      => '/apps',
+              'writable' => false,
+      ),
+
+  ),
+
+
+
+
+
+
+);
+
+
+
+
+
+================  Nouveau config.php ============================== se trouve dans :/var/www/owncloud/config
+<?php
+$CONFIG = array (
+  'instanceid' => 'ocq2f89mclq2',
+  'passwordsalt' => 'EjHOMOrl2lY42F9WVM6//Vtz28ibXG',
+  'secret' => '9zlivixqH34a1GMzrk+qKPxeqfkisueaDaTt+FB2xjvVGrB6',
+  'trusted_domains' =>
+  array (
+    0 => '88.174.188.32',
+  ),
+  'datadirectory' => '/media/diskWesternDigital/cloudData/owncloud/data/',
+  'overwrite.cli.url' => 'https://88.174.188.32/owncloud',
+  'dbtype' => 'mysql',
+  'version' => '10.0.2',
+  'dbname' => 'owncloud',
+  'dbhost' => 'localhost',
+  'dbtableprefix' => 'oc_',
+  'dbpassword' => '7Gsovarm1_',
+  'logtimezone' => 'UTC',
+  'installed' => true,
+);
+======================Actuellement en cours config.php ====================================== (copie de l'ancienne instanceid ,passwordsalt et secret dans le nouveau)
+<?php
+$CONFIG = array (
+  'instanceid' => 'oc8izwwfvxkn',
+  'passwordsalt' => 'pbHXO3mU0hBhsQ/KRTh9gzQssjU1ln',
+  'secret' => 'dmkz2oJcJ72Y7UNypBReOZ1AbhFhiPO0AJSLAQ+IZvLKgnaZ',
+  'trusted_domains' =>
+  array (
+    0 => '88.174.188.32',
+  ),
+  'datadirectory' => '/media/diskWesternDigital/cloudData/owncloud/data/',
+  'overwrite.cli.url' => 'https://88.174.188.32/owncloud',
+  'dbtype' => 'mysql',
+  'version' => '10.0.2',
+  'dbname' => 'owncloud',
+  'dbhost' => 'localhost',
+  'dbtableprefix' => 'oc_',
+  'dbuser' => 'gandjicloud',
+  'dbpassword' => '7Gsovarm1_',
+  'logtimezone' => 'UTC',
+  'installed' => true,
+);
+
+=========================================
+MONTER LES DISQUE : 2 Septembre 2017 : Pour ça, faire : sudo fdisk -l 
+puis tenir compte de la sortie pour Monter les disques.
+
+Attribut de groupe :
+
+aller dans /media et créer les répertoires :
+
+sudo mkdir diskIomega
+
+sudo mount /dev/sda1 /media/diskIomega/
+
+sudo mkdir diskWesternDigital
+
+sudo mount /dev/sdb1 /media/diskWesternDigital/
+
+sudo mkdir diskScanDisk
+
+sudo mount /dev/sdc1 /media/diskScanDisk/
+
+Obtenir l'UUID du disque : diskWesternDigital :
+sudo blkid
+
+Cela permet d'obtenir : C6B89CABB89C9B8D pour diskWesternDigital 
+
+Contenu de fstab: ( vi ou nano /etc/fstab)
+
+proc            /proc           proc    defaults          0       0
+/dev/mmcblk0p1  /boot           vfat    defaults          0       2
+/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+
+/dev/sda1 /media/diskIomega/   auto    defaults,uid=1000,gid=1000        0       0
+
+#/dev/sdb1     /media/diskWesternDigital/  auto    defaults,uid=1000,gid=1000        0       0
+
+/dev/sdc1     /media/diskScanDisk/ auto    defaults,uid=1000,gid=1000        0       0
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigital ntfs-3g defaults,auto,gid=1003,umask=007,locale=fr_FR.utf8 0 0
+
+----- Ce 25 Dec 2024 :
+
+Faitre : sudo blkid pour voir les UIID
+
+UUID de Scandisk : 3AD8-6D10 sur /dev/sdc1  
+UUID de My Book : Western DiDigital "C6B89CABB89C9B8D" sur /dev/sdb
+UUID de Iomega : FE7CCF887CCF3A63 sur  /dev/sdc
+
+sudo mkdir diskWesternDigitalMyBook
+sudo mkdir diskIomegaCrocodile
+sudo mkdir diskScanDisk
+
+
+Montons MyBook : sudo mount /dev/sda1 /media/diskWesternDigitalMyBook/
+
+Montons : Iomega : sudo mount /dev/sdb2 /media/diskIomegaCrocodile/
+
+Montons scandisk : sudo mount /dev/sdc1 /media/diskScanDiskDataCloud/
+
+
+Faire : sudo chmod -R 770 sur les répertoires montés .
+
+
+Pour monter automatiquement les trois disques, on va ajouter les lignes suivantes dans fstab:
+dans l'odre de montage de diskWesternDigital diskIomega,  et diskScanDisk
+
+/dev/sda1  /media/diskWesternDigital/  auto    defaults,uid=1000,gid=1000        0       0
+
+
+/dev/sdb2 /media/diskIomega/   auto    defaults,uid=1000,gid=1000        0       0
+
+/dev/sdc1     /media/diskScanDisk/ auto    defaults,uid=1000,gid=1000        0       0
+=========================================
+
+DESINSTALLATION DE DOCKER : 
+
+sudo apt-get remove --auto-remove docker #Removes docker and dependencies
+sudo rm -rf /var/lib/docker #Removes all data 
+
+
+Docker specifies Google DNS servers by default. If your Document Server is not going to have access to the Internet, we recommend that you change the default Docker DNS address to the address of your local DNS server. To do that go to the /etc/default/docker file and change the IP address in the following line to the IP address of a DNS server in your local network:
+
+VOIR ICI : http://helpcenter.onlyoffice.com/server/docker/document/docker-installation.aspx
+
+docker_OPTS="--dns 192.168.0.12"  (spécifie l'adresse locale sur laquelle va tourner docker : /etc/default/docker )
+
+Mais il faut utiliser plutôt : /etc/default/docker 
+
+
+
+!!! Après cela, il faut relancer le docker : sudo service docker restart
+
+After you have Docker installed, run it and execute the following command:
+
+sudo docker run -i -t -d -p 80:80 --restart=always onlyoffice/documentserver
+sudo docker run -i -t -d -p 8080:80 --restart=always onlyoffice/documentserver
+
+NB :
+
+By default Document Server listens to the incoming connections using port 80. Starting with version 4.3 you can change the port for Document Server if you plan to use it instead of the default one. This can be easily done changing the mapping port during the installation:
+
+sudo docker run -i -t -d -p <PORT_NUMBER>:80 --restart=always onlyoffice/documentserver
+
+Where <PORT_NUMBER> is the number of port you want Document Server to use. 
+
+Port Docker retenu : 8080
+
+Lancer l'installation de DocumentServer pour Onlyoffice avec : 
+
+sudo docker run -i -t -d -p 8080:80 --restart=always \
+    -v /app/onlyoffice/DocumentServer/logs:/var/log/onlyoffice  \
+    -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data  \
+    -v /app/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice \
+    -v /app/onlyoffice/DocumentServer/db:/var/lib/postgresql  onlyoffice/documentserver
+
+
+
+=========================================
+Redemarrer la raspberry pi Maintenant  : sudo shutdown now -r
+
+
+
+=========================================
+
+
+mkdir -p /var/www/owncloud/app/onlyoffice/DocumentServer/data/certs
+cp onlyoffice.key /var/www/owncloud/app/onlyoffice/DocumentServer/data/certs/
+cp onlyoffice.crt  /var/www/owncloud//app/onlyoffice/DocumentServer/data/certs/
+cp dhparam.pem  /var/www/owncloud//app/onlyoffice/DocumentServer/data/certs/
+chmod 400  /var/www/owncloud//app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
+
+
+=========================================
+Dans fstab :
+
+proc            /proc           proc    defaults          0       0
+/dev/mmcblk0p1  /boot           vfat    defaults          0       2
+/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+
+/dev/sda1 /media/diskIomega/   auto    defaults,uid=1000,gid=1000        0       0
+
+/dev/sdb1     /media/diskWesternDigital/  auto    defaults,uid=1000,gid=1000        0       0
+
+/dev/sdc1     /media/diskScanDisk/ auto    defaults,uid=1000,gid=1000        0       0
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigital ntfs-3g defaults,auto,gid=1002,umask=007,locale=fr_FR.utf8 0 0
+
+
+Il faut que le gid pour diskWesternDigital soit celui du groupe formé
+par : pi, armand, www-data
+
+- Voir les groupes existants : cat /etc/group
+
+(créer le groupe diskWesternDigital)
+- sudo groupadd diskWesternDigital 
+(recupérer le gid du groupe)
+- cat /etc/group |grep diskWesternDigital  ici c'est 1002
+
+(Ajouter pi, armand et www-data au groupe)
+
+- sudo usermod -a -G diskWesternDigital pi
+
+- sudo usermod -a -G diskWesternDigital www-data
+
+- sudo usermod -a -G diskWesternDigital armand
+
+(obtenir le UUID du disque diskWesternDigital)
+
+sudo blkid
+on peut y lire l'UUID du disque diskWesternDigital: C6B89CABB89C9B8D (My Book)
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigital ntfs-3g defaults,auto,uid=1002,gid=1002,umask=007,locale=fr_FR.utf8 0 0
+
+Vérifier, au cas ou, que le disque-dur est bien dans le groupe diskWesternDigital
+
+stat /media/diskWesternDigital
+
+
+- Créons un groupe formé par : pi et armand
+
+- sudo groupadd piarmand
+
+sudo usermod -a -G piarmand pi
+
+sudo usermod -a -G piarmand armand
+
+(recupérer le gid du groupe : piarmand)
+- cat /etc/group |grep piarmand  ici c'est 1003
+
+Donnons ce gid dans : 
+/dev/sda1 /media/diskIomega/   auto    defaults,uid=1003,gid=1003        0       0
+                 et dans :
+/dev/sdc1     /media/diskScanDisk/ auto    defaults,uid=1003,gid=1003        0       0
+
+CE QUI DONNE FINALEMENT : le contenu de /etc/fstab
+
+
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigital ntfs-3g defaults,auto,uid=1002,gid=1002,umask=007,locale=fr_FR.utf8 0 0
+
+/dev/sda1 /media/diskIomega/   auto    defaults,uid=1003,gid=1003        0       0
+
+/dev/sdc1     /media/diskScanDisk/ auto    defaults,uid=1003,gid=1003        0       0
+
+
+NE PAS OUBLIER DE DONNER LES DROITS DE www:data à : /media/diskWesternDigital/cloudData/owncloud/data/
+
+sudo chown -R www-data:www-data /media/diskWesternDigital/cloudData/owncloud/data/
+
+
+UUID du disque Iomega : 3D28-5B52
+
+UUID du disque Scandisk : 3AD8-6D10
+
+Ici je veux donner le droit au groupe diskWesternDigital à tous les disques. CE 03 Novembre 2017
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigital ntfs-3g defaults,auto,uid=1002,gid=1002,umask=007,locale=fr_FR.utf8 0 0
+
+/dev/sda1     /media/diskIomega/   auto    defaults,uid=1002,gid=1002,umask=007         0       0
+
+/dev/sdc1     /media/diskScanDisk/ auto    defaults,uid=1002,gid=1002,umask=007         0       0
+
+
+
+=========================================
+
+contenu de : /var/www/owncloud/config ce 7 Sept 2017 après installation :
+
+<?php
+$CONFIG = array (
+  'instanceid' => 'ocr5jba7ayo3',
+  'passwordsalt' => 'h7uM2gPU7Zz2xec7d+S+Ii2YAtXE50',
+  'secret' => 'zM6cLnYMs+2lQjEG1llFbtW1u1RL5kVVTcIsGey6syr2pS2M',
+  'trusted_domains' =>
+  array (
+    0 => '88.174.188.32',
+  ),
+  'datadirectory' => '/media/diskWesternDigital/cloudData/owncloud/data/',
+  'overwrite.cli.url' => 'http://88.174.188.32/owncloud',
+  'dbtype' => 'mysql',
+  'version' => '10.0.2.1',
+  'dbname' => 'owncloud',
+  'dbhost' => 'localhost',
+  'dbtableprefix' => 'oc_',
+  'dbuser' => 'gandjicloud',
+  'dbpassword' => '7Gsovarm1_',
+  'logtimezone' => 'UTC',
+  'installed' => true,
+);
+
+
+
+
+*******************************************
+
+
+EN CAS D'OUBLI DE MOT DE PASSE, SE CONNECTER A LA BASE DE DONNEES EN TANT QUE : gandjicloud ET Y DEFINIR 
+L'ADRESSE E-MAIL DE RECEPTION . REPARTIR SUR L'INTERFACE WEB DE OWNCLOUD ET CHOISIR MOT DE PASSE OUBLIÉ ET PRÉFÉRER LA RÉINITIALISATION.
+AINSI, LE NOUVEAU LIEN POUR DÉFINIR LE MOT DE PASSE SERA ENVOYÉ SUR L'ADRESSE EMAIL.
+
+  
+
+================ 1
+INSERT INTO `owncloud`.`oc_preferences` (
+`userid`,
+`appid`,
+`configkey`,
+`configvalue`
+)
+VALUES (
+'gerard',
+'settings',
+'email',
+'gerardarm@gmail.com'
+);
+
+ENSUITE ALLER DANS /var/www/owncloud/
+PUIS LANCER LA COMMANDE : sudo -u www-data php /var/www/owncloud/occ user:resetpassword gerard
+
+
+
+
+==============================================================================
+Configuration Mail
+Chiffrement : SSL/TSL
+Adresse serveur : smtp.gmail.com
+Informations d'identification : gerardarm
+Port : 465
+
+
+==============================================================================
+
+echo "CREATE USER 'onlyoffice_user'@'localhost' IDENTIFIED BY '7Gsovarm__';
+CREATE USER 'gerardarm'@'gmail' IDENTIFIED BY 'ahodehou';
+GRANT ALL PRIVILEGES ON * . * TO 'root'@'%' IDENTIFIED BY '7Gsovarm1!_!';
+GRANT ALL PRIVILEGES ON * . * TO 'onlyoffice_user'@'%' IDENTIFIED BY '7Gsovarm__';
+GRANT ALL PRIVILEGES ON * . * TO 'gerardarm'@'%' IDENTIFIED BY '7Gsovarm1!_!';
+FLUSH PRIVILEGES;"
+
+
+
+
+==============================================================================
+DEMARCHES POUR UTILISER LE HTTPS :
+
+https://foxty.io/passer-owncloud-https/
+
+
+1. Création du Virtualhost :
+
+Apache utilise un système de “sites” virtuels pour gérer ses configurations. Nous devons donc créer un “site” de configuration dédié à notre serveur Owncloud.
+
+Créons donc un nouveau fichier “owncloud.conf” dans le répertoire “/etc/apache2/sites-available”, et saisissons-y les lignes suivantes :
+NameVirtualHost *:443
+# Hôte virtuel qui écoute sur le port HTTPS 443
+<VirtualHost *:443>
+DocumentRoot /var/www/
+# Activation du mode SSL
+SSLEngine On 
+SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
+# On indique ou est le certificat
+SSLCertificateFile /etc/ssl/certs/owncloud.crt
+SSLCertificateKeyFile /etc/ssl/private/owncloud.key
+</VirtualHost>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+	
+NameVirtualHost *:443
+# Hôte virtuel qui écoute sur le port HTTPS 443
+<VirtualHost *:443>
+DocumentRoot /var/www/
+# Activation du mode SSL
+SSLEngine On 
+SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
+# On indique ou est le certificat
+SSLCertificateFile /etc/ssl/certs/owncloud.crt
+SSLCertificateKeyFile /etc/ssl/private/owncloud.key
+</VirtualHost>
+
+2. Activation des modules nécessaires :
+
+Apache a besoin de modules supplémentaires pour faire fonctionner le HTTPS. Pour ce faire, activons le module “ssl” avec cette commande :
+a2enmod ssl
+1
+	
+a2enmod ssl
+
+Cela fait, activons le “site” virtuel que nous avons créé précédemment :
+a2ensite owncloud.conf
+1
+	
+a2ensite owncloud.conf
+
+3. Création du certificat SSL :
+
+
+Nous allons maintenant créer un dossier regroupant toutes les clés nécessaires à la génération du certificat :
+cd /etc/apache2/ && mkdir CertOwncloud && cd CertOwncloud
+1
+	
+cd /etc/apache2/ && mkdir CertOwncloud && cd CertOwncloud
+
+Génèrons notre clé sur 1024 bits :
+openssl genrsa -out owncloud.key 1024
+1
+	
+openssl genrsa -out owncloud.key 1024
+
+Créons les “.key” et “.csr” nécessaires :
+openssl req -new -key owncloud.key -out owncloud.csr
+1
+	
+openssl req -new -key owncloud.key -out owncloud.csr
+
+Nos informations personnelles sont alors demandées. Replissons le formulaire correctement, ça ne fera de mal à personne.
+
+Et pour finir, créons le certificat :
+openssl x509 -req -days 365 -in owncloud.csr -signkey owncloud.key -out owncloud.crt
+1
+	
+openssl x509 -req -days 365 -in owncloud.csr -signkey owncloud.key -out owncloud.crt
+
+Copions les certificats aux bons endroits :
+cp owncloud.crt /etc/ssl/certs
+cp owncloud.key /etc/ssl/private
+1
+2
+	
+cp owncloud.crt /etc/ssl/certs
+cp owncloud.key /etc/ssl/private
+
+Redémarrons Apache et tout est terminé !
+apachectl configtest
+service apache2 restart
+1
+2
+	
+apachectl configtest
+service apache2 restart
+
+ 
+
+Vous pouvez dès à présent vous rendre à l’adresse de votre serveur Owncloud, en précisant “https://” au début de l’URL.
+
+ATTENTION: Votre navigateur vous préviendra que votre connexion n’est pas privée, et c’est faux. Votre connexion est belle et bien cryptée, mais votre certificat est dit “auto-signé”, ce qui signifie qu’il n’a pas été vérifié par qui que ce soit.
+
+
+FORCER LE HTTPS :
+
+https://technique.arscenic.org/ssl-securisation-des-communications-serveur-client/article/rediriger-http-vers-https-ssl-automatiquement
+
+==============================================================================
+
+==============================================================================
+
+
+
+==========================================================
+echo "CREATE USER 'onlyoffice_user'@'localhost' IDENTIFIED BY '7Gsovarm1_';
+CREATE USER 'gerardarm'@'gmail' IDENTIFIED BY 'gerardarm';
+GRANT ALL PRIVILEGES ON * . * TO 'root'@'%' IDENTIFIED BY '7Gsovarm1_!_';
+GRANT ALL PRIVILEGES ON * . * TO 'onlyoffice_user'@'%' IDENTIFIED BY '7Gsovarm1_';
+GRANT ALL PRIVILEGES ON * . * TO 'gerardarm'@'%' IDENTIFIED BY 'gerardarm';
+FLUSH PRIVILEGES;"
+
+===========================================================================================
+
+
+
+===========================================================================================
+
+INSTALLATION DE OWNCLOUD ONLYOFFICE ET CONSORT VIA DOCKER !
+
+1-°) Installer Ngnix et nginx php5-fpm : sudo aptitude install nginx php5-fpm puis configurer Nginx comme ici : 
+
+https://raspbian-france.fr/installer-nginx-raspbian-raspberry/
+
+
+2°) Installer : Docker : curl -sSL https://get.docker.com | sh
+
+( ajouter un utilisateur au groupe : "docker" : sudo adduser armand docker )
+
+3°) Installer docker-compose: 
+
+sudo apt-get -y install python-pip
+sudo pip install docker-compose
+
+PREFERER CECI POUR INSTALLER DOCKER-COMPOSE:
+
+Installation de docker-compose :
+***************************************
+
+sudo apt-get install libffi-dev libssl-dev
+sudo apt install python3-dev
+sudo apt-get install -y python3 python3-pip
+
+Once you have python and pip installed just run the following command:
+
+sudo pip3 install docker-compose
+***************************************
+
+
+
+Controler la version installée de docker-compose : docker-compose --version
+
+4°) Installer Redis: 
+sudo apt-get update
+sudo apt-get install redis-server
+
+Voir ici : https://vaclavdedik.com/blog/create-your-own-cloud-storage-with-raspberry-pi/
+
+
+Installer Owncloud avec docker-compose :
+
+- sudo mkdir /srv/Owncloud ; cd /srv/Owncloud
+
+Probleme avec Docker:
+En cas de probleme avec docker, ces instructions arrivent à bout :
+
+sudo service docker stop
+sudo mv /var/lib/docker /var/lib/docker.bak
+sudo service docker start
+
+
+---------------------
+Tout d’abord, il faut générer les certificats TLS, avec Let’s Encrypt. Pour cela, vous pouvez lire mon tutoriel « Let’s Encrypt Nginx« . Vous aurez donc une connexion TLS notée en A+.
+
+
+--------------------
+
+cd /etc/
+git clone https://github.com/letsencrypt/letsencrypt ; cd letsencrypt
+
+
+
+Maintenant on va préparer l’arborescence pour nos certificats dans le répertoire /etc/letsencrypt :
+
+mkdir -p /etc/letsencrypt/live-ecdsa/your-domain.com/letmp
+cd /etc/letsencrypt/live-ecdsa/your-domain.com
+
+Suivre la suite des instructions ici : https://blog.ouvrard.it/2016/03/18/lets-encrypt-nginx/
+
+mkdir -p /etc/letsencrypt/live-ecdsa/gerard.gandji.free.fr/letmp
+cd /etc/letsencrypt/live-ecdsa/gerard.gandji.free.fr
+
+
+openssl req -new -sha256 -key privkey-p384.pem -subj "/CN=gerard.gandji.free.fr" -reqexts SAN -config <(cat /etc/ssl/openssl.cnf <(printf "[SAN]\nsubjectAltName=DNS:gerard.gandji.free.fr")) -outform der -out csr-p384.der
+
+sudo su 
+
+/etc/letsencrypt/letsencrypt-auto certonly -a webroot --email gerardarm@gmail.com --webroot-path /var/www/html/ --csr /etc/letsencrypt/live-ecdsa/gerard.gandji.free.fr/csr-p384.der --renew-by-default --agree-tos 
+
+
+cat 0001* > /etc/letsencrypt/live-ecdsa/gerard.gandji.free.fr/chain.pem  (Cette syntaxe ne fonctionne pas)
+--------------------
+
+
+
+On va commencer par préparer nos dossiers afin d’y ajouter les certificats et la conf de Nginx. Il faut donc que vos certificats soient dans /etc/letsencrypt. :
+
+sudo mkdir /srv/Owncloud/etc/
+
+
+===========================================================================================
+
+
+
+
+
+============================================== File yml en expérimentation
+
+
+
+
+=====================SAUVEGARDE ET RESTAURATION INTEGRALE ===================================
+
+
+->  Faire un sudo fdisk -l
+
+voir le disque qui correspond à la carte SD .
+Ici, c'est :
+
+    /dev/sdf (disque de 16 Go) qui est ma carte SD que je souhaite sauvegarder.
+
+On lance la sauvegarde avec la commande suivante:
+sudo dd if=/dev/sdf | gzip -9 > ./raspberry-3-Oct2017_Docker_DockerCompose-Nginx_Ftp-TousDisques-sdf.img.gz
+
+sudo dd if=/dev/sdf | gzip -9 > ./raspberry-14-Oct2017_Docker_DockerCompose-Apache_Ftp-TousDisques-sdf.img.gz
+
+
+sudo dd if=/dev/sdf | gzip -9 > ./raspberry-23-Oct2017_Docker_DockerCompose-Nginx_DBaseMySQL_Owncloud_Clef_SSL_Ftp-TousDisques-sdf.img.gz
+
+sudo dd if=/dev/sdf | gzip -9 > ./Raspi_03-Nov_2017_DocDockerCompose-Apache_DBaseMySQL_OwncloudClef_SSL_RedisFtpTousDisques-sdf.img.gz
+
+sudo dd if=/dev/sdf | gzip -9 > ./Raspi_23-Fev_2018_DocDockerCompose-Apache_DBaseMySQL_Owncloud_RedisFtpTousDisques-sdf.img.gz
+
+sudo dd if=/dev/sdf | gzip -9 > ./Raspi_04-Mars_2019_DocDockerCompose-Apache_DBaseMySQL_Owncloud10-1-0_RedisFtpTousDisques-sdf.img.gz
+
+
+Restauration intégrale d'une carte SD
+
+Après avoir inséré la clé USB sur laquelle on souhaite faire la restauration (attention la clé va être effacée), on commence par identifier l'identifiant du périphérique comme dans le paragraphe précédant (/dev/sdf dans mon cas).
+
+Puis ensuite, il suffit de saisir la ligne de commande:
+
+gunzip ./raspberry-3-Oct2017_Docker_DockerCompose-Nginx_Ftp-TousDisques-sdf.img.gz | sudo dd of=/dev/sdf
+
+
+
+Faire plutôt : sudo ddrescue -D --force ubuntu-mate-16.04-desktop-armhf-raspberry-pi.img /dev/sdf
+
+sudo ddrescue -D --force raspberry-14-Oct2017_Docker_DockerCompose-Apache_MySQL_DBaseOwncloud_Ftp-TousDisques-sdf.img /dev/sdf
+
+
+
+!!!!!!!!!!!!  INFO MONTAGE ISO !!!!!!!!!!
+
+mv fichier_image.img fichier_image.iso ou vice versa
+========================================================================
+> Procéder à l'encryptage : HTTPS
+Avec Docker-compose, 
+> Lancer Owncloud
+> Lancer OnlyOffice
+=========================================================================
+
+===================================Docker commandes : ===================================
+
+To show all containers use the given command:
+
+docker ps -a
+
+To show the latest created container (includes all states) use the given command:
+
+docker ps -l
+
+To show n last created containers (includes all states) use the given command:
+
+docker ps -n=-1
+
+To display total file sizes use the given command:
+
+docker ps -s
+
+
+===================================
+> sudo service docker stop  : pour arrêter docker
+
+
+> sudo service docker start  :pour démarrer docker
+
+
+les containers qui existent , ceux qui sont actuellement en exécution...
+
+
+
+La configuration de Nginx se trouve ici : nano /etc/nginx/sites-available/default
+
+sudo /etc/init.d/nginx restart 
+
+La configuration de docker se trouve ici : /etc/default/docker
+
+To display open ports and established TCP connections, enter:
+netstat -vatn
+
+===================================
+Une fois le fichier docker-compose constitué, on le lance par :
+
+Démarrer :  docker-compose up
+Arrêter : docker-compose down
+=================================== docker-compose.yaml
+version: '3.1'
+services:
+  owncloud:
+    # use the latest version of owncloud
+    image: owncloud:10.0.2
+    ports:
+      # bind ownCloud's port 80 to port 8080
+      - 8080:80
+    volumes:
+      # make sure we store the data on the host and not in the container
+      - "/media/diskWesternDigital/cloudData/owncloud/data/:/var/www/html/data"
+
+
+
+puis : docker-compose up  ça marche avec sqlite ! Garde le port 8080 (ou un autre sauf 80) car le 80 est utilisé par Nginx
+
+Complément en cours de réflexion pour définir le lieu de stockage des data:
+
+Avec MySQL :
+
+-v /<mydatalocation>/data:/media/diskWesternDigital/cloudData/owncloud/data/
+
+
+Configuration de PHP.ini :
+
+sudo nano /etc/php5/fpm/php.ini
+	
+allow_url_fopen = on
+allow_url_include = on
+memory_limit = 2048M
+post_max_size = 20000M
+upload_max_filesize = 20000M
+max_input_time = -1
+max_execution_time = 0
+
+===================================
+En cours de réflexion pour faire fonctionner : Onlyoffice 
+
+
+sudo docker run -i -t -d --name onlyoffice-document-server onlyoffice/documentserver (en cours)
+
+Ensuite : sudo docker run -i -t -d -p 8081:8081 -p 443:443 --link onlyoffice-document-server:document_server onlyoffice/communityserver
+
+
+
+
+mkdir -p /etc/letsencrypt/live-ecdsa/guy78-7-88-174-188-32.fbx.proxad.net/letmp
+
+
+
+gerard.gandji.free.fr
+
+
+cd /etc/letsencrypt/live-ecdsa/guy78-7-88-174-188-32.fbx.proxad.net
+
+openssl req -new -sha256 -key privkey-p384.pem -subj "/CN=guy78-7-88-174-188-32.fbx.proxad.net" -reqexts SAN -config <(cat /etc/ssl/openssl.cnf <(printf "[SAN]\nsubjectAltName=DNS:guy78-7-88-174-188-32.fbx.proxad.net")) -outform der -out csr-p384.der
+
+
+
+
+
+
+cd /etc/letsencrypt/live-ecdsa/guy78-7-88-174-188-32.fbx.proxad.net/letmp
+
+
+/etc/letsencrypt/letsencrypt-auto certonly -a webroot --email gerardarm@gmail.com --webroot-path /var/www/html/ --csr /etc/letsencrypt/live-ecdsa/guy78-7-88-174-188-32.fbx.proxad.net/csr-p384.der --renew-by-default --agree-tos
+
+
+==========================
+worker_processes  1;
+ 
+events {
+    worker_connections  1024;
+}
+ 
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    gzip on;
+    gzip_disable "msie6";  
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 32k;
+    gzip_min_length  256;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+    
+    server {
+      listen         80;
+      server_name    guy78-7-88-174-188-32.fbx.proxad.net;
+      return         301 https://$server_name$request_uri;
+    }
+ 
+    server {
+      
+      listen 443 ssl http2;
+      ssl_certificate /etc/letsencrypt/live-ecdsa/guy78-7-88-174-188-32.fbx.proxad.net/chain.pem;
+      ssl_trusted_certificate /etc/letsencrypt/live-ecsa/guy78-7-88-174-188-32.fbx.proxad.net/chain.pem;
+      ssl_certificate_key /etc/letsencrypt/live-ecdsa/guy78-7-88-174-188-32.fbx.proxad.net/privkey-p384.pem;
+      ssl_session_timeout 1d;
+      ssl_session_cache shared:SSL:50m;
+      ssl_session_tickets off;
+      ssl_protocols TLSv1.2;
+      ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!3DES:!MD5:!PSK';
+      ssl_prefer_server_ciphers on;
+      add_header Strict-Transport-Security max-age=15768000;
+      ssl_stapling on;
+      ssl_stapling_verify on;
+      ssl_ecdh_curve secp384r1;
+ 
+      resolver 8.8.8.8 8.8.4.4 valid=86400;
+      root /var/www/html;
+      index index.php;
+
+      location / {
+        try_files $uri $uri/ /index.php?$args;
+      }
+ 
+      location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+        expires 30d;
+        add_header Pragma public;
+        add_header Cache-Control "public";
+      }
+
+      rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+        
+      location ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
+        access_log off; log_not_found off; expires max;
+      }
+ 
+      location ~ [^/]\.php(/|$) {
+        fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+        if (!-f $document_root$fastcgi_script_name) {
+        	return 404;
+        }
+          root           /var/www/html;
+          fastcgi_pass   localhost:9000;
+          fastcgi_index  index.php;
+          fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
+          include        fastcgi_params;
+      }    
+    }
+}
+============================== AVEC NGINX, QUELQUES LIBRAIRIES PHP DOIVENT ETRE INSTALLEES =============
+sudo apt-get install php5-gd php5-mysql php5-curl
+
+sudo apt-get install apache2 php5 php5-gd php5-mysql php5-curl php5-json php5-common php5-intl php-pear php-apc php-xml-parser libapache2-mod-php5 curl libcurl3 libcurl3-dev 
+==============================
+ Configurer HTTPS :
+
+> Aller ici : cd /etc/apache2/sites-available
+> Créer le fichier  : owncloud.conf
+
+Ouvrir : sudo nano /etc/apache2/sites-available/000-default.conf
+
+sudo /etc/init.d/apache2 restart
+
+
+==============================
+INSTALLATION docker et docker-compose via pip
+
+sudo pip install docker
+
+sudo pip install docker-compose
+
+connaître l'architecture sur laquelle on travaille : sudo docker info  -f '{{.OSType}}/{{.Architecture}}'
+
+==============================
+NOUVELLE INSTALLATION DE OWNCLOUD AVEC NGINX 
+
+http://www.pihomeserver.fr/2014/08/11/raspberry-pi-home-server-installer-owncloud-7-en-https-nginx/
+
+
+Après création du fichier :/etc/nginx/sites-available/owncloud et son contenu défini,
+
+modifier :root /var/www/owncloud; en root /var/www/;
+
+Détail :
+
+-> Installer : apt-get install nginx php5-fpm php5 php5-json php5-gd php5-sqlite curl libcurl3 libcurl3-dev php5-curl php5-common php-xml-parser sqlite php-apc php5-mysql
+
+-> Télécharger owncloud, décompressé et copier dans /var/www/
+
+
+-> Créer le répertoire /etc/nginx/certs s’il n’existe pas  : mkdir /etc/nginx/certs
+
+
+-> Générer les certificats pour le site. Vous devez être dans le répertoire /etc/nginx/certs . Attention : utilisez un mot de passe robuste pour générer votre certificat. Le certificat est valable 365 jours. Il faudra en générer un nouveau dans un an
+( Verifying - Enter pass phrase for owncloud.key: 7G...1_!_)
+cd /etc/nginx/certs
+
+openssl genrsa -des3 -out owncloud.key 1024
+
+openssl req -new -key owncloud.key -out owncloud.csr
+
+cp owncloud.key owncloud.key.org
+
+openssl rsa -in owncloud.key.org -out owncloud.key
+
+openssl x509 -req -days 365 -in owncloud.csr -signkey owncloud.key -out owncloud.crt
+
+-> Supprimer les fichier inutiles
+
+rm owncloud.csr owncloud.key.org
+
+
+
+-> Créer un fichier /etc/nginx/sites-available/owncloud (A vous de choisir le port).
+
+server {
+	listen 8091 ssl;
+	ssl_certificate /etc/nginx/certs/owncloud.crt;
+
+	ssl_certificate_key /etc/nginx/certs/owncloud.key;
+
+	error_log /var/log/nginx/owncloud.log;
+	access_log /var/log/nginx/owncloud.log;
+
+	server_name owncloud;
+
+	root /var/www/owncloud;
+
+	client_max_body_size 10G; # set max upload size
+	fastcgi_buffers 64 4K;
+
+	rewrite ^/caldav((/|$).*)$ /remote.php/caldav$1 last;
+	rewrite ^/carddav((/|$).*)$ /remote.php/carddav$1 last;
+	rewrite ^/webdav((/|$).*)$ /remote.php/webdav$1 last;
+
+	index index.php;
+
+	error_page 403 = /core/templates/403.php;
+	error_page 404 = /core/templates/404.php;
+
+	location = /robots.txt {
+            allow all;
+            log_not_found off;
+            access_log off;
+        }
+
+        location ~ ^/(?:\.htaccess|data|config|db_structure\.xml|README) {
+                deny all;
+        }
+
+        location / {
+                # The following 2 rules are only needed with webfinger
+                rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+                rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json last;
+
+                rewrite ^/.well-known/carddav /remote.php/carddav/ redirect;
+                rewrite ^/.well-known/caldav /remote.php/caldav/ redirect;
+
+                rewrite ^(/core/doc/[^\/]+/)$ $1/index.html;
+
+                try_files $uri $uri/ index.php;
+        }
+
+        location ~ \.php(?:$|/) {
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                include fastcgi_params;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param PATH_INFO $fastcgi_path_info;
+                fastcgi_param HTTPS on;
+                fastcgi_pass unix:/var/run/php5-fpm.sock;
+        }
+
+        # Optional: set long EXPIRES header on static assets
+        location ~* \.(?:jpg|jpeg|gif|bmp|ico|png|css|js|swf)$ {
+                expires 30d;
+                # Optional: Don't log access to assets
+                access_log off;
+        }
+
+}
+
+
+-> Activer le site : ln -s /etc/nginx/sites-available/owncloud /etc/nginx/sites-enabled/owncloud
+
+
+-> Modifier le fichier /etc/php5/fpm/php.ini pour augmenter la taille des fichiers pouvant être envoyés
+
+
+upload_max_filesize = 2000M
+
+post_max_size = 2000M
+
+
+-> Relancer NGINX et php5-fpm
+
+
+sudo service nginx restart
+
+sudo service php5-fpm restart
+
+
+-> Accéder à Owncloud par https://<IP_du_Raspberry> :<port_dans_la_configuration>/
+
+
+
+Configuration de Regis pour la gestion de la mémoire cache:
+
+-> sudo apt install redis-server php5-redis
+
+
+-> Ouvrir :/etc/redis/redis.conf
+Modifier pour avoir : 
+
+port 0
+unixsocket /tmp/redis.sock
+unixsocketperm 777
+
+-> ouvrir : /var/www/owncloud/config/config.php
+
+et mettre à la fin du fichier avant la dernière ) :
+
+'memcache.local' => '\OC\Memcache\APCu',
+
+'redis' => [
+        'host' => 'localhost', // can also be a unix domain socket: '/tmp/redis.sock'
+        'port' => 0,
+        'timeout' => 0.0,
+        'password' => '', // Optional, if not defined no password will be used.
+        'dbindex' => 0, // Optional, if undefined SELECT will not run and will use Redis Server's default DB Index.
+],
+
+==============================
+
+Architecture pocesseur Raspberry pi:
+
+La commande suivante permet de retourner les informations concernant le processeur de la Raspberry Pi :
+
+    cat /proc/cpuinfo 
+
+
+==============================
+PORT D'INSTALLATION DE NGINX : 8091
+
+==============================
+
+INSTALLATION DE ONLYOFFICE: [ https://helpcenter.onlyoffice.com/fr/server/docker/document/docker-compose.aspx ]
+
+-> Créer une machine virtuelle de 64 bit.
+-> Installer dessus : Docker et docker-compose.
+
+-> Installation proprement dite de Onlyoffice :
+
+Getting the docker-compose.yaml file
+
+Execute the following command:
+
+wget https://raw.githubusercontent.com/ONLYOFFICE/Docker-DocumentServer/master/docker-compose.yml
+
+Starting and using Document Server
+
+-> Configuring Document Server
+
+Using custom fonts
+
+Mount the fonts folder from your local machine to the fonts folder within the onlyoffice-documentserver-data container. To do that:
+
+    open the docker-compose.yml file,
+    find the services -> onlyoffice-documentserver-data -> volumes section,
+    replace the - /usr/share/fonts string with the following one:
+
+     - /your_local_fonts_folder:/usr/share/fonts
+
+Setting up HTTPS
+
+To use the HTTPS protocol you need to uncomment the following strings in the docker-compose.yml file:
+
+- FORCE_SSL=true
+- CERT_FOLDER=/certs/
+- /app/onlyoffice/DocumentServer/data/certs/onlyoffice.pem:/certs/cert1.pem
+
+Create the /app/onlyoffice/DocumentServer/data/certs/onlyoffice.pem file that contains a certificate and a private key.
+
+When using CA certified certificates, the Private key (.key) and SSL certificate (.crt) are provided to you by the CA. When using self-signed certificates you need to generate these files yourself. Skip steps 1-3 in the following section if you have CA certified SSL certificates.
+Generation of self signed certificates
+
+Generation of self-signed SSL certificates involves a simple 3 step procedure
+STEP 1: Create the server private key
+
+openssl genrsa -out onlyoffice.key 2048
+
+STEP 2: Create the certificate signing request (CSR)
+
+openssl req -new -key onlyoffice.key -out onlyoffice.csr
+
+STEP 3: Sign the certificate using the private key and CSR
+
+openssl x509 -req -days 365 -in onlyoffice.csr -signkey onlyoffice.key -out onlyoffice.crt
+
+STEP 4: Merge both the files
+
+cp onlyoffice.crt onlyoffice.pem
+
+
+To start Document Server execute the following command:
+
+docker-compose up -d
+
+Pour l'arrêter :  docker-compose down
+
+
+Accéder aux ressources via : https://IP_VirtuelleMachine
+
+===============================
+
+FONT EN ONLYOFFICE:
+
+- Copier de nouveaux font dans /usr/share/fonts/
+
+- Exécuter : docker exec 08ec41d1ebb1 /usr/bin/documentserver-generate-allfonts.sh
+
+où 08ec41d1ebb1 est l'ID du container de : onlyoffice/documentserver
+
+
+
+docker exec 66d1c8b31cfa /usr/bin/documentserver-generate-allfonts.sh
+
+
+J'ai redirigé https://88.174.188.32:8080 sur 192.168.0.19:443 (https) le serveur  qui héberge Onlyoffice
+
+Si la connexion sur une tablette, téléphone... ne fonctionne pas, il suffit de changer le lien de connexion
+en ajoutant le port 8080 et en acceptant le nouveau certificat. Après , c'est bon.
+
+===============================
+
+Split in multiple file. Exemple:
+
+split --bytes=1000M /home/gerard/VirtualBox\ VMs/SauvegardesMachinesVM/Crocodile.tar.7z partialCrocodile
+
+Et pour la reconstitution : cat partial* > Crocodile.tar.7z
+
+===============================
+
+Nom de la distribustion installée :
+
+lsb_release -a
+
+===============================
+KNEUP751326316316
+
+Votre démarche N°9914808 a été mise en attente.
+
+Votre démarche est disponible sur « Mon compte usager » sur le site de l'Agence Nationale des Titres Sécurisés (ANTS).
+
+
+9914808.
+
+==============================
+
+INSTALLATION de A à Z sur Ubuntu 14.04
+
+https://helpcenter.onlyoffice.com/video/install-community-ubuntu.aspx
+==============================
+
+
+==============================
+Le nom de domaine gerard-gandji.freeboxos.fr vous a bien été attribué et sera utilisable d'ici 24 heures maximum
+
+Vous avez maintenant la possibilité d'obtenir gratuitement un certificat TLS qui vous permettra d'accéder à distance de manière sécurisée à votre Freebox
+Je veux obtenir un certificat Let's Encrypt
+
+
+Port d'accès distant en HTTP : Activer l'authentification par mot de passe :
+
+Port accès distant (HTTP) : 16588
+Port accès distant sécurisé (HTTPS) : 25023
+
+
+==============================
+==== UUID DES Disques : ce 20 Déc 2020 ======
+
+/dev/sda1: LABEL_FATBOOT="Data_Cloud" LABEL="Data_Cloud" UUID="3AD8-6D10" TYPE="vfat"   (diskScanDisk)
+
+/dev/sdb1: LABEL="My Book" UUID="C6B89CABB89C9B8D" TYPE="ntfs"  ( diskWesternDigital) 
+
+/dev/sdc2: LABEL="CROCODILE" UUID="FE7CCF887CCF3A63" TYPE="ntfs" PARTLABEL="Basic data partition" PARTUUID="3afe7df1-fa57-4c15-80cf-dfdd2be40233"
+
+
+ce qui donne ce fichier fstab :
+
+UUID=C6B89CABB89C9B8D /media/diskWesternDigital ntfs-3g defaults,auto,gid=1003,umask=007,locale=fr_FR.utf8 0 0
+
+UUID=FE7CCF887CCF3A63 /media/diskCrocodile ntfs-3g defaults,auto,gid=1005,umask=007,locale=fr_FR.utf8 0 0
+
+UUID=3AD8-6D10 /media/diskScanData_Cloud	vfat	defaults,auto,gid=1000,umask=007,uid=1000,locale=fr_FR.utf8 0 0
+
+
+IMPORTANT !
+La meilleure façon de réaliser le montage automatique dans fstab est ceci:
+
+
+- Brancher tous les disques sur le raspberry 
+
+- Se connecter au raspberry pi par ssh
+
+- Créer dans /media/ autant de répertoires qu'il y a de disques branchés : 
+
+- sur le terminal , taper : sudo blkid
+cela donnera tous les disques avec leur identifiant unique UUID
+
+- Les paramètres sur chaque ligne restent ainsi. Parlons du gid:
+
+
+L'idée, c'est que les disques doivent pouvoir recevoir des odres d'écriture venant de l'administrateur 
+, de www-data ( c'est l'utilisateur du cloud : nextcloud pour le cas d'aujourd'hui )
+Il est donc important de voir quel est le gid du www-data , de l'administrateur...etc
+
+Pour voir les différents group et leur gid, taper : cat /etc/group
+dans le présent cas, l'administrateur à un gid de 1000. L'installation de nextcloud/apache n'a pas encore
+commencé. Alors, je n'ai pas encore le gid de www-data.
+
+Si après l'installation du cloud/apache , on a le gid de www-data , si ce dernier est différent de celui de l'administrateur,
+on clée un groupe compposé de : www-data + l'administrateur +....peut-être d'autres auteurs
+
+Il faut que le gid pour diskWesternDigital ( le disque choisi pour les écritures venant du web)  soit celui du groupe formé
+par : www-data et d'autres
+
+- Voir les groupes existants : cat /etc/group
+
+(créer le groupe diskWesternDigital)
+- sudo groupadd diskWesternDigital 
+(recupérer le gid du groupe)
+- cat /etc/group |grep diskWesternDigital  ici c'est 1002
+
+(Ajouter pi, armand et www-data au groupe)
+
+- sudo usermod -a -G diskWesternDigital pi
+
+- sudo usermod -a -G diskWesternDigital www-data
+
+- sudo usermod -a -G diskWesternDigital armand
+
+(obtenir le UUID du disque diskWesternDigital)et ce gid qu'il faut attribuer au gid des paramètres dans fstab.
+
+Pour l'instant la partie de mon fstab qui monte les disques est :
+
+
+UUID=C6B89CABB89C9B8D  /media/diskWesternDigital/  auto    defaults,uid=1000,gid=1000        0       0
+
+UUID=FE7CCF887CCF3A63 /media/diskIomega/   auto    defaults,uid=1000,gid=1000        0       0
+
+
+UUID=3AD8-6D10     /media/diskScanDisk/ auto    defaults,uid=1000,gid=1000        0       0
+
+
+==============================
+
+Activer SSL certificat : https://variax.wordpress.com/2017/03/18/adding-https-to-the-raspberry-pi-apache-web-server/comment-page-1/
+
+ sudo cp default-ssl gerard-gandji.hd.free.fr.
+
+
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+echo "deb https://packages.sury.org/php/ buster main" | sudo tee /etc/apt/sources.list.d/php.list
+sudo apt update
+
+sudo apt install -y php7.4-common php7.4-fpm php7.4-cli php7.4-curl php7.4-json php7.4-mysql php7.4-opcache php7.4-gd php7.4-sqlite3 php7.4-mbstring php7.4-zip php7.4-readline php-pear
+
+Mettre dans sudo nano /etc/php/7.4/fpm/conf.d/90-pi-custom.ini : ******
+
+cgi.fix_pathinfo=0
+
+upload_max_filesize=64m
+post_max_size=64m
+max_execution_time=600
+
+******
+Virtualenv :
+
+- lsvirtualenv spour lister tous les environnements existants.
+
+- workon aussi liste tous les environnements existants.
+
+- workon $NomEnvironnement  : permet de pointer sur l'environnement : $NomEnvironnement
+
+Une fois à l'intrieur de l'environnement, on peut faire : pip list  : pour voir tous les packages installés au sein de $NomEnvironnement.
+
+
+virtualenv NomEnvironnement --python="/usr/bin/python2.6" "/path/to/new/virtualenv/"  : Crée un environnement virtual : NomEnvironnement
+avec une version spéécifiée de python avec un lieu prédéféini de l'environnement virtuel
+=============================
+/tmp/Python-3.12.1 
+voilà où se trouve python 3.12
+Installer alors Anaconda sous un virtualenv
+=============================
+https://python-guide-pt-br.readthedocs.io/fr/latest/dev/virtualenvs.html
+
+https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html
+
+https://repo.anaconda.com/archive/
+
+https://docs.anaconda.com/anaconda/install/install-metapackage/
+
+
+https://dzone.com/articles/the-power-of-visualization-in-exploratory-data-ana
+
+
+https://repo.anaconda.com/archive/
+
+Ouvrir le navigateur de anaconda : Dans un Terminal , tapez : anaconda-navigator
+=============================
+
+
+
+
+
+
+
+
+
