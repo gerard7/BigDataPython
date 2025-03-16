@@ -1,25 +1,240 @@
-# -*- encoding: utf-8 -*-
+# decouverte du module sys
+# decouverte de la taille
+
+# interet : fonctionnalités liées qu systeme d'exploitation et à
+# l'environnement d'exécution et d'interragir avec l'interpreteur python.
+
+import sys
+
+print(sys.version) # donne la version de python
+
+taille_liste =[1,2,3,5,88]
+taille_tuple = (144664,2888979,34646,457,9)
+print(f"taille de la liste = {sys.getsizeof(taille_liste)} octets")
+print(f"taille du tuple = {sys.getsizeof(taille_tuple)} octets")
+
+print("*********************************************************************************")
+
+# decouverte de la fonction zip
+# la fonction zip va combiner plusieurs itérables en regroupant leur élément
+# par paire . Elle renvoie un itérateur de tuples.
+# TRES UTILE pour parcourir plusieurs itérablese en parallèle
+# Ou associer les données
+
+print("*********************************************************************************")
+
+names = ("Armand", "Paul","Remi")
+ages =(22,35,29)
+# combiner deux tuples en 1 itérable de tuple.
+combined = zip(names,ages)
+print(combined)
+print("type de combined =",{type(combined)})
+# convertir en liste
+print("Convertir en liste ")
+print(list(combined))
+
+print("*********************************************************************************")
+##print("Convertir en tuple ")
+##print(tuple(combined))
+# ATTENTION, lorsque qu'on utilise tuple ou liste sur un zip
+#Si en premier on a utilsé d'abord list, alors si on rappelle tuple sur le zip, on aura
+# un zip nul. Et vice versa
+#apres, l'autre élement est vide
+
+# exemple d'itérartion avec zip
+for name, age  in zip(names, ages):
+    print(f"{names} : {ages}")
+
+
+print("*********************************************************************************")
+
+# Déballage complet
+
+#(name1,age1), (name2,age2),(name3,age3) = combined
+#print(f"premiere identite: ",{(name1,age1)})
+
+# Déballage partiel : Operateur *
+
+# (first_pair,*autrespairs) =combined
+# print(first_pair,autrespairs)
+
+# récupérer la derniere paire en ignorant les autres :
+#(*lesautres_ignores, derniere_paire) = combined
+
+# zip renvoie un itérateur: consommation uen seule fois
+# gestion et stockage des paires non immédiate
+
+print("*********************************************************************************")
+
+# -------- APPROFONDISSEMENT DES FONCTION : MIN, MAX ,SORTED,MAP, REDUCE FILTER ----
+
+# Ces focntions agissent uniquement sur les itérables
+# Liste, tuples, chaines de caractères, dictionnires , ensembles, générateur
+
+# CAS 1 : Avec une fonction personnalisée  ou existante
+
+words =['apple','banana','cherry','date']
+
+# 1 usage
+def last_caractere(s):
+    return s[-1] # retourne le dernier caractère. Attntion, cette focntion doit avoir un return
+sorted_words = sorted(words,key=last_caractere) # Attention,pas de parenthèse à la fonction. key est obligatoire
+print(sorted_words)
+
+print("*********************************************************************************")
+
+# 2 Usage
+
+#Cas de fonction anonyme lambda --> action à l'instant
+
+data = [(1,3),(4,1),(2,9),(5,2)]
+# Je veux trier par rapport au 2ème élément de chaque tuple.
+
+sorted_data= sorted(data,key=lambda x: x[1])
+
+print('sorted_data=',sorted_data)
+# RETENONS QU'IL NE FAUT PAS FAIRE DE TEST DANS LAMBDA
+
+print("*********************************************************************************")
+
+# TD TUPLES:
+# https://sharemycode.fr/3gy
+products = [
+    (1, "Laptop", 1500.0),
+    (2, "Mouse", 25.0),
+    (3, "Keyboard", 75.0),
+    (4, "Monitor", 300.0)]
+# Exercice : Trie les produits par prix croissant.
+
+print("A FAIRE ******")
+
+print("*********************************************************************************")
+
+# Affiche uniquement les produits ayant un prix supérieur à 100.
+print('---- prix sup 100 ----')
+
+print("*********************************************************************************")
+# Génère une nouvelle liste où chaque produit est représenté
+# par un tuple (nom, prix après une réduction de 10%).
+
+print("*********************************************************************************")
+
+def reduce_dix_sur_cent(list_tuple_data): ****
+
+
+print("*********************************************************************************")
+
+
+# ---- Exercice 3 : Tuples imbriqués et tris avancés ----
+# On te donne une liste de tuples représentant des employés, chaque tuple contient le nom, l’âge et le salaire :
+# Trie les employés par salaire décroissant.
+# Trouve l'employé le plus jeune ayant un salaire supérieur à 50000.
+
+employees = [
+    ("Djamen", 30, 50000),
+    ("Jarfar", 25, 45000),
+    ("Aurelien", 35, 70000),
+    ("Robert", 40, 65000)
+]
+print("*********************************************************************************")
+
+# Exercice :
+
+# Trie les employés par salaire décroissant.
+
+# Trouve l'employé le plus jeune ayant un salaire supérieur à 50000
+
+print("*********************************************************************************")
+
+# Module functools
+
+from functools import reduce
+
+number = [1,2,3,4]
+result = reduce(lambda x,y :x*y, number)
+print('Utilisation de reduce du module functools',result)
+
+# Autre cas:
+#Initialisateur
+print("**** initialisateur ******")
+result_2 = reduce(lambda x, y:x+y, number,10)
+# il fait la somme des élements du tablau number en commencant par 10
+# donc , il fait : 10+1+2+3+4
+print(result_2)
+
+
+# Tuple de coordonnées
+coordinates = ((1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12))
+
+# Exercice: Ecrire une fonction sumPoint(coordinates) qui renvoie un point qui vaut la somme des coordonnées
+# de tous les points
+def sumPoint(point):
+
+# from math import sqrt
+# Identifie le point le plus proche de l'origine (0, 0, 0).
+
+print("*********************************************************************************")
+
+
+# Exercice : Calculer La distance minimale au carré. Retourner le point concerné. Le point dont
+# la distance de (0,0,0) est le plus faible
+
+print("*********************************************************************************")
+
+# Crée un nouveau tuple contenant uniquement les coordonnées avec une somme supérieure à 15.
+# Utilisez reduce pour filtrer les points avec une somme supérieure à 15.
+
+# (Bonus) : Calculez la somme totale de toutes les coordonnées de tous les points.
+
+meetings = [
+    ["09:00", "10:30"],
+    ["11:00", "12:00"],
+    ["14:00", "15:30"],
+    ["16:00", "17:00"]
+]
+
+# Etape 1 : Convertissez chaque sous-liste contenant les horaires d'une réunion en un tuple de deux chaînes.
+# Par exemple, ["09:00", "10:30"] devient ("09:00", "10:30").
+
+print("*********************************************************************************")
+
+# Source https://www.sharemycode.fr/3gy
+# Etape 2 : Écrivez une fonction time_difference qui calcule la différence en minutes entre l'heure de début
+# et l'heure de fin d'une réunion.
+# Appliquez cette fonction à chaque réunion et affichez les durées calculées.
+
+print("*********************************************************************************")
+
+# Etape 3 : Parcourez les réunions consécutives pour calculer les intervalles libres
+# entre la fin d'une réunion et le début de la suivante.
+# Identifiez le créneau le plus long, son heure de début et son heure de fin.
+
+
+print("*********************************************************************************")
+
+# Aide :
+# Les horaires sont au format 24 heures (HH:MM).
+# Vous pouvez utiliser le module datetime pour gérer les conversions entre chaînes et objets datetime :
+# avec la fonction suivante (conversion de chaine à une date) datetime.strptime(xxxx, format) avec format = "%H:%M".
+
+
+print("*********************************************************************************")
+
 # # pratique 2:
 # #prend une liste et returne un tuples
 # # def find_first(f_list):
-# #     for i in range(len(f_list)):
-# #         if isinstance(f_list[i],str):
-# #             return i + 1,f_list[i]
+
+print("*********************************************************************************")
 # import copy
 # import itertools
-#
-# # from cloudinit.net import find_fallback_nic_on_freebsd
-
-#
-# # Résultat
-#
-# # print(find_first([1, 2, "Fizz",4,5,"Fizz",7,8,"Fizz",10,11,"Fizz",13,14,"Fizz",16,17,"Fizz",19,20]))
-#
+# print(find_first([1, 2, "Fizz",4,5,"Fizz",7,8,"Fizz",10,11,"Fizz",13,14,"Fizz",16,17,"Fizz",19,20]))
 # # Devra afficher (3,'Fizz')
-# # print(find_first([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "Buzz", 14, 15, 16, 17, 18, 19, 20]))
+
+print("*********************************************************************************")
+# print(find_first([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "Buzz", 14, 15, 16, 17, 18, 19, 20]))
 # # doit retourner (13,'Buzz')
-#
-#
+
+print("*********************************************************************************")
 # # ----- EXERCICE 02 ------
 # # Vous êtes chargé d'analyser les logs d'un serveur pour identifier les erreurs les plus fréquentes.
 # # Le fichier de logs contient des lignes au format suivant :
@@ -27,10 +242,8 @@
 # # 404 Not Found
 # # 500 Internal Server Error
 # # Chaque ligne commence par un code HTTP, suivi d'une description.
-#
-#
-# # -----------------------------------------------------------------
-#
+
+print("*********************************************************************************")
 # # Objectifs de l'exercice :
 # # Compter le nombre d'occurrences de chaque code HTTP dans les logs.
 # # Identifier les codes les plus fréquents en utilisant la méthode most_common() de Counter.
@@ -50,14 +263,14 @@
 # #         "500 Internal Server Error",
 # #         "500 Internal Server Error"
 # #     ]
-#
-#
-# # -----------------------------------------------------------------
-#
+
+
+print("*********************************************************************************")
+
 # # LES ENSEMBLES
-#
-#
-# # Un ensemble (set) est une collection non ordonnée sans doublon d'informations
+
+
+ # Un ensemble (set) est une collection non ordonnée sans doublon d'informations
 #
 # # Création d'un ensemble
 # my_set ={1,2,3,4,5}
@@ -117,18 +330,20 @@
 #
 # # Compréhension d'ensemble
 #
-# squared_set ={x**2 for x in my_set}
+# Exercice: renvoyez le carré de chaque élément de my_set
 # print('le carré = ',squared_set)
 #
 # # Vérifier la présence d'un élément dans un ensemble. ( in ultra rapide : O(1)
-# if 4 in my_set:
-# 	print('ok')
+
 #
 # # Eliminer les doublons rapidement
 # numbers =[1,2,3,2,4,4,5]
-# unique_numbers =set(numbers)  # REND UN ENSEMBLE QU'ON PEUT CONVERTIR EN LISTE BIEN SUR : list(set(numbers))
-# print('Unique valeurs = ',unique_numbers)
+# REND UN ENSEMBLE QU'ON PEUT CONVERTIR EN LISTE BIEN SUR : list(set(numbers))
+
 #
+
+print("*********************************************************************************")
+
 # # CONCLUSION mémoire :
 # # Tuple : meilleure optimisation mémoire
 # # Liste : assez compact.... plus que les Tuple
@@ -140,16 +355,14 @@
 # # Liste : O(n)
 # # Ensemble : O(1)
 # # Dictionnaire : ( O(1) mais lourd )
-#
-#
+
+print("*********************************************************************************")
 # # ----------------- PRATIQUE 3 6min
 #
 # from collections import defaultdict
 #
 # def generate_datastructure():
-# 	obj = defaultdict(lambda: 'Anonymous')
-# 	return obj
-#
+
 # # ============ 7/02/25 ===================
 # # def to_iterator(malitse):
 # # 	return iter(malitse)
@@ -159,38 +372,20 @@
 # # print(next(it))
 # # print(next(it))
 # # print(next(it))
-#
-# #print(next(it,'Fin de l\'itérateur'))
-#
-# print("/////////////////")
+print("*********************************************************************************")
 # import sys
 # #crée une fonction qui génère les carré des nombres de 0 à n-1
-# def square_number(n, use_generator=True):
-# 	'''Une liste (mode use_generator = False)
-#     Affiche la mémoire utilisée pour chaque version'''
-# 	if use_generator:
-# 		return iter((x**2 for x in range(n)))
-# 	else:
-# 		return [x**2 for x in range(n)]
-#
-# print("use_generator=True",sys.getsizeof((square_number(10 ** 6, use_generator=True))),"octets")  # Faible mémoire
-# print("use_generator=False",sys.getsizeof((square_number(10 ** 6,use_generator=False))),"octets") # élevée
-#
-# print("+++++++++++++++++++++++")
-#
+
+
 # #qui génère toutes les  paires  uniques(combinaisons  de  2 éléments
 # # un itérable en utilisant itertools.comninations()
 #
+print("*********************************************************************************")
 # def pair_combinations(iterable):
-# 	return itertools.combinations(iterable,2)
-#
-#
-# # exeemple result = list(pair_combinations([1, 2, 3, 4])) = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
-# result = list(pair_combinations([1, 2, 3, 4]))
-# print("Result =",result)
-#
-# print("---------------------------")
-#
+
+
+print("*********************************************************************************")
+
 # # ---------------- Pratique 7 : 10min  --------------------
 #
 # # Ecrire une fonction group_scores(scores) qui :
@@ -198,21 +393,12 @@
 # # Prend une liste de scores triés sous forme (nom, score).
 # # Regroupe les scores par valeur en utilisant itertools.groupby().
 # # Renvoie un dictionnaire {score: [noms]}
-#
-# def group_scores(scores_donne):
-# 	scores_donne.sort(key=lambda x:x[1],reverse=True)
-# 	print("****",scores)
-# 	return {scor:[nom for nom,_ in list(gr)] for scor,gr in itertools.groupby(scores_donne,lambda x:x[1])}
-#
-# # Exemple :
+
+
+print("*********************************************************************************")
+ # Exemple :
 # scores = [("Alice", 90), ("Bob", 80), ("Charlie", 90), ("David", 70), ("Eve", 80)]
-# result = group_scores(scores)
-# print(result)
-# # {90: ["Alice", "Charlie"], 80: ["Bob", "Eve"], 70: ["David"]}
-#
-#
-# print('ppppppppppppppppppppppppppppppppppppppppppppppp')
-#
+
 # # Exercice: Optimisation d’un planning de rotation d’équipe
 # # Contexte professionnel :
 # # Une entreprise de support technique doit organiser le planning hebdomadaire de ses employés en assurant :
@@ -236,103 +422,8 @@
 # employees = ["Jarfar", "Aurelien", "Paly", "Lucas", "Dan", "Arnaud"]
 # days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"]
 # shifts = ["Matin", "Après-midi", "Soir"]
-#
-#
-# # def presence_equipe_partielle_ou_non(eq,dico_equipe_tache):
-# # 	"""
-# # 	Indique True si Un membre de eq est dans dico_equipe_tache
-# # 	:param eq: (nom_un,nom_deux)
-# # 	:param dico_equipe_tache: {(nom1,nom2):('Lundi','Matin'),(nom3,nom4):('Lundi','soir')....}
-# # 	:return:
-# # 	"""
-# # 	reponse = False
-# # 	for clef in dico_equipe_tache.keys():
-# # 		if clef[0] == eq[0] or clef[0]==eq[1] or clef[1]==eq[0] or clef[1]==eq[1]:
-# # 			reponse = True
-# # 			return reponse
-# # 		else:pass
-# # 	return reponse
-#
-# # def recherche_tous_les_moments_travail(equipe,dico):
-# # 	jours=[]
-# # 	moments = []
-# # 	for k in dico.keys():
-# # 		if presence_equipe_partielle_ou_non(equipe,dico):
-# # 			jours.append(dico[k][0])
-# # 			moments.append(dico[k][1])
-# # 		else:pass
-# # 	return jours,moments
-#
-#
-# def valider_entrer_equipe(equipe,dico,moment_tuple):
-# 	"""
-# 	Cette fonction valide si l'équipe : equipe peut être intégrer au dictionnaire : dico  avec
-# 	son moment de travail moment_tuple
-# 	:param equipe:
-# 	:param dico:
-# 	:param moment_tuple:
-# 	:return: Boolean
-# 	"""
-# 	toutes_les_reponse = []
-# 	if dico=={}:
-# 		return True
-# 	else:
-# 		for cle,moment_courant in dico.items():
-# 			if equipe[0]==cle[0] or equipe[0]==cle[1] or equipe[1]==cle[0] or equipe[1]==cle[0]:
-# 				if moment_courant[0]!=moment_tuple[0] and moment_courant[1]!=moment_tuple[1]:
-# 					toutes_les_reponse.append("True")
-# 				# else:toutes_les_reponse.append("False")
-# 			else:toutes_les_reponse.append("True")
-#
-# 		if "False" not in toutes_les_reponse:
-# 			return True
-# 		else:
-# 			return False
-#
-#
-# def generate_schedule(employees, days, shifts):
-# 	"""
-# 	:param employees:
-# 	:param days:
-# 	:param shifts:
-# 	:return:
-# 	"""
-# 	#Générer toutes les permutations possibles des employés pour s'assurer qu'ils travaillent avec différents
-#     # collègues chaque jour.
-# 	toutes_permut_employes = list(itertools.permutations(employees,2))
-# 	print('Les permutations employés possibles =',toutes_permut_employes)
-# 	# Utiliser itertools.product pour combiner les jours de la semaine avec les horaires disponibles.
-# 	combine_jours_horaires = list(itertools.product(days,shifts))
-# 	# print('Les combinaisons ,jours-horaires =',combine_jours_horaires)
-# 	# Utiliser itertools.cycle pour assurer une rotation équilibrée sur les horaires.
-# 	planning_groupe_travail = itertools.cycle(combine_jours_horaires)
-# 	taille_base =len(toutes_permut_employes)
-# 	tasks = [next(planning_groupe_travail) for _ in range(120)]
-# 	print("Horaire groupe de travail =",tasks,'taille =',len(tasks))
-# 	# si par exemple :('Jarfar', 'Aurelien') travaillent Lundi-Matin, le couple ('Jarfar', 'Paly') ne
-# 	# sera plus mis sur Lundi. A cause de la présence de Jarfar. Mais Parly peut travailler Lundi
-# 	# Parcourons toute la liste toutes_permut_employes
-# 	dico_equipe_tache = {}
-# 	compteur =0
-# 	iter_cycle_equipe= itertools.cycle(toutes_permut_employes)
-# 	equipe_cycle = [next(iter_cycle_equipe) for _ in range(120)]  # Mettre un random ici pour changer l'ordre
-# 	# Possibilité d'ordonner equipe_cycle
-# 	print("Toute l'équipe =",equipe_cycle)
-# 	for eq in equipe_cycle:
-# 		if valider_entrer_equipe(eq, dico_equipe_tache, tasks[compteur]):
-# 			# print("L'équipe:",eq,"Moment:",tasks[compteur],"Dictionnaire :",dico_equipe_tache)
-# 			dico_equipe_tache[eq] = tasks[compteur]
-# 			compteur += 1
-# 			if compteur == len(tasks) - 1:
-# 				compteur = 0
-# 		else:pass
-#
-# 	print('Les associations equipe-horaire =',dico_equipe_tache)
-#
-# generate_schedule(employees, days, shifts)
-# # def display_schedule(schedule):
-# #     pass
-#
+
+print("*********************************************************************************")
 # # ===================== 11 Février =====================
 #
 # # TOSA PRATIQUE
@@ -342,31 +433,9 @@
 # # Par exemple, il doit correspondre à 'zt904a' mais pas à 'qwerty' et ni à '1a2b3c'
 #
 # # La fonction retourne un booléen en fonction de la recherche.
-#
-# # Temps par TOSA : 5min
-# import re
-#
-# def check_condition(reg:str, mon_string:str)->bool: # Les paramètres peuvent être typés :
-# 	# Même si le typage est renseigné, ce n'est pas fort comme dans C ou C++
-# 	"""
-# 	Verifie si la chaine mon_string contient au moins 3 chiffres
-# 	:param reg: : C'est l'expression régulière utilisée pour tester mon_string
-# 	type: regex
-# 	:param mon_string: : C'est la chaine qui est testée.
-# 	type : str
-# 	:return: True mon_string contient si au moins 3 chiffres consécutifs ou False sinon
-# 	type : bool
-# 	"""
-# 	match= re.search(reg,mon_string)
-# 	return bool(match)
-#
-#
-# regex = r'\d{3,}' # {3,} signifie: au moins 3 chiffres ou aussi {3}+
-# s = 'zt904a'
-# print("Réponse=",check_condition(regex,s))
-#
-#
-#
+
+print("*********************************************************************************")
+
 # # ================= 12 Fevrier 25 ==============================
 #
 # # Exercice TOSA PYTHON (6min)
@@ -377,24 +446,10 @@
 # # Compilez la regex
 # # Utilisez une compréhension de liste
 # # Précisez la docString de la fonction
-#
-# import re
-# def extract_numbers(text)->[]:
-# 	"""
-# 	Cette fonction prend une chaine de caractères et retourne les chiffres qui sont dedans avec leur position
-# 	:param text:
-# 	:return: Retourne tous les nombres dans une chaine
-# 	"""
-# 	motif = re.compile(r'\d+')
-#
-# 	return [(match.start(),match.end(),match.group()) for match in re.finditer(motif, text)]
-#
-#
-# text = "Prix : 199€, Promo:50%, Quantité : 3 unités"
-# # Résultat attendu : [(7, 10, '199'), (19, 21, '50'), (35, 36, '3')]
-# print(extract_numbers(text))
-#
-# # EXERCICE TOSA ~ 7min
+
+print("*********************************************************************************")
+
+ # EXERCICE TOSA ~ 7min
 #
 # # Regrouper une liste de produits par catégorie avec une fonction regroupement_par_categorie(). Cette fonction retourne # un dictionnaire.
 # # Compétences évaluées :
@@ -409,95 +464,36 @@
 # 	{"nom": "Tomate", "categorie": "Légumes"},
 # 	{"nom": "Orange", "categorie": "Fruits"},
 # ]
-#
-#
-# def regroupement_par_categorie(produits):
-# 	# Pour utiliser itertools.groupby, on doit d'abord nécessairement trier la liste par catégorie
-# 	produits.sort(key=lambda x:x["categorie"])
-# 	# print(produits)
-# 	print({fruit:[val["nom"] for val in elem] for fruit,elem in itertools.groupby(produits, key=lambda x:x["categorie"])})
-#
-# regroupement_par_categorie(produits)
-# # Entrée : produits
-# # Exemple de Sortie : {'Fruits': ['Pomme', 'Banane', 'Orange'], 'Légumes': ['Carotte', 'Tomate']}
-#
-#
+
+
+print("*********************************************************************************")
+
 # # TOSA PRATIQUE ~5min
 # # Trouver la première lettre qui ne se répète pas dans une chaîne avec le module Counter
-#
-#
-# from collections import Counter
-#
-# def first_non_repeating_char(st):
-# 	reg= Counter(st).most_common() # Le retour est une liste de tuples
-# 	print("reg=",reg)
-# 	for i in reg:
-# 		if i[1]==1:
-# 			return i[0]
-# from TDListes import nombres
-from linecache import cache
 
-from pyarrow.lib import Type_RUN_END_ENCODED
+
+print("*********************************************************************************")
+
+# from linecache import cache
+#
+# from pyarrow.lib import Type_RUN_END_ENCODED
 
 # # Test
 # print(first_non_repeating_char("aabccdeff"))  # 'b'
 # print(first_non_repeating_char("aabb"))  # None
 
-print("//////////////////////////////////////////////")
 
+print("*********************************************************************************")
 # EXERCICE TOSA PYTON ~7min
 # Vous devez implémenter une fonction qui calcule des statistiques sur une liste de nombres :
 
 # Moyenne (mean)
 # Médiane (median)
 # Écart type (std_dev)
+#[10, 20, 30, 40],[1, 1, 1, 1],[5],[-5, -10, -15]
+print("*********************************************************************************")
 
 # import statistics
-#
-#
-# def compute_statistics(numbers):
-# 	"""
-#     Calcule la moyenne, la médiane et l'écart-type d'une liste de nombres.
-#
-#     :param numbers: Liste de nombres (int ou float)
-#     :return: Dictionnaire {'mean': ..., 'median': ..., 'std_dev': ...} arrondi à 2 décimales avec round()
-#     :raises ValueError: Si la liste est vide
-#     :raises TypeError: Si l'entrée n'est pas une liste de nombres
-#     """
-# 	if len(numbers)==0:
-# 		raise ValueError(" La Liste est vide et ne devrait l'être")
-# 	else:
-# 		if len(numbers)==1:
-# 			return {"mean":round(statistics.mean(numbers),2),"median":round(statistics.median(numbers),2),"std_dev":0}
-# 		elif len(numbers)>1:
-# 			for i in numbers:
-# 				try:
-# 					if not isinstance(i,int) or not isinstance(i,float):
-# 						raise TypeError("Les éléments de la liste doivent être soit des entiers ou des float ou leur mélange.")
-# 					else:pass
-# 				except:pass
-# 			return {"mean":round(statistics.mean(numbers),2),
-# 					"median":round(statistics.median(numbers),2),
-# 					"std_dev":round(statistics.stdev(numbers),2)
-# 				   }
-
-
-# print(compute_statistics([-5, -10, -15]))
-#
-# import pytest
-# #[10, 20, 30, 40],[1, 1, 1, 1],[5],[-5, -10, -15]
-#
-# @pytest.mark.parametrize("input_numbers",[[1, 2, 3, 4, 5],[10, 20, 30, 40],[1, 1, 1, 1],[5],[-5, -10, -15]])
-# def test_compute_statistics(input_numbers):
-# 	expected = {"mean":round(statistics.mean(input_numbers),2),"median":round(statistics.median(input_numbers),2),
-# 				"std_dev":round(statistics.stdev(input_numbers),2) if len(input_numbers)>1 else 0}
-# 	assert compute_statistics(input_numbers) == expected
-
-# /////////////////////////////////////////////////////////////////////////
-# Exercice TOSA PRATIQUE
-# On veut ajouter une option --verbose (-v) au script ci-dessous qui permet d’afficher un message détaillé si elle est # activée.
-
-# Objectifs :
 
 # Définir un argument obligatoire "valeur" type float
 # Définir un argument obligatoire "unite" dont le choix : km ou miles
@@ -509,35 +505,7 @@ print("//////////////////////////////////////////////")
 # 10 km = 6.21
 # 5 miles = 8.05
 
-# Rappel :
-# resultat = args.valeur * 1.60934  # Conversion miles → km
-# resultat = args.valeur / 1.60934  # Conversion km → miles
-
-# import argparse
-#
-# def main():
-# 	parser = argparse.ArgumentParser(description="Script de conversion d'unités")
-# 	parser.add_argument("valeur", type=float, help="Veuillez renseigner la distance soit en km soit en miles")
-# 	parser.add_argument("mode", help="Mode", choices=["km", "miles"])
-# 	parser.add_argument("-v","--verbose",action="store_true",help="Vous êtes en mode verboose")
-#
-# 	# Completer ICI
-# 	args = parser.parse_args()
-#
-# 	if args.mode=="km":
-# 		distance = str("{:.5f}".format(args.valeur * 1.60934)) +" miles"
-#
-# 	if args.mode=="miles":
-# 		distance = str("{:.5f}".format(args.valeur / 1.60934))+ " km"
-#
-#
-# 	if args.verbose:
-# 		print("La consersion de :",args.valeur,args.mode,"est :",distance)
-# 	else:
-# 		print(args.valeur,"=",distance)
-#
-#
-# main()
+print("*********************************************************************************")
 
 #================================= 24 Février 2025 ===========================
 # Compléter la fonction launcher de façon à ce qu'elle accepte comme paramètre , en plus
@@ -545,42 +513,7 @@ print("//////////////////////////////////////////////")
 # (positionnel arguments) par mot-cles (keymord arguments)
 # La fonction launcher doit exécuter my_callable avec tous les arguments fournis, et retourner
 # son résultat
-
-
-# def launcher(my_callable,*arg ,**kwgs):
-# 	# if isinstance(arg[0],list):
-# 	# 	for i in arg:
-# 	# 		res= my_callable(i)
-# 	# 	return res
-# 	# else:
-# 	# 	return my_callable(arg)
-# 	return my_callable(*arg,**kwgs)
-#
-#
-# print(launcher(sum, [1,2,3]))
-# print(launcher(max,1,2,3))
-# print(launcher(int,"100",base=2))
-# #
-# Exemple d'utilisation :
-# assert launcher(sum,[1,2,3]))==6
-# assert launcher (max, 1,2,3)==3
-# assert launcher(int,"100",base=2)==4
-
-# import numpy as np
-# def graphe_matrix_to_list(m):
-#     res=[[]]
-#     for i in range(len(m)):
-#         for j in range(len(m)):
-#             if m[i,j]==True:
-#                 res.insert(i,[1])
-#             else:pass
-#     return res
-#
-# m1= np.array([[False,True],[False,False]]) # Doit retourner  [[1],[]]
-# m2 = np.array([[False,True,False],[True,False,True],[False,True,False]])
-# print("Adjacent Matrice =",graphe_matrix_to_list(m1))
-
-
+print("*********************************************************************************")
 
 # EXERCICE TOSA PRATIQUE - OBJET
 #
@@ -597,9 +530,11 @@ print("//////////////////////////////////////////////")
 # Sortie attendue :
 # Je suis une voiture.
 # Je suis une moto.
+print("*********************************************************************************")
 
 from abc import ABC
 from abc import abstractmethod
+
 
 # class Vehicule(ABC):
 #     """
@@ -616,7 +551,7 @@ from abc import abstractmethod
 #         pass
 #
 #     def decrire(self):
-#         return "Je suis une Voiture"
+#
 #
 #
 #
@@ -625,7 +560,7 @@ from abc import abstractmethod
 #         pass
 #
 #     def decrire(self):
-#         return "Je suis une Moto"
+#
 #
 #
 # ma_voiture = Voiture()
@@ -634,8 +569,7 @@ from abc import abstractmethod
 # print(ma_voiture.decrire())
 # print(ma_moto.decrire())
 
-
-
+print("*********************************************************************************")
 print("***************** 4 Mars *****************")
 """
 EXERCICE TOSA 6min
@@ -659,23 +593,7 @@ print(f" Nombre d'appels réels : {memo.appel_count}")  #  2 (seuls 5 et 3 ont �
 
 """
 
-# class Memorizer:
-#     def __int__(self):
-#         self.cache = {}
-#         self.count = 0
-#
-#     def __call__(self,n):
-#         # self.count+=1
-#         print(f"Count = {self.count}")
-#         # if n in self.cache.keys():
-#         #     print("Je ne calcule rien. Je retourne seulement")
-#         #     return self.cache[n]
-#         # else:
-#         #    self.cache[n] = n*2
-#         #    return self.cache[n]
-#
-# memo =Memorizer()
-# print(memo(5))
+
 
 print("************************* 6 MARS : 5 Exercices ********************")
 
@@ -686,11 +604,6 @@ print("---------- Exerciuce 1 -------------")
 # Complétez la classe suivante pour que l’affichage print(dog)
 # retourne "Chien de race Labrador".
 # class Dog:
-#     def __init__(self, breed):
-#         self.breed = breed
-#
-#     def __str__(self):
-#         return f"Chien de race : {self.breed}"
 #
 
 
@@ -724,9 +637,7 @@ print("///// Exo 2 /////")
 #         self.balance = balance
 #
 #     def __add__(self,obj):
-#         commun_nom = self.owner + " & " + obj.owner
-#         commune_somme = self.balance + obj.balance
-#         return BankAccount(commun_nom,commune_somme)
+
 #
 #
 # acc1 = BankAccount("Sam", 1000)
@@ -738,18 +649,7 @@ print("///// Exo 2 /////")
 # # print(acc3.balance)  # Doit afficher : 2500
 
 print("--------- Exercice 3---------")
-# A REVOIR
-"""
-def __call__(cls, *args, **kwargs):
-        # Vérifier si l'instance existe déjà
-        if cls not in cls._instances:
-            # Si l'instance n'existe pas, créer une nouvelle instance
-            instance = super().__call__(*args, **kwargs)
-            # Enregistrer cette instance
-            cls._instances[cls] = instance
-        # Retourner l'instance existante
-        return cls._instances[cls]
-"""
+
 
 # ---- Exercice TOSA 3 ----:
 # Complétez la classe Singleton pour qu'elle respecte le design pattern Singleton
@@ -758,11 +658,7 @@ def __call__(cls, *args, **kwargs):
 #    _instances = {}
 #
 #    def __call__(cls, *args, **kwargs):
-#         # Si l'instance n'existe pas encore, on la crée
-#         if cls not in cls._instances:
-#             cls._instances[cls] = super().__call__(*args, **kwargs)
-#         # On retourne toujours la même instance
-#         return cls._instances[cls]
+#
 # # #
 # s1 = Singleton()
 # s2 = Singleton()
@@ -821,10 +717,10 @@ class Forme(ABC):
 
 class Carre(Forme):
     def __init__(self, cote):
-        self.cote = cote  # I
+
 
     def aire(self):
-        return self.cote**2
+
 
 
 class Cercle(Forme):
@@ -832,7 +728,7 @@ class Cercle(Forme):
         self.rayon  =rayon
 
     def aire(self):
-        return math.pi * (self.rayon**2)
+
 
 # TESTS :
 c1 = Carre(4)
@@ -852,10 +748,7 @@ print("------ EXERCICE TOSA 2 ------:")
 from pathlib import Path
 
 def fichiers_txt(dossier):
-    lieu = Path(dossier)
-    fich_txt = list(lieu.rglob("*.txt"))
-    # print(fich_txt)
-    return [ fich.name for fich in fich_txt]
+
 
 
 # Exemple d'utilisation
@@ -874,10 +767,7 @@ import pandas as pa
 import json
 
 def charger_json(fichier):
-    with open(fichier, "r") as f:
-        data_tosa3 = json.load(f)
-    df1 = pa.DataFrame([data_tosa3])
-    print(df1[['nom','âge']])
+
 
 
 
@@ -905,8 +795,6 @@ import numpy as np
 
 def nettoyer_df(df_):
     # remplaçons les NaN existants par la moyenne, avec l'option : inplace=True
-    df_.fillna(df_["revenu"].mean(),inplace=True)
-    return df.sort_values(by="revenu", ascending=False)  # Trier par revenu décroissant
 
 # TESTS :
 data = {"nom": ["Sam", "Bob", "Charlie"], "revenu": [50000, np.nan, 70000]}
@@ -926,7 +814,7 @@ print("------ EXERCICE TOSA 5 ---------:")
 import pandas as pa
 
 def moyenne_par_groupe(df, colonne_groupe, colonne_valeur):
-    return df.groupby(colonne_groupe)[colonne_valeur].mean()
+    return
 
 # TESTS :
 data = {"categorie": ["A", "B", "A", "B", "A"], "valeur": [10, 20, 30, 40, 50]}
@@ -936,17 +824,6 @@ print(moyenne_par_groupe(df, "categorie", "valeur"))
 # categorie
 # A    30.0
 # B    30.0
-
-
-
-
-
-
-
-
-
-
-
 
 
 

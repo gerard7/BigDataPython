@@ -4,7 +4,7 @@
 
 
 # interet : fonctionnalités liées qu systeme d'exploitation et à
-# lenvironnement d'exécution et d'interragir avec l'interpreteur python.
+# l'environnement d'exécution et d'interragir avec l'interpreteur python.
 
 import sys
 
@@ -15,9 +15,9 @@ print(f"taille de la liste = {sys.getsizeof(taille_liste)} octets")
 print(f"taille du tuple = {sys.getsizeof(taille_tuple)} octets")
 
 # decouverte de la fonction zip
-# la fonction zip va combiner plusieurs itérables en cregroupant leut élément
+# la fonction zip va combiner plusieurs itérables en regroupant leur élément
 # par paire . Elle renvoie un itérateur de tuples.
-# TRES UTILE pour parcourir plusieurs itérablese en parallèlgee
+# TRES UTILE pour parcourir plusieurs itérablese en parallèle
 # Ou associer les données
 
 names = ("Armand", "Paul","Remi")
@@ -84,7 +84,7 @@ data = [(1,3),(4,1),(2,9),(5,2)]
 sorted_data= sorted(data,key=lambda x: x[1])
 
 print('sorted_data=',sorted_data)
-# RETENONS QU'IL NE FAUT PAS FAIRE DE TESTE DANS LAMBDA
+# RETENONS QU'IL NE FAUT PAS FAIRE DE TEST DANS LAMBDA
 
 # TD TUPLES:
 # https://sharemycode.fr/3gy
