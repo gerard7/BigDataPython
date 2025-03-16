@@ -2250,6 +2250,7 @@ ln: La commande pour créer des liens.
 
 cd /var/www/html/nextcloud (voir data en vue qui est dans nextcloud)
 ln -s /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025/data /var/www/html/nextcloud/data
+Suppression : rm -i /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025/data
 
 dans : /media/diskWesternDigitalMyBook/cloudData/data_4_Jan_2025, faire : ls -lh pour voir que le répertoire 
  contient un répertoire data qui pointe sur /var/www/html/nextcloud/data
@@ -2325,7 +2326,7 @@ services:
     
     Aller dans le dossier /media/diskWesternDigitalMyBook/cloudData/data_6_Fev_2025 : et faire : touch -c .ocdata Dès qu'on fait cela, ça passe.
 
-    
+    ==============================================================
    
     
     

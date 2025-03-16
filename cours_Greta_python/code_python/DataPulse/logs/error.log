@@ -239,3 +239,8 @@
 2025-03-07 20:10:47,242 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
 2025-03-07 20:12:47,227 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
 2025-03-07 20:19:36,320 - ERROR - Erreur lors de la création du Visualizer :'dict' object is not callable - streamlit_app.py - 63 Lignes dans le Fichier : - DataPulse
+2025-03-16 17:55:11,824 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-16 17:55:58,977 - ERROR - Erreur lors de la création du Visualizer :'dict' object is not callable - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-16 17:57:24,765 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-16 17:58:07,786 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse
+2025-03-16 17:58:23,963 - ERROR - Erreur lors de la création du Visualizer :name 'analysis_type' is not defined - streamlit_app.py - 61 Lignes dans le Fichier : - DataPulse

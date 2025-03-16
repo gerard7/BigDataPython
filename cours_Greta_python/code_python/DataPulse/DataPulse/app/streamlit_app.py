@@ -63,6 +63,7 @@ except Exception as e:
 # Afficher les statistiques sous forme de tableau
 
 # Créons un sous-titre
+analysis_type="clients" # clients transactions
 st.subheader("Données utilisées pour l'analyse")
 df_data = pa.DataFrame.from_dict(fake_data[analysis_type],orient="index") # orient contrôle comment les dictionnaires sont créés
 st.dataframe(df_data)
