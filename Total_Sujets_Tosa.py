@@ -4,14 +4,14 @@
 # interet : fonctionnalités liées qu systeme d'exploitation et à
 # l'environnement d'exécution et d'interragir avec l'interpreteur python.
 
-import sys
-
-print(sys.version) # donne la version de python
-
-taille_liste =[1,2,3,5,88]
-taille_tuple = (144664,2888979,34646,457,9)
-print(f"taille de la liste = {sys.getsizeof(taille_liste)} octets")
-print(f"taille du tuple = {sys.getsizeof(taille_tuple)} octets")
+# import sys
+#
+# print(sys.version) # donne la version de python
+#
+# taille_liste =[1,2,3,5,88]
+# taille_tuple = (144664,2888979,34646,457,9)
+# print(f"taille de la liste = {sys.getsizeof(taille_liste)} octets")
+# print(f"taille du tuple = {sys.getsizeof(taille_tuple)} octets")
 
 print("*********************************************************************************")
 
@@ -23,15 +23,15 @@ print("*************************************************************************
 
 print("*********************************************************************************")
 
-names = ("Armand", "Paul","Remi")
-ages =(22,35,29)
-# combiner deux tuples en 1 itérable de tuple.
-combined = zip(names,ages)
-print(combined)
-print("type de combined =",{type(combined)})
-# convertir en liste
-print("Convertir en liste ")
-print(list(combined))
+# names = ("Armand", "Paul","Remi")
+# ages =(22,35,29)
+# # combiner deux tuples en 1 itérable de tuple.
+# combined = zip(names,ages)
+# print(combined)
+# print("type de combined =",{type(combined)})
+# # convertir en liste
+# print("Convertir en liste ")
+# print(list(combined))
 
 print("*********************************************************************************")
 ##print("Convertir en tuple ")
@@ -42,8 +42,8 @@ print("*************************************************************************
 #apres, l'autre élement est vide
 
 # exemple d'itérartion avec zip
-for name, age  in zip(names, ages):
-    print(f"{names} : {ages}")
+# for name, age  in zip(names, ages):
+#     print(f"{names} : {ages}")
 
 
 print("*********************************************************************************")
@@ -72,14 +72,14 @@ print("*************************************************************************
 # Liste, tuples, chaines de caractères, dictionnires , ensembles, générateur
 
 # CAS 1 : Avec une fonction personnalisée  ou existante
-
-words =['apple','banana','cherry','date']
+#
+# words =['apple','banana','cherry','date']
 
 # 1 usage
-def last_caractere(s):
-    return s[-1] # retourne le dernier caractère. Attntion, cette focntion doit avoir un return
-sorted_words = sorted(words,key=last_caractere) # Attention,pas de parenthèse à la fonction. key est obligatoire
-print(sorted_words)
+# def last_caractere(s):
+#     return s[-1] # retourne le dernier caractère. Attntion, cette focntion doit avoir un return
+# sorted_words = sorted(words,key=last_caractere) # Attention,pas de parenthèse à la fonction. key est obligatoire
+# print(sorted_words)
 
 print("*********************************************************************************")
 
@@ -87,23 +87,23 @@ print("*************************************************************************
 
 #Cas de fonction anonyme lambda --> action à l'instant
 
-data = [(1,3),(4,1),(2,9),(5,2)]
-# Je veux trier par rapport au 2ème élément de chaque tuple.
-
-sorted_data= sorted(data,key=lambda x: x[1])
-
-print('sorted_data=',sorted_data)
+# data = [(1,3),(4,1),(2,9),(5,2)]
+# # Je veux trier par rapport au 2ème élément de chaque tuple.
+#
+# sorted_data= sorted(data,key=lambda x: x[1])
+#
+# print('sorted_data=',sorted_data)
 # RETENONS QU'IL NE FAUT PAS FAIRE DE TEST DANS LAMBDA
 
 print("*********************************************************************************")
 
 # TD TUPLES:
 # https://sharemycode.fr/3gy
-products = [
-    (1, "Laptop", 1500.0),
-    (2, "Mouse", 25.0),
-    (3, "Keyboard", 75.0),
-    (4, "Monitor", 300.0)]
+# products = [
+#     (1, "Laptop", 1500.0),
+#     (2, "Mouse", 25.0),
+#     (3, "Keyboard", 75.0),
+#     (4, "Monitor", 300.0)]
 # Exercice : Trie les produits par prix croissant.
 
 print("A FAIRE ******")
@@ -118,8 +118,8 @@ print("*************************************************************************
 # par un tuple (nom, prix après une réduction de 10%).
 
 print("*********************************************************************************")
-
-def reduce_dix_sur_cent(list_tuple_data): ****
+#
+# def reduce_dix_sur_cent(list_tuple_data):
 
 
 print("*********************************************************************************")
@@ -130,12 +130,12 @@ print("*************************************************************************
 # Trie les employés par salaire décroissant.
 # Trouve l'employé le plus jeune ayant un salaire supérieur à 50000.
 
-employees = [
-    ("Djamen", 30, 50000),
-    ("Jarfar", 25, 45000),
-    ("Aurelien", 35, 70000),
-    ("Robert", 40, 65000)
-]
+# employees = [
+#     ("Djamen", 30, 50000),
+#     ("Jarfar", 25, 45000),
+#     ("Aurelien", 35, 70000),
+#     ("Robert", 40, 65000)
+# ]
 print("*********************************************************************************")
 
 # Exercice :
@@ -147,28 +147,28 @@ print("*************************************************************************
 print("*********************************************************************************")
 
 # Module functools
-
-from functools import reduce
-
-number = [1,2,3,4]
-result = reduce(lambda x,y :x*y, number)
-print('Utilisation de reduce du module functools',result)
-
-# Autre cas:
-#Initialisateur
-print("**** initialisateur ******")
-result_2 = reduce(lambda x, y:x+y, number,10)
-# il fait la somme des élements du tablau number en commencant par 10
-# donc , il fait : 10+1+2+3+4
-print(result_2)
+#
+# from functools import reduce
+#
+# number = [1,2,3,4]
+# result = reduce(lambda x,y :x*y, number)
+# print('Utilisation de reduce du module functools',result)
+#
+# # Autre cas:
+# #Initialisateur
+# print("**** initialisateur ******")
+# result_2 = reduce(lambda x, y:x+y, number,10)
+# # il fait la somme des élements du tablau number en commencant par 10
+# # donc , il fait : 10+1+2+3+4
+# print(result_2)
 
 
 # Tuple de coordonnées
-coordinates = ((1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12))
-
-# Exercice: Ecrire une fonction sumPoint(coordinates) qui renvoie un point qui vaut la somme des coordonnées
-# de tous les points
-def sumPoint(point):
+# coordinates = ((1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12))
+#
+# # Exercice: Ecrire une fonction sumPoint(coordinates) qui renvoie un point qui vaut la somme des coordonnées
+# # de tous les points
+# def sumPoint(point):
 
 # from math import sqrt
 # Identifie le point le plus proche de l'origine (0, 0, 0).
@@ -705,82 +705,82 @@ print("////// Exo 5//////")
 # print(isinstance(b, A))  # Doit afficher True
 #
 
-print("**************** Vendredi 7 Mars 2025 ************************")
-print("Exercice 1")
-from abc import ABC, abstractmethod
-import math
+# print("**************** Vendredi 7 Mars 2025 ************************")
+# print("Exercice 1")
+# from abc import ABC, abstractmethod
+# import math
+#
+# class Forme(ABC):
+#     @abstractmethod
+#     def aire(self):
+#         pass
+#
+# class Carre(Forme):
+#     def __init__(self, cote):
+#
+#
+#     def aire(self):
 
-class Forme(ABC):
-    @abstractmethod
-    def aire(self):
-        pass
 
-class Carre(Forme):
-    def __init__(self, cote):
+#
+# class Cercle(Forme):
+#     def __init__(self, rayon):
+#         self.rayon  =rayon
+#
+#     def aire(self):
+#
+#
+# # TESTS :
+# c1 = Carre(4)
+# print(c1.aire())  # Doit afficher 16
+#
+# c2 = Cercle(3)
+# print(round(c2.aire(), 2))  # Doit afficher 28.27
 
 
-    def aire(self):
+# print("Exercice 2")
+#
+# print("------ EXERCICE TOSA 2 ------:")
+#
+# # Compléter la fonction pour retourner la liste
+# # des fichiers .txt présents dans un dossier donné.
+#
+# from pathlib import Path
+#
+# def fichiers_txt(dossier):
 
 
+#
+# # Exemple d'utilisation
+# dossier = "mon_dossier"  # Remplacez par le chemin de votre dossier
+# liste_fichiers_txt = fichiers_txt(dossier)
+# print(liste_fichiers_txt)
+#
+# # TESTS :
+# print(fichiers_txt("."))
+# # Affiche ["exemple.txt", "notes.txt"] si ces fichiers existent
+#
+#
+#
+# print("------ EXERCICE TOSA 3 ------ : ")
+# import pandas as pa
+# import json
+#
+# def charger_json(fichier):
+#
 
-class Cercle(Forme):
-    def __init__(self, rayon):
-        self.rayon  =rayon
-
-    def aire(self):
 
 
 # TESTS :
-c1 = Carre(4)
-print(c1.aire())  # Doit afficher 16
-
-c2 = Cercle(3)
-print(round(c2.aire(), 2))  # Doit afficher 28.27
-
-
-print("Exercice 2")
-
-print("------ EXERCICE TOSA 2 ------:")
-
-# Compléter la fonction pour retourner la liste
-# des fichiers .txt présents dans un dossier donné.
-
-from pathlib import Path
-
-def fichiers_txt(dossier):
-
-
-
-# Exemple d'utilisation
-dossier = "mon_dossier"  # Remplacez par le chemin de votre dossier
-liste_fichiers_txt = fichiers_txt(dossier)
-print(liste_fichiers_txt)
-
-# TESTS :
-print(fichiers_txt("."))
-# Affiche ["exemple.txt", "notes.txt"] si ces fichiers existent
-
-
-
-print("------ EXERCICE TOSA 3 ------ : ")
-import pandas as pa
-import json
-
-def charger_json(fichier):
-
-
-
-
-# TESTS :
-
-# Supposons un fichier JSON {"nom": "Sam", "age": 30, "ville": "Paris"}
-print(charger_json("data.json"))
-# Doit afficher :
-#     nom  âge
-# 0  Sam  30
-
-
-print("------ EXERCICE TOSA 4 ------:")
+#
+# # Supposons un fichier JSON {"nom": "Sam", "age": 30, "ville": "Paris"}
+# print(charger_json("data.json"))
+# # Doit afficher :
+# #     nom  âge
+# # 0  Sam  30
+#
+#
+# print("------ EXERCICE TOSA 4 ------:")
 
 # Compléter la fonction nettoyer_df(df), qui :
 #
@@ -790,16 +790,16 @@ print("------ EXERCICE TOSA 4 ------:")
 # de la colonne revenu.
 
 
-import pandas as pa
-import numpy as np
-
-def nettoyer_df(df_):
-    # remplaçons les NaN existants par la moyenne, avec l'option : inplace=True
-
-# TESTS :
-data = {"nom": ["Sam", "Bob", "Charlie"], "revenu": [50000, np.nan, 70000]}
-df = pa.DataFrame(data)
-print(nettoyer_df(df))
+# import pandas as pa
+# import numpy as np
+#
+# def nettoyer_df(df_):
+#     # remplaçons les NaN existants par la moyenne, avec l'option : inplace=True
+#
+# # TESTS :
+# data = {"nom": ["Sam", "Bob", "Charlie"], "revenu": [50000, np.nan, 70000]}
+# df = pa.DataFrame(data)
+# print(nettoyer_df(df))
 
 
 print("------ EXERCICE TOSA 5 ---------:")
@@ -811,19 +811,19 @@ print("------ EXERCICE TOSA 5 ---------:")
 # Retourne la moyenne de colonne_valeur
 # pour chaque groupe.
 
-import pandas as pa
-
-def moyenne_par_groupe(df, colonne_groupe, colonne_valeur):
-    return
-
-# TESTS :
-data = {"categorie": ["A", "B", "A", "B", "A"], "valeur": [10, 20, 30, 40, 50]}
-df = pa.DataFrame(data)
-print(moyenne_par_groupe(df, "categorie", "valeur"))
-# Doit afficher :
-# categorie
-# A    30.0
-# B    30.0
+# import pandas as pa
+#
+# def moyenne_par_groupe(df, colonne_groupe, colonne_valeur):
+#     return
+#
+# # TESTS :
+# data = {"categorie": ["A", "B", "A", "B", "A"], "valeur": [10, 20, 30, 40, 50]}
+# df = pa.DataFrame(data)
+# print(moyenne_par_groupe(df, "categorie", "valeur"))
+# # Doit afficher :
+# # categorie
+# # A    30.0
+# # B    30.0
 
 
 
