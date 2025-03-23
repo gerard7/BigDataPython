@@ -1,0 +1,4 @@
+2025-03-22 16:46:21,726 - INFO - Méthode principale... - main.py - 6 Lignes dans le Fichier : - ArmandTraitementDonneesCommande
+2025-03-23 13:14:54,941 - INFO - Connexion Réussie à la Base de Données - TraitementDataBase.py - 64 Lignes dans le Fichier : - ArmandTraitementDonneesCommande
+2025-03-23 13:14:54,962 - INFO - Recherche du client en Base de Données , réussie! - TraitementDataBase.py - 132 Lignes dans le Fichier : - ArmandTraitementDonneesCommande
+2025-03-23 13:14:54,967 - INFO - Connexion Réussie à la Base de Données - TraitementDataBase.py - 64 Lignes dans le Fichier : - ArmandTraitementDonneesCommande
