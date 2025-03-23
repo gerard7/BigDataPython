@@ -18,6 +18,7 @@ from django.conf.global_settings import STATICFILES_DIRS
 from django.conf.global_settings import INTERNAL_IPS
 from django.conf.global_settings import AUTH_USER_MODEL
 
+# debug_toolbar.middleware.DebugToolbarMiddleware
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,14 +30,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-r#@934lfh1d@yb*#n272-%z6c_-fepzvlki!2a4o2-%)l5r4#e"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
+DEBUG = True  # Ancienne valeur : True
+#
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "debug_toolbar",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,10 +47,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "apps.home",
-    "debug_toolbar",
     "apps.account",
-    "apps.product",
+
 ]
+
+# "apps.product",
+
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -142,7 +147,7 @@ STATICFILES_DIRS =[
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 INTERNAL_IPS =[
-    '127.0.0.1'
+    "127.0.0.1"
 
 ]
 

@@ -236,8 +236,8 @@ print("*************************************************************************
 
 print("*********************************************************************************")
 # # ----- EXERCICE 02 ------
-# # Vous êtes chargé d'analyser les logs d'un serveur pour identifier les erreurs les plus fréquentes.
-# # Le fichier de logs contient des lignes au format suivant :
+# # Vous êtes chargé d'analyser les log d'un serveur pour identifier les erreurs les plus fréquentes.
+# # Le fichier de log contient des lignes au format suivant :
 # # 200 OK
 # # 404 Not Found
 # # 500 Internal Server Error
@@ -245,17 +245,17 @@ print("*************************************************************************
 
 print("*********************************************************************************")
 # # Objectifs de l'exercice :
-# # Compter le nombre d'occurrences de chaque code HTTP dans les logs.
+# # Compter le nombre d'occurrences de chaque code HTTP dans les log.
 # # Identifier les codes les plus fréquents en utilisant la méthode most_common() de Counter.
-# # Simuler un ajout de nouvelles entrées dans les logs et mettre à jour les résultats avec update().
-# # Générer un rapport indiquant la proportion de chaque code dans l'ensemble des logs (en pourcentage).
+# # Simuler un ajout de nouvelles entrées dans les log et mettre à jour les résultats avec update().
+# # Générer un rapport indiquant la proportion de chaque code dans l'ensemble des log (en pourcentage).
 # # Ajouter une étape pour obtenir les codes d’erreurs uniques avec un set.
 #
 # # def exo02():
 # #     from collections import Counter
 # #
-# #     # Fichier fictif de logs
-# #     logs = [
+# #     # Fichier fictif de log
+# #     log = [
 # #         "200 OK",
 # #         "404 Not Found",(#         "500 Internal Server Error",
 # #         "200 OK",

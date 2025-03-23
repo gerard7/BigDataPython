@@ -6,7 +6,7 @@ from functools import reduce
 # Ce fichier est fondamental pour transformer un dossier en package Python
 # Il peut être vide ou contenir du code / Ce serait alors du code d'initialisation:
 # - Dans ce __init__.py, on peut Importer certains modules du package pour une accessibilité plus simple
-# On peut également définir des variables globales , configurations, logs.
+# On peut également définir des variables globales , configurations, log.
 
 # Imaginons qu'on a un dossier projet. On va avoir : projet/__init__.py
 # Alors mon projet devient un package

@@ -37,6 +37,7 @@
             {{ form.confirme_password.errors }}
         </div>
         <button  type="submit" class="btn btn-primary">S'inscrire</button>
+        <p>Déja inscrit ? <a href ="{% url 'login' %}"><b>Connexion</b></a></p>
         {% if form.non_field_errors %}
             <div class="alert alert-danger">
                 {{ form.non_field_errors }}

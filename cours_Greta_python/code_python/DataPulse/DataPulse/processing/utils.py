@@ -6,7 +6,7 @@ import sys
 from DataPulse.processing import file_loaders
 def setup_logging(verbose):
     """
-    Execution des logs en DEBUG
+    Execution des log en DEBUG
     :param verbose: argument verbose pour gérer les informations détaillées
     """
     # VERBOSE : utile pour débogage + suivi des performances
@@ -37,7 +37,7 @@ def detect_and_load_file(file_path, verbose):
     """
     Detecte le type de fichier et charge les données
     :param file_path: chemin du fichier
-    :param verbose: permet de définir un niveau DEBUG dans les logs
+    :param verbose: permet de définir un niveau DEBUG dans les log
     :return: data: liste contenant les données du fichier
     :raises ValueError: si le type de fichier est inconnu
     :raises RuntimeError: si le chargement échoue

@@ -25,9 +25,10 @@ logging.basicConfig(
     ]
 )
 # Création du logger principal
-logger = logging.getLogger("DataPulse")
+logger = logging.getLogger("ArmandTraitementDonneesCommande")
 # Configurer un niveau spécifique pour error.log
 logging.getLogger().handlers[0].setLevel(logging.ERROR)
 # Définit le premier handler au niveau ERROR (minimum)
 # error.log : ERROR et CRITICAL uniquement
+
 # Ordre du plus bas au plus élevé : DEBUG - INFO - WARNING - ERROR - CRITICAL

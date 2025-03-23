@@ -3,7 +3,7 @@
 
 # Modules :
 
-# 1: logging : Gestion des logs et erreurs
+# 1: logging : Gestion des log et erreurs
 # 2: Gestion des expressions régulières
 # 3: os et sys
 # 4: csv : Lecture et écriture des fichiers csv
@@ -22,7 +22,7 @@ from re import finditer
 logging.basicConfig(
     filename ='app.log',
     level=logging.DEBUG,
-    # Niveau minimal des logs
+    # Niveau minimal des log
     # (DEBUG, INFO, WARNING, ERROR ,CRITICAL )
     format='%(asctime)s - %(levelname)s - %(message)s'
 )

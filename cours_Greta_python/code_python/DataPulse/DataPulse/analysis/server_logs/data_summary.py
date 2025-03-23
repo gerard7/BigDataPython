@@ -1,4 +1,4 @@
-# Un fichier de logs serveur contient des informations sur
+# Un fichier de log serveur contient des informations sur
 # chaque requête HTTP envoyée au serveur, telles que :
 # L’adresse IP du client qui a fait la requête.
 # Le code de réponse HTTP (200, 404, 500, etc.).
@@ -16,7 +16,7 @@ def analyze_server_logs(log_path, top_ips=5):
     """
     Cette fonction lit de gros fichiers et a pour particularité de ne pas stocker l'intégratlité du fichier
     dans la mémoire pour renvoyer les statistiques suivantes :
-    - Le nombre total de requêtes enregistrées dans les logs.
+    - Le nombre total de requêtes enregistrées dans les log.
     - La distribution des codes HTTP (exemple : combien de 200, 404, 500, etc.).
     - Les top_ips les plus actives (les adresses IP qui ont fait le plus de requêtes).
     - Les pics de trafic par heure (combien de requêtes sont envoyées à chaque heure de la journée).

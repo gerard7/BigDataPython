@@ -1,1 +1,1 @@
-from apps.product.models.category import  Category
+from ..product.models.category import  Category

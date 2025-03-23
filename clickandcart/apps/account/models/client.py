@@ -31,4 +31,4 @@ class Client(AbstractBaseUser,PermissionsMixin):
     USERNAME_FIELD ="email" # Impose que les utilisateurs doivent se connecter avec leur mail
     REQUIRED_FIELDS = ["firstname","lastname"]
     def __str__(self):
-        return f"{self.firstname} {self.lastname}" # Comme ça , si on print d'uin Client, on aura : firstname lastname
+        return f"{self.firstname} {self.lastname}" # Comme ça , si on print d'un Client, on aura : firstname lastname

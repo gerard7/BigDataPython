@@ -116,13 +116,13 @@ grouped = {key:list(group) for key,group in itertools.groupby(achats,lambda x:x[
 # Regroupement des éléments en fonction de la premiere valeur du tuple
 print("Groupement grouped=",grouped)
 
-# 7. itertools.islice() : Extraire une partie d'un journal de logs
+# 7. itertools.islice() : Extraire une partie d'un journal de log
 logs = range(100,190)
 print(logs) # Crée un itérable contenant les nombre de 100 à 189
 extracted_logs = list(itertools.islice(logs,2,20,3))
 # Parametre de isslice
 
-# 2-> début de l'extraction (index 2 dans logs)
+# 2-> début de l'extraction (index 2 dans log)
 # 20-> fin de l'extraction (index 20 non inclus)
 # 3-> Le Pas: (on prend 1 élément à chaque 3 pas)
 print('Extracted log =',extracted_logs)

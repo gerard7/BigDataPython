@@ -21,8 +21,8 @@
 #
 #
 # # ----- EXERCICE 02 ------
-# # Vous êtes chargé d'analyser les logs d'un serveur pour identifier les erreurs les plus fréquentes.
-# # Le fichier de logs contient des lignes au format suivant :
+# # Vous êtes chargé d'analyser les log d'un serveur pour identifier les erreurs les plus fréquentes.
+# # Le fichier de log contient des lignes au format suivant :
 # # 200 OK
 # # 404 Not Found
 # # 500 Internal Server Error
@@ -32,17 +32,17 @@
 # # -----------------------------------------------------------------
 #
 # # Objectifs de l'exercice :
-# # Compter le nombre d'occurrences de chaque code HTTP dans les logs.
+# # Compter le nombre d'occurrences de chaque code HTTP dans les log.
 # # Identifier les codes les plus fréquents en utilisant la méthode most_common() de Counter.
-# # Simuler un ajout de nouvelles entrées dans les logs et mettre à jour les résultats avec update().
-# # Générer un rapport indiquant la proportion de chaque code dans l'ensemble des logs (en pourcentage).
+# # Simuler un ajout de nouvelles entrées dans les log et mettre à jour les résultats avec update().
+# # Générer un rapport indiquant la proportion de chaque code dans l'ensemble des log (en pourcentage).
 # # Ajouter une étape pour obtenir les codes d’erreurs uniques avec un set.
 #
 # # def exo02():
 # #     from collections import Counter
 # #
-# #     # Fichier fictif de logs
-# #     logs = [
+# #     # Fichier fictif de log
+# #     log = [
 # #         "200 OK",
 # #         "404 Not Found",(#         "500 Internal Server Error",
 # #         "200 OK",
@@ -811,138 +811,145 @@ print("////// Exo 5//////")
 
 print("**************** Vendredi 7 Mars 2025 ************************")
 print("Exercice 1")
-from abc import ABC, abstractmethod
-import math
-
-class Forme(ABC):
-    @abstractmethod
-    def aire(self):
-        pass
-
-class Carre(Forme):
-    def __init__(self, cote):
-        self.cote = cote  # I
-
-    def aire(self):
-        return self.cote**2
-
-
-class Cercle(Forme):
-    def __init__(self, rayon):
-        self.rayon  =rayon
-
-    def aire(self):
-        return math.pi * (self.rayon**2)
-
-# TESTS :
-c1 = Carre(4)
-print(c1.aire())  # Doit afficher 16
-
-c2 = Cercle(3)
-print(round(c2.aire(), 2))  # Doit afficher 28.27
-
-
-print("Exercice 2")
-
-print("------ EXERCICE TOSA 2 ------:")
-
-# Compléter la fonction pour retourner la liste
-# des fichiers .txt présents dans un dossier donné.
-
-from pathlib import Path
-
-def fichiers_txt(dossier):
-    lieu = Path(dossier)
-    fich_txt = list(lieu.rglob("*.txt"))
-    # print(fich_txt)
-    return [ fich.name for fich in fich_txt]
-
-
-# Exemple d'utilisation
-dossier = "mon_dossier"  # Remplacez par le chemin de votre dossier
-liste_fichiers_txt = fichiers_txt(dossier)
-print(liste_fichiers_txt)
-
-# TESTS :
-print(fichiers_txt("."))
-# Affiche ["exemple.txt", "notes.txt"] si ces fichiers existent
-
-
-
-print("------ EXERCICE TOSA 3 ------ : ")
-import pandas as pa
-import json
-
-def charger_json(fichier):
-    with open(fichier, "r") as f:
-        data_tosa3 = json.load(f)
-    df1 = pa.DataFrame([data_tosa3])
-    print(df1[['nom','âge']])
-
-
-
-# TESTS :
-
-# Supposons un fichier JSON {"nom": "Sam", "age": 30, "ville": "Paris"}
-print(charger_json("data.json"))
-# Doit afficher :
-#     nom  âge
-# 0  Sam  30
-
-
-print("------ EXERCICE TOSA 4 ------:")
-
-# Compléter la fonction nettoyer_df(df), qui :
+# from abc import ABC, abstractmethod
+# import math
 #
-# Remplace les valeurs manquantes (NaN)
-# par la moyenne de la colonne.
-# Trie le DataFrame par ordre décroissant
-# de la colonne revenu.
+# class Forme(ABC):
+#     @abstractmethod
+#     def aire(self):
+#         pass
+#
+# class Carre(Forme):
+#     def __init__(self, cote):
+#         self.cote = cote  # I
+#
+#     def aire(self):
+#         return self.cote**2
+#
+#
+# class Cercle(Forme):
+#     def __init__(self, rayon):
+#         self.rayon  =rayon
+#
+#     def aire(self):
+#         return math.pi * (self.rayon**2)
+#
+# # TESTS :
+# c1 = Carre(4)
+# print(c1.aire())  # Doit afficher 16
+#
+# c2 = Cercle(3)
+# print(round(c2.aire(), 2))  # Doit afficher 28.27
+#
+#
+# print("Exercice 2")
+#
+# print("------ EXERCICE TOSA 2 ------:")
+#
+# # Compléter la fonction pour retourner la liste
+# # des fichiers .txt présents dans un dossier donné.
+#
+# from pathlib import Path
+#
+# def fichiers_txt(dossier):
+#     lieu = Path(dossier)
+#     fich_txt = list(lieu.rglob("*.txt"))
+#     # print(fich_txt)
+#     return [ fich.name for fich in fich_txt]
+#
+#
+# # Exemple d'utilisation
+# dossier = "mon_dossier"  # Remplacez par le chemin de votre dossier
+# liste_fichiers_txt = fichiers_txt(dossier)
+# print(liste_fichiers_txt)
+#
+# # TESTS :
+# print(fichiers_txt("."))
+# # Affiche ["exemple.txt", "notes.txt"] si ces fichiers existent
+#
+#
+#
+# print("------ EXERCICE TOSA 3 ------ : ")
+# import pandas as pa
+# import json
+#
+# def charger_json(fichier):
+#     with open(fichier, "r") as f:
+#         data_tosa3 = json.load(f)
+#     df1 = pa.DataFrame([data_tosa3])
+#     print(df1[['nom','âge']])
+#
+#
+#
+# # TESTS :
+#
+# # Supposons un fichier JSON {"nom": "Sam", "age": 30, "ville": "Paris"}
+# print(charger_json("data.json"))
+# # Doit afficher :
+# #     nom  âge
+# # 0  Sam  30
+#
+#
+# print("------ EXERCICE TOSA 4 ------:")
+#
+# # Compléter la fonction nettoyer_df(df), qui :
+# #
+# # Remplace les valeurs manquantes (NaN)
+# # par la moyenne de la colonne.
+# # Trie le DataFrame par ordre décroissant
+# # de la colonne revenu.
+#
+#
+# import pandas as pa
+# import numpy as np
+#
+# def nettoyer_df(df_):
+#     # remplaçons les NaN existants par la moyenne, avec l'option : inplace=True
+#     df_.fillna(df_["revenu"].mean(),inplace=True)
+#     return df.sort_values(by="revenu", ascending=False)  # Trier par revenu décroissant
+#
+# # TESTS :
+# data = {"nom": ["Sam", "Bob", "Charlie"], "revenu": [50000, np.nan, 70000]}
+# df = pa.DataFrame(data)
+# print(nettoyer_df(df))
+#
+#
+# print("------ EXERCICE TOSA 5 ---------:")
+# # Compléter la fonction
+# # moyenne_par_groupe(df, colonne_groupe,
+# # colonne_valeur), qui :
+# #
+# # Groupe les données par colonne_groupe.
+# # Retourne la moyenne de colonne_valeur
+# # pour chaque groupe.
+#
+# import pandas as pa
+#
+# def moyenne_par_groupe(df, colonne_groupe, colonne_valeur):
+#     return df.groupby(colonne_groupe)[colonne_valeur].mean()
+#
+# # TESTS :
+# data = {"categorie": ["A", "B", "A", "B", "A"], "valeur": [10, 20, 30, 40, 50]}
+# df = pa.DataFrame(data)
+# print(moyenne_par_groupe(df, "categorie", "valeur"))
+# # Doit afficher :
+# # categorie
+# # A    30.0
+# # B    30.0
 
-
-import pandas as pa
+print("/////////////////////////// Tests Personnels ///////////////////////////")
 import numpy as np
-
-def nettoyer_df(df_):
-    # remplaçons les NaN existants par la moyenne, avec l'option : inplace=True
-    df_.fillna(df_["revenu"].mean(),inplace=True)
-    return df.sort_values(by="revenu", ascending=False)  # Trier par revenu décroissant
-
-# TESTS :
-data = {"nom": ["Sam", "Bob", "Charlie"], "revenu": [50000, np.nan, 70000]}
-df = pa.DataFrame(data)
-print(nettoyer_df(df))
-
-
-print("------ EXERCICE TOSA 5 ---------:")
-# Compléter la fonction
-# moyenne_par_groupe(df, colonne_groupe,
-# colonne_valeur), qui :
-#
-# Groupe les données par colonne_groupe.
-# Retourne la moyenne de colonne_valeur
-# pour chaque groupe.
-
-import pandas as pa
-
-def moyenne_par_groupe(df, colonne_groupe, colonne_valeur):
-    return df.groupby(colonne_groupe)[colonne_valeur].mean()
-
-# TESTS :
-data = {"categorie": ["A", "B", "A", "B", "A"], "valeur": [10, 20, 30, 40, 50]}
-df = pa.DataFrame(data)
-print(moyenne_par_groupe(df, "categorie", "valeur"))
-# Doit afficher :
-# categorie
-# A    30.0
-# B    30.0
+ma = np.array([[False,True,False],[True,False,True],[False,True,False]])
 
 
 
+def creer_mat_adjacente(mat):
+    dim =np.shape(mat)[0]
+    print(dim)
+    
 
 
-
-
+creer_mat_adjacente(ma)
 
 
 

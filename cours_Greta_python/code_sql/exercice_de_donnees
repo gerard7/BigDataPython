@@ -54,7 +54,7 @@ Exercice Association Annajah
 FICHE ADHERENT
 
 Numéro : 125 : entier
-Nom: Ahmed : chaine de caracteres d'une longeur max fixée
+Nom: Ahmed : chaine de caracteres d'une longueur max fixée
 Prenom : Karim : chaine de caracteres d'une longeur max fixée
 Adresse : Rue El Kindy : Chaine de caracteres d'une longeur max fixée
 Code postal: 62000 : entier ( avec peut-etre des contraintes exigées aud départ)
@@ -110,7 +110,7 @@ issus de l'agriculture Biologique et équitable
 
 Phrase accroche CV
 Professionnel, dynamique et empathique, doté d'excellentes compétences interpersonnelles et d'une 
-forte capacité d'daptation . Passionné par le travail en équipe et la résolution de prblèmes, je
+forte capacité d'adaptation . Passionné par le travail en équipe et la résolution de problèmes, je
 favorise la collaboration et la communication efficace pour atteindre les objectifs communs.
 
 

@@ -11,7 +11,7 @@ Qu'est-ce qu'on faire avec ?
 - Charger rapidement des millions de lignes depuis des fichiers CSV,excel,BDD, txt,...
 - Analyse et filter des grandes Bases clients
 - Produire des statistiques 
-- Manipuler et transformer des données issues d'API, de logs serveur
+- Manipuler et transformer des données issues d'API, de log serveur
 - Préparer des données pour le Machine Learning (ML) & IA
 - Visualisation
 

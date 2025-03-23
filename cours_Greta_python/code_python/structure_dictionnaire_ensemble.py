@@ -247,23 +247,23 @@ exo01('Django')
 
 
 # ----- EXERCICE 02 ------
-# Vous êtes chargé d'analyser les logs d'un serveur pour identifier les erreurs les plus fréquentes.
-# Le fichier de logs contient des lignes au format suivant :
+# Vous êtes chargé d'analyser les log d'un serveur pour identifier les erreurs les plus fréquentes.
+# Le fichier de log contient des lignes au format suivant :
 # 200 OK
 # 404 Not Found
 # 500 Internal Server Error
 # Chaque ligne commence par un code HTTP, suivi d'une description.
 
 # Objectifs de l'exercice :
-# Compter le nombre d'occurrences de chaque code HTTP dans les logs.
+# Compter le nombre d'occurrences de chaque code HTTP dans les log.
 # Identifier les codes les plus fréquents en utilisant la méthode most_common() de Counter.
-# Simuler un ajout de nouvelles entrées dans les logs et mettre à jour les résultats avec update().
-# Générer un rapport indiquant la proportion de chaque code dans l'ensemble des logs (en pourcentage).
+# Simuler un ajout de nouvelles entrées dans les log et mettre à jour les résultats avec update().
+# Générer un rapport indiquant la proportion de chaque code dans l'ensemble des log (en pourcentage).
 # Ajouter une étape pour obtenir les codes d’erreurs uniques avec un set.
 
 from collections import Counter
 def exo02():
-    # Fichier fictif de logs
+    # Fichier fictif de log
     logs = [
         "200 OK",
         "404 Not Found",
@@ -274,22 +274,22 @@ def exo02():
         "500 Internal Server Error"
     ]
 
-    # Compter le nombre d'occurrences de chaque code HTTP dans les logs.
+    # Compter le nombre d'occurrences de chaque code HTTP dans les log.
     count = {}
     count = Counter(logs)
     print('Les occurrence de chaque code =',count)
     # Identifier les codes les plus fréquents en utilisant la méthode most_common() de Counter.
     print('Les codes les plus fréquents =',count.most_common(2)) # Les 2 plus fréquents codes
-    # Simuler un ajout de nouvelles entrées dans les logs et mettre à jour les résultats avec update().
+    # Simuler un ajout de nouvelles entrées dans les log et mettre à jour les résultats avec update().
     dic = {i+1:logs[i] for i in range(len(logs))}
     dic.update({len(logs)+1:"503 nouvelle erreur"})
     print('dic = ',dic)
-    # Générer un rapport indiquant la proportion de chaque code dans l'ensemble des logs (en pourcentage).
+    # Générer un rapport indiquant la proportion de chaque code dans l'ensemble des log (en pourcentage).
     stat= count.most_common()
     print('Les codes les plus fréquents =', stat)
     print(["{:.2f}%".format(stat[i][1]*100/len(logs)) for i in range(len(stat))])
     # Ajouter une étape pour obtenir les codes d’erreurs uniques avec un set.
-    print('logs=',logs)
+    print('log=',logs)
     le_set = set(logs)
     print('le_set',le_set)
 

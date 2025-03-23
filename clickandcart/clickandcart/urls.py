@@ -23,8 +23,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("",include("apps.home.urls")),
     path("account/",include("apps.account.urls")),
-    path("product/",include("apps.product.urls")),
-]
+
+]#   path("product/",include("apps.product.urls")),
+
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns+=[
