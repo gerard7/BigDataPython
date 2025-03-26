@@ -31,3 +31,32 @@ Ce fichier contient des réserves de code sensés être stockés pour un usage f
 #         "traffic_by_hour": sorted_traffic_by_hour
 #             }
 #====================================================================
+
+# Decoupage de période en mois: python,
+# from datetime import datetime, timedelta
+# from dateutil.relativedelta import relativedelta
+#
+# # Définir les dates
+# start_date = datetime(2023, 10, 14)
+# end_date = datetime(2024, 2, 17)
+#
+# # Liste des périodes
+# periods = []
+# current_date = start_date
+#
+# while current_date < end_date:
+#     # Fin du mois en cours
+#     next_month = (current_date + relativedelta(months=1)).replace(day=1)
+#     last_day_of_month = next_month - timedelta(days=1)
+#
+#     # S'assurer qu'on ne dépasse pas la date de fin
+#     period_end = min(last_day_of_month, end_date)
+#
+#     periods.append((current_date, period_end))
+#
+#     # Passer au premier jour du mois suivant
+#     current_date = period_end + timedelta(days=1)
+#
+# # Affichage
+# for start, end in periods:
+#     print(f"De {start.date()} à {end.date()}")

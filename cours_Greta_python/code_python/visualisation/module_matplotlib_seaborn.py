@@ -76,7 +76,7 @@ def customize_plot():
     ax.legend()
     plt.show()
 
-# customize_plot()
+# customize_plot() # Retenu
 
 # On va configurer Seaborn
 sns.set_theme(style="darkgrid") # Permet de controler la police, les axes, les couleurs
@@ -129,7 +129,7 @@ def plot_pie_chart():
     plt.ylabel("Ventes")
     plt.show()
 
-# plot_pie_chart()
+# plot_pie_chart()  # Retenu
 
 def export_pdf():
     with PdfPages("mon_rapportSeaborn.pdf") as pdf :
@@ -148,4 +148,4 @@ def export_pdf():
         plt.close(fig2)
 
         
-export_pdf()
+# export_pdf()

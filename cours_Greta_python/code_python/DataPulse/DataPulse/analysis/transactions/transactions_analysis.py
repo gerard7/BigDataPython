@@ -100,7 +100,7 @@ def analyze_transactions(json_path, chunk_size=1000):
     """
     chemin = PurePath(json_path)
     df_ = pa.read_json(json_path)
-    nouv_fichier = os.path.join(chemin.parent,"consersion_json_en_csv.csv")
+    nouv_fichier = os.path.join(chemin.parent,"conversion_json_en_csv.csv")
     df_.to_csv(nouv_fichier)
     dico_global ={}
     montants_lus =[]
