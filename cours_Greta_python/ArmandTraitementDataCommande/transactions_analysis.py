@@ -73,6 +73,12 @@ class Traitement_Donnees:
         self.chunk_size =chunk_size
         self.date_debut_etude=date_debut_etude
         self.date_fin_etude = date_fin_etude
+        # self.chemin_fichier = "/home/ratel/BigDataPython/cours_Greta_python/ArmandTraitementDataCommande/transactions_nouvelles.json"
+        # self.chemin_fichier = os.path.join(os.path.dirname(__file__),'/transactions_nouvelles.json')
+        self.chemin_fichier = os.getcwd() + "/transactions_nouvelles.json"
+        # self.fichier_csv ="/home/ratel/BigDataPython/cours_Greta_python/ArmandTraitementDataCommande/conversion_json_en_csv.csv"
+        # self.fichier_csv = os.path.join(os.path.dirname(__file__),'/conversion_json_en_csv.csv')
+        self.fichier_csv =  os.getcwd() + "/conversion_json_en_csv.csv"
         # self.my_spark = SparkSession.builder.getOrCreate()
         self.articles = pa.read_csv(self.json_path)
 
@@ -636,29 +642,34 @@ class Traitement_Donnees:
         # print(stat_total_retour)
         return stat_total_retour
 
+def main():
+    pass
 
 if __name__=="__main__":
-    chunk_size = 1000
-    chemin_fichier = "/home/ratel/BigDataPython/cours_Greta_python/ArmandTraitementDataCommande/transactions_nouvelles.json"
-    fichier_csv ="/home/ratel/BigDataPython/cours_Greta_python/ArmandTraitementDataCommande/conversion_json_en_csv.csv"
-    date_debut = datetime.date(2023,5,13)
-    date_fin = datetime.date(2024,7,22)
-    if date_debut > date_fin :
-        logger.warning(f"La Date de début Doit être inférieure à la Date de fin de Période. veuillez changer.")
-        logger.error(f"La Date de début Doit être inférieure à la Date de fin de Période. veuillez changer.")
-        sys.exit()
-    else:
-        print("Traitement des données en cours...")
-        transac =Traitement_Donnees(date_debut,date_fin,fichier_csv,chunk_size=1000)
+    main()
+
+    # chunk_size = 1000
+    # chemin_fichier = os.getcwd() + "/transactions_nouvelles.json"
+    # fichier_csv = os.getcwd() + "/conversion_json_en_csv.csv"
+    # date_debut = datetime.date(2023,5,13)
+    # date_fin = datetime.date(2024,7,22)
+    # if date_debut > date_fin :
+    #     logger.warning(f"La Date de début Doit être inférieure à la Date de fin de Période. veuillez changer.")
+    #     logger.error(f"La Date de début Doit être inférieure à la Date de fin de Période. veuillez changer.")
+    #     sys.exit()
+    # else:
+    #     print("Traitement des données en cours...")
+    #     transac =Traitement_Donnees(date_debut,date_fin,fichier_csv,chunk_size=1000)
         # print(transac.decoupage_periode_en_mois(date_debut,date_fin))
-        print(transac.differents_produits_achetes())
+        # print(transac.differents_produits_achetes())
         # print(transac.statut_paiement())
-        # transac.moyen_paiement()
-        # transac.chiffre_affaire_par_mois()
+        # print(transac.moyen_paiement())
+        # print(transac.chiffre_affaire_par_mois())
         # transac.tous_les_jours_entre_deux_dates(date_debut,date_fin)
         # print(transac.montant_achat())
         # print("Seuls les clients ayant payé:")
         # print(transac.nombre_clients())
+        # print(transac.decoupage_periode_en_mois(date_debut,date_fin))
 
 
 

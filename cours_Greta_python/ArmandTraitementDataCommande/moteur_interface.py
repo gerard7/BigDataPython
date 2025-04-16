@@ -8,7 +8,7 @@ from streamlit_pdf_viewer import pdf_viewer
 import pandas as pa
 import datetime
 import re
-
+import visualisation
 
 def validateur_mot_pass(passe_wor):
     """
@@ -64,6 +64,13 @@ def data_jeu_de_donnees(liste_de_jeux):
 def main():
     # """Login page"""
     st.title("PROJET DE GESTION DE TRAITEMENT DE DONNÉES DE COMMANDES EN LIGNE.")
+    correspondance_etude = {"Différents produits Achetés": "Produits-Vendus",
+                            "Statut-Paiement": "Statut-Paiement",
+                            "Moyen de Paiement": "Moyen-Paiement",
+                            "Nombre de Clients": "Nombre-Clients",
+                            "Chiffre d'Affaire par Mois": "Chiffre-Affaire-Mois",
+                            "Montant Achat": "Montant-Achat"
+                            }
     menu = ["Connexion", "S'inscrire"]
     choice = st.selectbox("Sélectionnez Connexion ou S'inscrire dans le choix du Menu ▾", menu, )
     st.markdown(
@@ -105,7 +112,7 @@ def main():
                                     logout()
                             elif choice_action == "Réaliser une nouvelle Étude":
                                 st.subheader("Études Statistiques")
-                                # Proposer la liste d'étude : Différents produits Achetés - Statut-Paiement - Moyen de Paiement
+                                # Proposer la liste d'étude : Différents Produits Achetés - Statut-Paiement - Moyen de Paiement
                                 # Nombre de Clients - Chiffre d'Affaire par Mois - Montant Achat
 
                                 # Insérer Calendrier pour le choix des dates de début et de fin de la période sur laquelle se réalisera l'étude
@@ -121,26 +128,28 @@ def main():
                                                                  disabled=False, label_visibility="visible")
                                 choice_etude = st.selectbox("Sélectionnez une étude: ", menu_etude, )
                                 conn_etude =  ConnexionDataBase() # Insérer en Base cette étude
-                                nom_etude = conn_etude.get_nom_alea()
-                                conn_etude.insert_jeu_donnees({"nom_jeu":nom_etude,"email":email,"mot_passe":password,"date_creation":str(datetime.datetime.today())})
+                                nom_jeu_de_donnee = conn_etude.get_nom_alea(choice_etude)
+                                conn_etude.insert_jeu_donnees({"nom_jeu":nom_jeu_de_donnee,"email":email,"mot_passe":password,"date_creation":str(datetime.datetime.today())})
                                 client_etude_commande ={"date_debut_etude":date_debut_etude,
                                                         "date_fin_etude":date_fin_etude,
-                                                        "etude":choice_etude,
-                                                        "jeu_de_donnees":conn_etude.get_nom_alea()
+                                                        "etude":correspondance_etude[choice_etude],
+                                                        "jeu_de_donnees":nom_jeu_de_donnee
                                                         }
                                 lancer_etude = st.checkbox("Lancer-Etude")
                                 if lancer_etude:
-                                    # Envoie des paramètres du client : client_etude_commande à l'équipe d'analyse
-
                                     # Attente du retour des résultats de l'équipe de Visualisation.
+                                    ordre_graphe = visualisation.Visuel(date_debut_etude, date_fin_etude, correspondance_etude[choice_etude],
+                                                                        nom_jeu_de_donnee)
+                                    # Lancement de Graphique :
+                                    ordre_graphe.exec()
                                     # On regarde dans le répertoire des résultats , s'ils y sont.
 
                                     # On affiche le PDF:
                                     st.title(f"Visualisation des Graphes: Étude Statistique de :{choice_etude} . Entre les Dates :{date_debut_etude} et {date_fin_etude}")
 
                                     # Charger le fichier PDF
-                                    lieu_etude_pdf ="/home/ratel/BigDataPython/cours_Greta_python/ArmandTraitementDataCommande"
-                                    pdf_path = os.path.join(lieu_etude_pdf,"mon_fichier.pdf")
+                                    lieu_etude_pdf = os.getcwd() + "/resultats"
+                                    pdf_path = os.path.join(lieu_etude_pdf,nom_jeu_de_donnee)
 
                                     pdf_viewer(pdf_path)
 
@@ -162,11 +171,11 @@ def main():
                             select_etude = st.selectbox("Choix étude :",data["Nom-Etude"])
                             choix_rejoue = st.checkbox("Lancer Étude")
                             if choix_rejoue:
-                                lieu_etude_pdf = "/home/ratel/BigDataPython/cours_Greta_python/ArmandTraitementDataCommande"
-                                # pdf_path = os.path.join(lieu_etude_pdf, select_etude+".pdf")
-                                # pdf_viewer(pdf_path)
-                                fake_file=os.path.join(lieu_etude_pdf,"mon_fichier.pdf")
-                                pdf_viewer(fake_file)
+                                lieu_etude_pdf = os.getcwd() + "/resultats"
+                                pdf_path = os.path.join(lieu_etude_pdf, select_etude)
+                                pdf_viewer(pdf_path)
+                                # fake_file=os.path.join(lieu_etude_pdf,"mon_fichier.pdf")
+                                # pdf_viewer(fake_file)
                                 # Proposer une déconnexion ici :
                                 deconn_visu = st.checkbox("Se déconnecter")
                                 if deconn_visu:
@@ -193,34 +202,39 @@ def main():
                                                            disabled=False, label_visibility="visible")
                             choice_etude = st.selectbox("Sélectionnez une étude: ", menu_etude, )
                             conn_etude2 = ConnexionDataBase() # Insérer en Base cette étude
-                            nom_etude = conn_etude2.get_nom_alea()
-                            conn_etude2.insert_jeu_donnees({"nom_jeu":nom_etude,"email":email,"mot_passe":password,"date_creation":str(datetime.datetime.today())})
+                            nom_jeu_de_donnee = conn_etude2.get_nom_alea(choice_etude)
+                            conn_etude2.insert_jeu_donnees({"nom_jeu":nom_jeu_de_donnee,"email":email,"mot_passe":password,"date_creation":str(datetime.datetime.today())})
                             client_etude_commande = {"date_debut_etude": date_debut_etude,
                                                      "date_fin_etude": date_fin_etude,
-                                                     "etude": choice_etude,
-                                                     "jeu_de_donnees":nom_etude
+                                                     "etude": correspondance_etude[choice_etude],
+                                                     "jeu_de_donnees":nom_jeu_de_donnee
                                                      }
                             lancer_etude_ = st.checkbox("Lancer-Etude")
-                            if lancer_etude_:
-                                # Envoie des paramètres du client : client_etude_commande à l'équipe d'analyse
+                            try:
+                                if lancer_etude_:
+                                    # Envoie des paramètres du client : client_etude_commande à l'équipe d'analyse
+                                    ordre_graphe = visualisation.Visuel(date_debut_etude,date_fin_etude,correspondance_etude[choice_etude],nom_jeu_de_donnee)
+                                    # Lancement de Graphique :
+                                    ordre_graphe.exec()
+                                    # Attente du retour des résultats de l'équipe de Visualisation.
+                                    # On regarde dans le répertoire des résultats , s'ils y sont.
 
-                                # Attente du retour des résultats de l'équipe de Visualisation.
-                                # On regarde dans le répertoire des résultats , s'ils y sont.
 
+                                    st.title(
+                                        f"Visualisation des Graphes: Étude Statistique de :{choice_etude} . Entre les Dates :{date_debut_etude} et {date_fin_etude}")
+                                    # On affiche le PDF:
+                                    lieu_etude_pdf = os.getcwd() + "/resultats"
+                                    pdf_path = os.path.join(lieu_etude_pdf, nom_jeu_de_donnee)
 
-                                st.title(
-                                    f"Visualisation des Graphes: Étude Statistique de :{choice_etude} . Entre les Dates :{date_debut_etude} et {date_fin_etude}")
-                                # On affiche le PDF:
-                                lieu_etude_pdf = "/home/ratel/BigDataPython/cours_Greta_python/ArmandTraitementDataCommande"
-                                pdf_path = os.path.join(lieu_etude_pdf, "mon_fichier.pdf")
-
-                                pdf_viewer(pdf_path)
-                                # Proposer une déconnexion ici :
-                                deconn_visu_ = st.checkbox("Se déconnecter")
-                                if deconn_visu_:
-                                    st.subheader("Déconnecté de l'application")
-                                    st.switch_page("pages/back_home.py")
-                                    logout()
+                                    pdf_viewer(pdf_path)
+                                    # Proposer une déconnexion ici :
+                                    deconn_visu_ = st.checkbox("Se déconnecter")
+                                    if deconn_visu_:
+                                        st.subheader("Déconnecté de l'application")
+                                        st.switch_page("pages/back_home.py")
+                                        logout()
+                            except Exception as e:
+                                st.error(f"Une erreur s'est produite à propos du fichier résultat :{e}")
             else:
                 st.warning("Incorrect NOM/Password")
     elif choice == "S'inscrire":

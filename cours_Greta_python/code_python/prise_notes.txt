@@ -718,6 +718,8 @@ reqId":"LsBDr2iQkVSGoYm6wXEy","level":3,"time":"2025-03-15T14:05:02+00:00","remo
 ==================================================
 Projet : Gestion de commande:
 
+CREATE DATABASE anaconda;
+
 USE anaconda;
 CREATE TABLE Clients ( id_client int NOT NULL primary key auto_increment,
 nom varchar(100) NOT NULL,
@@ -731,3 +733,10 @@ date_creation datetime,
 id_client int,
 foreign key (id_client) references Clients(id_client)
 );
+
+
+================================
+
+github de Saman :
+https://github.com/SamanBaobab/datapulse91/blob/main/data/transactions.json
+================================

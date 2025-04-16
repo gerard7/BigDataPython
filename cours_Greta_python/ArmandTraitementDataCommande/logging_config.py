@@ -16,8 +16,8 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s "
            "- %(filename)s - %(lineno)d Lignes dans le Fichier : - %(name)s",
     handlers=[
-        logging.FileHandler(os.path.join(log_dir, "error.log_interface"), encoding="utf-8"),
-        RotatingFileHandler(os.path.join(log_dir, "app.log_interface"),
+        logging.FileHandler(os.path.join(log_dir, "error_interface.log"), encoding="utf-8"),
+        RotatingFileHandler(os.path.join(log_dir, "app_interface.log"),
                             maxBytes=1_000_000, backupCount=5,
                             encoding="utf-8"),
         logging.StreamHandler()

@@ -402,13 +402,29 @@
 # # Construction d’un dictionnaire de catégories automatiquement.
 # # Manipulation avancée de listes de dictionnaires.
 #
-# produits = [
-# 	{"nom": "Pomme", "categorie": "Fruits"},
-# 	{"nom": "Banane", "categorie": "Fruits"},
-# 	{"nom": "Carotte", "categorie": "Légumes"},
-# 	{"nom": "Tomate", "categorie": "Légumes"},
-# 	{"nom": "Orange", "categorie": "Fruits"},
-# ]
+produits = [
+	{"nom": "Pomme", "categorie": "Fruits"},
+	{"nom": "Banane", "categorie": "Fruits"},
+	{"nom": "Carotte", "categorie": "Légumes"},
+	{"nom": "Tomate", "categorie": "Légumes"},
+	{"nom": "Orange", "categorie": "Fruits"},
+  {"nom": "Papaye", "categorie":"Fruits"},
+  {"nom": "Gombo", "categorie":"Légumes"},
+  {"nom": "Pomme-Canelle", "categorie":"Fruits"},
+  {"nom": "Coco", "categorie":"Fruits"},
+  {"nom": "Orange", "categorie":"Fruits"},
+  {"nom": "Gboman", "categorie":"Légumes"},
+  {"nom": "Fétri", "categorie":"Légumes"},
+  {"nom": "Agbissan", "categorie":"Légumes"},
+  {"nom": "Adémin", "categorie":"Légumes"},
+  {"nom": "Goussi", "categorie":"Légumes"},
+  {"nom": "Chap-Chap", "categorie":"Fruits"},
+  {"nom": "Corossol", "categorie":"Fruits"},
+  {"nom": "Manioc", "categorie":"Légumes"},
+  {"nom": "Avocat", "categorie":"Fruits"},
+  {"nom": "Mangue", "categorie":"Fruits"},
+  {"nom": "Arachide", "categorie":"Légumes"},
+]
 #
 #
 # def regroupement_par_categorie(produits):

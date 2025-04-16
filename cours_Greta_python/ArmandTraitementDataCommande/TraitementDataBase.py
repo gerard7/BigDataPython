@@ -21,7 +21,7 @@ def generer_date_alea_carac(taille=10):
     pool = string.ascii_letters + string.digits
     random_string = ''.join(random.choice(pool) for _ in range(length))
     d = datetime.datetime.today().strftime("%d-%m-%Y_%Hh-%Mm-%Ss")
-    return str(d)+"_" + random_string
+    return str(d)+"_" + random_string +".pdf"
 
 def crypter_data(value):
     """
@@ -67,12 +67,29 @@ class ConnexionDataBase:
             logger.error(f"Impossible de se connecter à la Base de Données à cause de l'erreur : {e}")
             return None
 
-    def get_nom_alea(self,taille=10):
+    def texte_sans_accent_espace(self,texte):
+        """
+        Cette méthode retourne le texte entré en paramètre sans les accents , ni les espaces . Les espace sont remplacés
+        par des -
+        :param: texte: c'est le texte entré en paramètre
+        :return : Retourne le même texte sans les accents ni les espaces
+        """
+        accents =["é","è","ê","û","ù","î","ô","ç"," "]
+        sans_accent =["e","e","e","u","u","i","o","c","-"]
+        res= texte
+        for i in accents:
+            if i in res:
+                pos = accents.index(i)
+                res=res.replace(i,sans_accent[pos])
+            else:pass
+        return res
+
+    def get_nom_alea(self,prefixe,taille=10):
         """
         Cette méthode a été écrite pour être appelée de l'extérieur afin d'utiliser la méthode : generer_date_alea_carac
         :param: C'est la taille
         """
-        return generer_date_alea_carac(taille)
+        return self.texte_sans_accent_espace(prefixe) + "_" + generer_date_alea_carac(taille)
 
     def insert_single_client(self,dico_single):
         """
